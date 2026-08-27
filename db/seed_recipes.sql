@@ -3,7 +3,7 @@
 -- 项目代号:GourmetAdvisor · 内部代号 03-美食 · 2026-08-27
 -- 关联文件:schema.sql(同目录)· 项目开发计划.md Phase 0 · 任务 2 起步
 -- 数据来源:知识库 _GourmetLib/09_健康快手食谱/健康快手食谱.md
--- 数据量:5 道(目标 200+,本文件为首批 5 道验证 schema 实用性)
+-- 数据量:10 道(目标 200+,v0.1 首批 5 道 + v0.2 追加 5 道 2026-08-28)
 -- 执行:sqlite3 gourmet.db < schema.sql && sqlite3 gourmet.db < seed_recipes.sql
 -- ============================================================================
 
@@ -183,7 +183,208 @@ INSERT INTO recipe_tag (recipe_id, tag_id)
     SELECT 5, id FROM tag WHERE name = '宴客' AND category = 'scenario';
 
 -- ============================================================================
--- v0.1 seed 结束 · 5 道菜谱已就位
+-- 6. 凉拌黄瓜(凉菜 · 3 分钟 · 鲁菜 · 爽口 · 快手)
+-- ============================================================================
+INSERT INTO recipe (name, cuisine, difficulty, prep_time_min, cook_time_min, servings,
+                    description, source, source_ref, is_ai_generated)
+VALUES ('凉拌黄瓜', '鲁菜', 1, 3, 0, 2,
+        '夏日必备 · 拍黄瓜 · 酸辣开胃,3 分钟搞定',
+        '知识库', '../../_GourmetLib/09_健康快手食谱/健康快手食谱.md#L236', 0);
+
+INSERT INTO ingredient (recipe_id, name, qty, unit, note, is_optional, order_no) VALUES
+    (6, '黄瓜', 2, '根', '拍碎切段', 0, 1),
+    (6, '蒜末', 5, 'g', NULL, 0, 2),
+    (6, '香醋', 1, '勺', NULL, 0, 3),
+    (6, '生抽', 1, '勺', NULL, 0, 4),
+    (6, '香油', 0.5, '勺', NULL, 0, 5),
+    (6, '辣椒油', 0.5, '勺', NULL, 1, 6),
+    (6, '白糖', 0.5, '勺', '中和酸味', 1, 7),
+    (6, '盐', 1, 'g', NULL, 0, 8);
+
+INSERT INTO step (recipe_id, step_no, content, duration_sec, tip) VALUES
+    (6, 1, '黄瓜洗净,刀背拍碎切段(不切断)', 30, '拍比切更入味'),
+    (6, 2, '加盐腌 5 分钟出水,挤干', 300, '出水后再调味更脆'),
+    (6, 3, '蒜末 + 香醋 + 生抽 + 香油 + 糖 + 辣椒油 调汁', 30, NULL),
+    (6, 4, '汁拌黄瓜,冰箱冷藏 10 分钟风味更佳', NULL, '现做现吃也行');
+
+INSERT INTO nutrition (recipe_id, calories_kcal, protein_g, carb_g, fat_g, fiber_g, sodium_mg, source, note) VALUES
+    (6, 60, 2, 8, 3, 2, 580, '估算', '低卡凉菜,2 人份分摊');
+
+INSERT OR IGNORE INTO tag (name, category) VALUES ('鲁菜', 'cuisine');
+INSERT OR IGNORE INTO tag (name, category) VALUES ('凉菜', 'scenario');
+INSERT OR IGNORE INTO tag (name, category) VALUES ('酸辣', 'flavor');
+INSERT INTO recipe_tag (recipe_id, tag_id)
+    SELECT 6, id FROM tag WHERE name = '鲁菜' AND category = 'cuisine';
+INSERT INTO recipe_tag (recipe_id, tag_id)
+    SELECT 6, id FROM tag WHERE name = '快手' AND category = 'scenario';
+INSERT INTO recipe_tag (recipe_id, tag_id)
+    SELECT 6, id FROM tag WHERE name = '凉菜' AND category = 'scenario';
+INSERT INTO recipe_tag (recipe_id, tag_id)
+    SELECT 6, id FROM tag WHERE name = '酸辣' AND category = 'flavor';
+
+-- ============================================================================
+-- 7. 番茄蛋花汤(汤品 · 10 分钟 · 粤菜 · 咸鲜 · 暖胃)
+-- ============================================================================
+INSERT INTO recipe (name, cuisine, difficulty, prep_time_min, cook_time_min, servings,
+                    description, source, source_ref, is_ai_generated)
+VALUES ('番茄蛋花汤', '粤菜', 1, 3, 7, 2,
+        '国民汤品 · 番茄酸甜 + 蛋花滑嫩,5 分钟上桌',
+        '知识库', '../../_GourmetLib/04_膳食搭配与配比原则/膳食搭配原则.md', 0);
+
+INSERT INTO ingredient (recipe_id, name, qty, unit, note, is_optional, order_no) VALUES
+    (7, '番茄', 2, '个', '去皮切块', 0, 1),
+    (7, '鸡蛋', 2, '个', '打散', 0, 2),
+    (7, '葱花', 5, 'g', NULL, 0, 3),
+    (7, '盐', 2, 'g', NULL, 0, 4),
+    (7, '香油', 0.5, '勺', NULL, 0, 5),
+    (7, '生抽', 0.5, '勺', '可选调色', 1, 6);
+
+INSERT INTO step (recipe_id, step_no, content, duration_sec, tip) VALUES
+    (7, 1, '番茄顶部划十字,开水烫 30 秒去皮', 60, '去皮口感更滑'),
+    (7, 2, '热锅冷油,番茄下锅炒出汁(加少许盐促出汁)', 180, '小火慢炒,出红油'),
+    (7, 3, '加水 600ml 烧开,转中火煮 3 分钟', 180, NULL),
+    (7, 4, '蛋液画圈淋入,等 5 秒再轻搅成蛋花', 30, '不要立刻搅,蛋花更整齐'),
+    (7, 5, '加盐调味,撒葱花淋香油', 15, NULL);
+
+INSERT INTO nutrition (recipe_id, calories_kcal, protein_g, carb_g, fat_g, fiber_g, sodium_mg, source, note) VALUES
+    (7, 140, 11, 10, 7, 2, 520, '估算', '低卡汤品,2 人份分摊');
+
+INSERT OR IGNORE INTO tag (name, category) VALUES ('汤品', 'scenario');
+INSERT INTO recipe_tag (recipe_id, tag_id)
+    SELECT 7, id FROM tag WHERE name = '汤品' AND category = 'scenario';
+INSERT INTO recipe_tag (recipe_id, tag_id)
+    SELECT 7, id FROM tag WHERE name = '粤菜' AND category = 'cuisine';
+INSERT INTO recipe_tag (recipe_id, tag_id)
+    SELECT 7, id FROM tag WHERE name = '咸鲜' AND category = 'flavor';
+INSERT INTO recipe_tag (recipe_id, tag_id)
+    SELECT 7, id FROM tag WHERE name = '快手' AND category = 'scenario';
+
+-- ============================================================================
+-- 8. 宫保鸡丁(主菜 · 15 分钟 · 川菜 · 糊辣酸甜 · 经典)
+-- ============================================================================
+INSERT INTO recipe (name, cuisine, difficulty, prep_time_min, cook_time_min, servings,
+                    description, source, source_ref, is_ai_generated)
+VALUES ('宫保鸡丁', '川菜', 3, 8, 8, 2,
+        '川菜经典 · 糊辣酸甜 + 鸡丁嫩滑 + 花生酥脆',
+        '知识库', '../../_GourmetLib/09_健康快手食谱/健康快手食谱.md#L163', 0);
+
+INSERT INTO ingredient (recipe_id, name, qty, unit, note, is_optional, order_no) VALUES
+    (8, '鸡腿肉', 250, 'g', '去骨切 1.5cm 丁', 0, 1),
+    (8, '花生米', 50, 'g', '油酥', 0, 2),
+    (8, '干辣椒', 8, '个', '剪段去籽', 0, 3),
+    (8, '花椒', 1, '勺', NULL, 0, 4),
+    (8, '葱白', 15, 'g', '切段', 0, 5),
+    (8, '蒜末', 5, 'g', NULL, 0, 6),
+    (8, '姜末', 3, 'g', NULL, 0, 7),
+    (8, '生抽', 1, '勺', NULL, 0, 8),
+    (8, '香醋', 1, '勺', NULL, 0, 9),
+    (8, '白糖', 1, '勺', '酸甜平衡', 0, 10),
+    (8, '料酒', 1, '勺', NULL, 0, 11),
+    (8, '淀粉', 1, '勺', '上浆', 0, 12),
+    (8, '盐', 1, 'g', NULL, 0, 13);
+
+INSERT INTO step (recipe_id, step_no, content, duration_sec, tip) VALUES
+    (8, 1, '鸡丁 + 盐 + 料酒 + 淀粉上浆,腌 10 分钟', 600, '上浆锁水,鸡丁嫩滑'),
+    (8, 2, '调汁:生抽+醋+糖+少量水(2:2:2:1)备用', 30, '提前调汁,避免手忙脚乱'),
+    (8, 3, '热油滑炒鸡丁至变色,盛出备用', 90, '六成熟盛出,后面会回锅'),
+    (8, 4, '锅底油,小火煸花椒 + 干辣椒至深红色', 60, '小火防糊,出糊辣香'),
+    (8, 5, '下葱白蒜末姜末爆香,下鸡丁大火快炒', 30, NULL),
+    (8, 6, '淋入调汁,翻炒挂芡,加花生米颠锅', 30, '出锅前下花生,保脆');
+
+INSERT INTO nutrition (recipe_id, calories_kcal, protein_g, carb_g, fat_g, fiber_g, sodium_mg, source, note) VALUES
+    (8, 460, 32, 18, 28, 3, 780, '估算', '花生油脂高,2 人份分摊');
+
+INSERT OR IGNORE INTO tag (name, category) VALUES ('糊辣', 'flavor');
+INSERT INTO recipe_tag (recipe_id, tag_id)
+    SELECT 8, id FROM tag WHERE name = '川菜' AND category = 'cuisine';
+INSERT INTO recipe_tag (recipe_id, tag_id)
+    SELECT 8, id FROM tag WHERE name = '麻辣' AND category = 'flavor';
+INSERT INTO recipe_tag (recipe_id, tag_id)
+    SELECT 8, id FROM tag WHERE name = '糊辣' AND category = 'flavor';
+INSERT INTO recipe_tag (recipe_id, tag_id)
+    SELECT 8, id FROM tag WHERE name = '宴客' AND category = 'scenario';
+INSERT INTO recipe_tag (recipe_id, tag_id)
+    SELECT 8, id FROM tag WHERE name = '高蛋白' AND category = 'diet';
+
+-- ============================================================================
+-- 9. 红烧肉(主菜 · 40 分钟 · 浙菜 · 咸甜 · 宴客大菜)
+-- ============================================================================
+INSERT INTO recipe (name, cuisine, difficulty, prep_time_min, cook_time_min, servings,
+                    description, source, source_ref, is_ai_generated)
+VALUES ('红烧肉', '浙菜', 3, 10, 30, 3,
+        '浙菜经典 · 肥而不腻 · 入口即化 · 色泽红亮',
+        '知识库', '../../_GourmetLib/07_中式养生食疗/中式养生食疗.md', 0);
+
+INSERT INTO ingredient (recipe_id, name, qty, unit, note, is_optional, order_no) VALUES
+    (9, '五花肉', 500, 'g', '带皮,切 3cm 方块', 0, 1),
+    (9, '冰糖', 30, 'g', '炒糖色', 0, 2),
+    (9, '生抽', 2, '勺', NULL, 0, 3),
+    (9, '老抽', 0.5, '勺', '上色', 0, 4),
+    (9, '料酒', 2, '勺', NULL, 0, 5),
+    (9, '葱段', 15, 'g', NULL, 0, 6),
+    (9, '姜片', 10, 'g', NULL, 0, 7),
+    (9, '八角', 2, '个', NULL, 0, 8),
+    (9, '香叶', 2, '片', NULL, 1, 9),
+    (9, '盐', 2, 'g', '后下', 0, 10);
+
+INSERT INTO step (recipe_id, step_no, content, duration_sec, tip) VALUES
+    (9, 1, '五花肉冷水下锅焯水,撇浮沫,捞出沥干', 300, '冷水下锅,血水出得更彻底'),
+    (9, 2, '小火,冰糖炒至枣红色(糖色)', 180, '小火,糖色过了会苦'),
+    (9, 3, '下五花肉快速翻炒上色', 60, '上色均匀,后面炖出来才红亮'),
+    (9, 4, '加葱姜八角香叶,淋料酒,加生抽老抽', 30, NULL),
+    (9, 5, '加热水没过肉,大火烧开转小火炖 30 分钟', 1800, '小火慢炖,肥肉部分会化'),
+    (9, 6, '最后 10 分钟大火收汁,加盐调味', 600, '收汁阶段多翻动,挂色均匀');
+
+INSERT INTO nutrition (recipe_id, calories_kcal, protein_g, carb_g, fat_g, fiber_g, sodium_mg, source, note) VALUES
+    (9, 580, 28, 12, 46, 0, 720, '估算', '高脂大菜,3 人份分摊;痛风/三高慎食');
+
+INSERT OR IGNORE INTO tag (name, category) VALUES ('浙菜', 'cuisine');
+INSERT OR IGNORE INTO tag (name, category) VALUES ('咸甜', 'flavor');
+INSERT INTO recipe_tag (recipe_id, tag_id)
+    SELECT 9, id FROM tag WHERE name = '浙菜' AND category = 'cuisine';
+INSERT INTO recipe_tag (recipe_id, tag_id)
+    SELECT 9, id FROM tag WHERE name = '咸甜' AND category = 'flavor';
+INSERT INTO recipe_tag (recipe_id, tag_id)
+    SELECT 9, id FROM tag WHERE name = '宴客' AND category = 'scenario';
+
+-- ============================================================================
+-- 10. 蛋炒饭(主食 · 10 分钟 · 中式 · 咸鲜 · 厨房入门)
+-- ============================================================================
+INSERT INTO recipe (name, cuisine, difficulty, prep_time_min, cook_time_min, servings,
+                    description, source, source_ref, is_ai_generated)
+VALUES ('蛋炒饭', '中式', 1, 5, 5, 1,
+        '厨房入门第一课 · 蛋裹饭粒 · 粒粒分明',
+        '知识库', '../../_GourmetLib/09_健康快手食谱/健康快手食谱.md', 0);
+
+INSERT INTO ingredient (recipe_id, name, qty, unit, note, is_optional, order_no) VALUES
+    (10, '隔夜米饭', 300, 'g', '冷饭更易炒散', 0, 1),
+    (10, '鸡蛋', 2, '个', '打散', 0, 2),
+    (10, '葱花', 10, 'g', '分两次', 0, 3),
+    (10, '生抽', 1, '勺', '调色提鲜', 0, 4),
+    (10, '盐', 2, 'g', NULL, 0, 5),
+    (10, '料酒', 0.5, '勺', '去蛋腥', 0, 6),
+    (10, '火腿丁', 50, 'g', '或用腊肠/虾仁', 1, 7);
+
+INSERT INTO step (recipe_id, step_no, content, duration_sec, tip) VALUES
+    (10, 1, '鸡蛋打散 + 料酒 + 少许盐,备用', 30, '加料酒去腥更嫩'),
+    (10, 2, '热锅热油,蛋液下锅快速划散至半凝固', 30, '油要够热,蛋花才嫩'),
+    (10, 3, '立刻下冷饭,中火压散饭团,翻炒 2 分钟', 120, '饭要压散,粒粒分明'),
+    (10, 4, '加火腿丁、葱花一半、生抽,大火快炒 30 秒', 30, '生抽沿锅边淋,出锅气'),
+    (10, 5, '出锅前撒剩余葱花,颠锅 2 下', 10, '葱花最后下,香气足');
+
+INSERT INTO nutrition (recipe_id, calories_kcal, protein_g, carb_g, fat_g, fiber_g, sodium_mg, source, note) VALUES
+    (10, 520, 18, 72, 16, 1, 680, '估算', '主食量足,1 人份');
+
+INSERT OR IGNORE INTO tag (name, category) VALUES ('中式', 'cuisine');
+INSERT INTO recipe_tag (recipe_id, tag_id)
+    SELECT 10, id FROM tag WHERE name = '中式' AND category = 'cuisine';
+INSERT INTO recipe_tag (recipe_id, tag_id)
+    SELECT 10, id FROM tag WHERE name = '咸鲜' AND category = 'flavor';
+INSERT INTO recipe_tag (recipe_id, tag_id)
+    SELECT 10, id FROM tag WHERE name = '快手' AND category = 'scenario';
+
+-- ============================================================================
+-- v0.2 seed 结束 · 10 道菜谱已就位
 -- 验证方法:
 --   sqlite3 gourmet.db < db/schema.sql
 --   sqlite3 gourmet.db < db/seed_recipes.sql
@@ -196,4 +397,9 @@ INSERT INTO recipe_tag (recipe_id, tag_id)
 --   蒜蓉西兰花炒鸡胸|粤菜|7
 --   番茄鸡蛋粉丝|川菜|6
 --   麻婆豆腐|川菜|10
+--   凉拌黄瓜|鲁菜|8
+--   番茄蛋花汤|粤菜|6
+--   宫保鸡丁|川菜|13
+--   红烧肉|浙菜|10
+--   蛋炒饭|中式|7
 -- ============================================================================
