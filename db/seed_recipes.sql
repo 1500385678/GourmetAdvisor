@@ -403,3 +403,222 @@ INSERT INTO recipe_tag (recipe_id, tag_id)
 --   红烧肉|浙菜|10
 --   蛋炒饭|中式|7
 -- ============================================================================
+-- v0.3 seed · 2026-08-29 追加 5 道(11-15),覆盖蒸菜/凉菜/素食/中式/西餐越南菜
+-- ============================================================================
+
+-- ============================================================================
+-- 11. 蔬菜蛋饼 · 微波炉版(早餐 · 4 分钟 · 快手 · 高蛋白)
+-- ============================================================================
+INSERT INTO recipe (name, cuisine, difficulty, prep_time_min, cook_time_min, servings,
+                    description, source, source_ref, is_ai_generated)
+VALUES ('蔬菜蛋饼', '中式', 1, 2, 2, 1,
+        '微波炉版 · 4 分钟搞定 · 蔬菜 + 蛋白一锅出',
+        '知识库', '../../_GourmetLib/09_健康快手食谱/健康快手食谱.md#L72', 0);
+
+INSERT INTO ingredient (recipe_id, name, qty, unit, note, is_optional, order_no) VALUES
+    (11, '鸡蛋', 2, '个', '打散', 0, 1),
+    (11, '胡萝卜丝', 30, 'g', NULL, 0, 2),
+    (11, '西葫芦丝', 30, 'g', '或换黄瓜丝', 0, 3),
+    (11, '盐', 1, 'g', NULL, 0, 4),
+    (11, '黑胡椒', 0.5, 'g', '出锅撒', 0, 5),
+    (11, '油', 1, '小勺', '抹碗用', 0, 6);
+
+INSERT INTO step (recipe_id, step_no, content, duration_sec, tip) VALUES
+    (11, 1, '鸡蛋打散 + 胡萝卜丝 + 西葫芦丝 + 盐搅匀', 30, '丝要细,易熟'),
+    (11, 2, '倒入抹油的小碗(微波可用),高火 2 分钟', 120, '碗底抹油,方便脱模'),
+    (11, 3, '出锅撒黑胡椒,切块装盘', 10, '可挤少许番茄酱');
+
+INSERT INTO nutrition (recipe_id, calories_kcal, protein_g, carb_g, fat_g, fiber_g, sodium_mg, source, note) VALUES
+    (11, 220, 14, 8, 14, 2, 320, '估算', '微波少油,脂肪可控;1 人份');
+
+INSERT OR IGNORE INTO tag (name, category) VALUES ('微波', 'scenario');
+INSERT INTO recipe_tag (recipe_id, tag_id)
+    SELECT 11, id FROM tag WHERE name = '早餐' AND category = 'scenario';
+INSERT INTO recipe_tag (recipe_id, tag_id)
+    SELECT 11, id FROM tag WHERE name = '快手' AND category = 'scenario';
+INSERT INTO recipe_tag (recipe_id, tag_id)
+    SELECT 11, id FROM tag WHERE name = '高蛋白' AND category = 'diet';
+INSERT INTO recipe_tag (recipe_id, tag_id)
+    SELECT 11, id FROM tag WHERE name = '中式' AND category = 'cuisine';
+
+-- ============================================================================
+-- 12. 黄瓜拌鸡胸丝(凉菜 · 15 分钟 · 高蛋白 · 低脂 · 减脂)
+-- ============================================================================
+INSERT INTO recipe (name, cuisine, difficulty, prep_time_min, cook_time_min, servings,
+                    description, source, source_ref, is_ai_generated)
+VALUES ('黄瓜拌鸡胸丝', '中式', 1, 3, 12, 2,
+        '手撕鸡丝 + 脆黄瓜 · 减脂增肌首选凉菜',
+        '知识库', '../../_GourmetLib/09_健康快手食谱/健康快手食谱.md#L128', 0);
+
+INSERT INTO ingredient (recipe_id, name, qty, unit, note, is_optional, order_no) VALUES
+    (12, '鸡胸肉', 150, 'g', '整块煮', 0, 1),
+    (12, '黄瓜', 2, '根', '切丝', 0, 2),
+    (12, '姜片', 5, 'g', '煮鸡用', 0, 3),
+    (12, '生抽', 1, '勺', NULL, 0, 4),
+    (12, '香醋', 1, '勺', NULL, 0, 5),
+    (12, '蒜末', 5, 'g', NULL, 0, 6),
+    (12, '香油', 0.5, '勺', NULL, 0, 7),
+    (12, '辣椒油', 0.5, '勺', NULL, 1, 8),
+    (12, '盐', 1, 'g', NULL, 0, 9);
+
+INSERT INTO step (recipe_id, step_no, content, duration_sec, tip) VALUES
+    (12, 1, '鸡胸整块冷水下锅 + 姜片,大火煮开转小火 12 分钟', 720, '冷水下锅,血沫出得彻底'),
+    (12, 2, '捞出放凉(可冰水镇 2 分钟),沿纹理撕细丝', 180, '冰水镇后肉更紧实'),
+    (12, 3, '黄瓜切丝,加少许盐腌 3 分钟出水,挤干', 180, '出水后更脆'),
+    (12, 4, '鸡丝 + 黄瓜丝 + 蒜末 + 生抽 + 醋 + 香油 + 辣椒油 拌匀', 60, '现拌现吃,口感最佳');
+
+INSERT INTO nutrition (recipe_id, calories_kcal, protein_g, carb_g, fat_g, fiber_g, sodium_mg, source, note) VALUES
+    (12, 200, 28, 6, 6, 1, 520, '估算', '高蛋白低脂,2 人份分摊');
+
+INSERT INTO recipe_tag (recipe_id, tag_id)
+    SELECT 12, id FROM tag WHERE name = '凉菜' AND category = 'scenario';
+INSERT INTO recipe_tag (recipe_id, tag_id)
+    SELECT 12, id FROM tag WHERE name = '快手' AND category = 'scenario';
+INSERT INTO recipe_tag (recipe_id, tag_id)
+    SELECT 12, id FROM tag WHERE name = '高蛋白' AND category = 'diet';
+INSERT INTO recipe_tag (recipe_id, tag_id)
+    SELECT 12, id FROM tag WHERE name = '低脂' AND category = 'diet';
+INSERT INTO recipe_tag (recipe_id, tag_id)
+    SELECT 12, id FROM tag WHERE name = '减脂' AND category = 'diet';
+INSERT INTO recipe_tag (recipe_id, tag_id)
+    SELECT 12, id FROM tag WHERE name = '中式' AND category = 'cuisine';
+
+-- ============================================================================
+-- 13. 清蒸鲈鱼(主菜 · 13 分钟 · 粤菜 · 高蛋白 · 宴客)
+-- ============================================================================
+INSERT INTO recipe (name, cuisine, difficulty, prep_time_min, cook_time_min, servings,
+                    description, source, source_ref, is_ai_generated)
+VALUES ('清蒸鲈鱼', '粤菜', 2, 5, 8, 2,
+        '粤菜经典蒸鱼 · 鱼肉嫩滑 · 宴客不输大菜',
+        '知识库', '../../_GourmetLib/09_健康快手食谱/健康快手食谱.md#L143', 0);
+
+INSERT INTO ingredient (recipe_id, name, qty, unit, note, is_optional, order_no) VALUES
+    (13, '鲈鱼', 1, '条', '约 400g,处理干净', 0, 1),
+    (13, '葱丝', 15, 'g', '铺面用', 0, 2),
+    (13, '姜丝', 10, 'g', NULL, 0, 3),
+    (13, '红椒丝', 5, 'g', '配色', 1, 4),
+    (13, '蒸鱼豉油', 2, '勺', '或用生抽+糖调', 0, 5),
+    (13, '料酒', 1, '勺', NULL, 0, 6),
+    (13, '盐', 2, 'g', NULL, 0, 7),
+    (13, '热油', 1, '勺', '葱丝上激香', 0, 8);
+
+INSERT INTO step (recipe_id, step_no, content, duration_sec, tip) VALUES
+    (13, 1, '鱼身两侧划几刀(方便入味),撒盐 + 料酒 + 姜片腌 5 分钟', 300, '划刀别太深,防断裂'),
+    (13, 2, '水开后上锅,大火蒸 8 分钟(根据鱼大小 ±2 分钟)', 480, '水必须大开,蒸气足'),
+    (13, 3, '出锅倒掉蒸盘里的水(去腥关键)', 15, '蒸出的水腥味重'),
+    (13, 4, '铺葱丝 + 姜丝 + 红椒丝,淋蒸鱼豉油', 15, NULL),
+    (13, 5, '烧热油至冒烟,淋在葱姜丝上激香', 30, '油温要够,激出葱香');
+
+INSERT INTO nutrition (recipe_id, calories_kcal, protein_g, carb_g, fat_g, fiber_g, sodium_mg, source, note) VALUES
+    (13, 240, 36, 1, 10, 0, 480, '估算', '高蛋白低脂,2 人份分摊');
+
+INSERT INTO recipe_tag (recipe_id, tag_id)
+    SELECT 13, id FROM tag WHERE name = '粤菜' AND category = 'cuisine';
+INSERT INTO recipe_tag (recipe_id, tag_id)
+    SELECT 13, id FROM tag WHERE name = '高蛋白' AND category = 'diet';
+INSERT INTO recipe_tag (recipe_id, tag_id)
+    SELECT 13, id FROM tag WHERE name = '低脂' AND category = 'diet';
+INSERT INTO recipe_tag (recipe_id, tag_id)
+    SELECT 13, id FROM tag WHERE name = '宴客' AND category = 'scenario';
+INSERT INTO recipe_tag (recipe_id, tag_id)
+    SELECT 13, id FROM tag WHERE name = '清淡' AND category = 'flavor';
+
+-- ============================================================================
+-- 14. 蒜蓉粉丝蒸娃娃菜(蒸菜 · 15 分钟 · 粤菜 · 素食 · 低脂)
+-- ============================================================================
+INSERT INTO recipe (name, cuisine, difficulty, prep_time_min, cook_time_min, servings,
+                    description, source, source_ref, is_ai_generated)
+VALUES ('蒜蓉粉丝蒸娃娃菜', '粤菜', 2, 7, 8, 2,
+        '素食蒸菜 · 蒜香浓郁 · 粉丝吸汁一绝',
+        '知识库', '../../_GourmetLib/09_健康快手食谱/健康快手食谱.md#L208', 0);
+
+INSERT INTO ingredient (recipe_id, name, qty, unit, note, is_optional, order_no) VALUES
+    (14, '娃娃菜', 2, '棵', '切 6 瓣', 0, 1),
+    (14, '粉丝', 50, 'g', '冷水泡软', 0, 2),
+    (14, '蒜末', 30, 'g', '3 勺量,蒜香关键', 0, 3),
+    (14, '生抽', 1.5, '勺', NULL, 0, 4),
+    (14, '蚝油', 1, '勺', NULL, 0, 5),
+    (14, '白糖', 0.5, '勺', '提鲜', 0, 6),
+    (14, '盐', 1, 'g', '焯水用', 0, 7),
+    (14, '葱花', 5, 'g', '出锅撒', 0, 8),
+    (14, '热油', 1, '勺', '激蒜香', 0, 9);
+
+INSERT INTO step (recipe_id, step_no, content, duration_sec, tip) VALUES
+    (14, 1, '娃娃菜切 6 瓣,沸水 + 少许盐焯 1 分钟,铺盘底', 60, '焯水保色,不发黄'),
+    (14, 2, '泡软的粉丝铺在娃娃菜上', 30, '粉丝别太长,易夹'),
+    (14, 3, '蒜末 + 生抽 + 蚝油 + 糖 调匀,淋在粉丝上', 30, '蒜要多才香'),
+    (14, 4, '水开上锅,大火蒸 8 分钟', 480, '水开再上,蒸气足'),
+    (14, 5, '出锅撒葱花,烧热油淋上激香', 30, '油温够热,葱香出');
+
+INSERT INTO nutrition (recipe_id, calories_kcal, protein_g, carb_g, fat_g, fiber_g, sodium_mg, source, note) VALUES
+    (14, 180, 5, 25, 7, 3, 620, '估算', '素食低脂,2 人份分摊');
+
+INSERT INTO recipe_tag (recipe_id, tag_id)
+    SELECT 14, id FROM tag WHERE name = '粤菜' AND category = 'cuisine';
+INSERT INTO recipe_tag (recipe_id, tag_id)
+    SELECT 14, id FROM tag WHERE name = '素食' AND category = 'diet';
+INSERT INTO recipe_tag (recipe_id, tag_id)
+    SELECT 14, id FROM tag WHERE name = '低脂' AND category = 'diet';
+INSERT OR IGNORE INTO tag (name, category) VALUES ('蒸菜', 'scenario');
+INSERT INTO recipe_tag (recipe_id, tag_id)
+    SELECT 14, id FROM tag WHERE name = '蒸菜' AND category = 'scenario';
+INSERT INTO recipe_tag (recipe_id, tag_id)
+    SELECT 14, id FROM tag WHERE name = '咸鲜' AND category = 'flavor';
+
+-- ============================================================================
+-- 15. 越南春卷(凉菜 · 10 分钟 · 西餐 · 减脂 · 高蛋白)
+-- ============================================================================
+INSERT INTO recipe (name, cuisine, difficulty, prep_time_min, cook_time_min, servings,
+                    description, source, source_ref, is_ai_generated)
+VALUES ('越南春卷', '西餐', 2, 8, 2, 1,
+        '低卡春卷 · 鲜虾 + 蔬菜 + 米纸 · 减脂餐颜值担当',
+        '知识库', '../../_GourmetLib/09_健康快手食谱/健康快手食谱.md#L255', 0);
+
+INSERT INTO ingredient (recipe_id, name, qty, unit, note, is_optional, order_no) VALUES
+    (15, '越南米纸', 3, '张', '温水泡 10 秒', 0, 1),
+    (15, '虾仁', 100, 'g', '提前烫熟', 0, 2),
+    (15, '生菜', 2, '片', '撕小', 0, 3),
+    (15, '黄瓜', 0.5, '根', '切条', 0, 4),
+    (15, '胡萝卜', 0.5, '根', '切丝', 0, 5),
+    (15, '薄荷叶', 5, 'g', '或罗勒叶', 0, 6),
+    (15, '鱼露', 1, '勺', '蘸汁用', 0, 7),
+    (15, '柠檬汁', 1, '勺', '蘸汁用', 0, 8),
+    (15, '蒜末', 3, 'g', '蘸汁用', 0, 9),
+    (15, '小米辣', 1, '个', '蘸汁用,切圈', 1, 10);
+
+INSERT INTO step (recipe_id, step_no, content, duration_sec, tip) VALUES
+    (15, 1, '米纸放入温水(常温即可)泡 10 秒变软,平铺案板', 10, '水别太热,米纸会化'),
+    (15, 2, '中间铺生菜 + 胡萝卜丝 + 黄瓜条 + 薄荷 + 虾仁 2-3 只', 30, '食材控干水分'),
+    (15, 3, '两边向中间折,再从下往上卷紧(类似卷寿司)', 30, '卷紧防散'),
+    (15, 4, '调蘸汁:鱼露 + 柠檬汁 + 蒜末 + 小米辣 拌匀', 30, '酸辣开胃,蘸食');
+
+INSERT INTO nutrition (recipe_id, calories_kcal, protein_g, carb_g, fat_g, fiber_g, sodium_mg, source, note) VALUES
+    (15, 250, 20, 30, 5, 3, 580, '估算', '3 个春卷为 1 人份;米纸碳水低');
+
+INSERT INTO recipe_tag (recipe_id, tag_id)
+    SELECT 15, id FROM tag WHERE name = '减脂' AND category = 'diet';
+INSERT INTO recipe_tag (recipe_id, tag_id)
+    SELECT 15, id FROM tag WHERE name = '高蛋白' AND category = 'diet';
+INSERT INTO recipe_tag (recipe_id, tag_id)
+    SELECT 15, id FROM tag WHERE name = '快手' AND category = 'scenario';
+INSERT INTO recipe_tag (recipe_id, tag_id)
+    SELECT 15, id FROM tag WHERE name = '凉菜' AND category = 'scenario';
+
+-- ============================================================================
+-- v0.3 seed 结束 · 15 道菜谱已就位
+-- 累计:早餐 3 / 凉菜 4 / 汤品 1 / 主菜 5 / 主食 1 / 蒸菜 1 = 15 道
+-- 菜系分布:川菜 3 / 粤菜 4 / 鲁菜 1 / 浙菜 1 / 中式 3 / 西餐 3 = 7 类
+-- 标签字典累计:32 个(新增 微波/蒸菜)
+-- 验证方法:
+--   sqlite3 gourmet.db < db/schema.sql
+--   sqlite3 gourmet.db < db/seed_recipes.sql
+--   sqlite3 gourmet.db "SELECT r.name, r.cuisine, COUNT(i.id) AS ingredients
+--                       FROM recipe r LEFT JOIN ingredient i ON i.recipe_id = r.id
+--                       GROUP BY r.id ORDER BY r.id;"
+-- 预期(新增段):
+--   蔬菜蛋饼|中式|6
+--   黄瓜拌鸡胸丝|中式|9
+--   清蒸鲈鱼|粤菜|8
+--   蒜蓉粉丝蒸娃娃菜|粤菜|9
+--   越南春卷|西餐|10
+-- ============================================================================
