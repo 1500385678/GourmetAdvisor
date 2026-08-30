@@ -605,20 +605,210 @@ INSERT INTO recipe_tag (recipe_id, tag_id)
     SELECT 15, id FROM tag WHERE name = '凉菜' AND category = 'scenario';
 
 -- ============================================================================
--- v0.3 seed 结束 · 15 道菜谱已就位
--- 累计:早餐 3 / 凉菜 4 / 汤品 1 / 主菜 5 / 主食 1 / 蒸菜 1 = 15 道
--- 菜系分布:川菜 3 / 粤菜 4 / 鲁菜 1 / 浙菜 1 / 中式 3 / 西餐 3 = 7 类
--- 标签字典累计:32 个(新增 微波/蒸菜)
+-- 16. 蒜蓉蒸虾(海鲜 · 12 分钟 · 粤菜 · 高蛋白 · 宴客)
+-- ============================================================================
+INSERT INTO recipe (name, cuisine, difficulty, prep_time_min, cook_time_min, servings,
+                    description, source, source_ref, is_ai_generated)
+VALUES ('蒜蓉蒸虾', '粤菜', 2, 5, 7, 2,
+        '蒜香大虾 · 鲜嫩多汁 · 5 分钟出锅',
+        '知识库', '../../_GourmetLib/09_健康快手食谱/健康快手食谱.md#L312', 0);
+
+INSERT INTO ingredient (recipe_id, name, qty, unit, note, is_optional, order_no) VALUES
+    (16, '大虾', 12, '只', '约 400g,开背去虾线', 0, 1),
+    (16, '蒜末', 40, 'g', '4 勺量,蒜香关键', 0, 2),
+    (16, '生抽', 2, '勺', NULL, 0, 3),
+    (16, '蚝油', 1, '勺', NULL, 0, 4),
+    (16, '白糖', 0.5, '勺', '提鲜', 0, 5),
+    (16, '料酒', 1, '勺', '去腥', 0, 6),
+    (16, '葱花', 5, 'g', '出锅撒', 0, 7),
+    (16, '热油', 2, '勺', '激蒜香', 0, 8),
+    (16, '粉丝', 50, 'g', '铺底吸汁', 1, 9);
+
+INSERT INTO step (recipe_id, step_no, content, duration_sec, tip) VALUES
+    (16, 1, '大虾开背去虾线,留尾,平铺盘(可用粉丝铺底)', 60, '开背要深,入味'),
+    (16, 2, '蒜末 + 生抽 + 蚝油 + 糖 + 料酒 调匀,淋在虾上', 30, '蒜末一半生一半熟更香'),
+    (16, 3, '水开上锅,大火蒸 5 分钟(虾变色卷起即熟)', 300, '别超 6 分钟,虾肉老'),
+    (16, 4, '出锅撒葱花,烧热油淋上激香', 30, '油温够热,蒜香出');
+
+INSERT INTO nutrition (recipe_id, calories_kcal, protein_g, carb_g, fat_g, fiber_g, sodium_mg, source, note) VALUES
+    (16, 320, 38, 6, 16, 1, 720, '估算', '2 人份分摊;高蛋白海鲜');
+
+INSERT OR IGNORE INTO tag (name, category) VALUES ('海鲜', 'flavor');
+INSERT INTO recipe_tag (recipe_id, tag_id)
+    SELECT 16, id FROM tag WHERE name = '海鲜' AND category = 'flavor';
+INSERT INTO recipe_tag (recipe_id, tag_id)
+    SELECT 16, id FROM tag WHERE name = '高蛋白' AND category = 'diet';
+INSERT INTO recipe_tag (recipe_id, tag_id)
+    SELECT 16, id FROM tag WHERE name = '蒸菜' AND category = 'scenario';
+
+-- ============================================================================
+-- 17. 牛奶鸡蛋羹(早餐 · 8 分钟 · 中式 · 微波 · 宵夜)
+-- ============================================================================
+INSERT INTO recipe (name, cuisine, difficulty, prep_time_min, cook_time_min, servings,
+                    description, source, source_ref, is_ai_generated)
+VALUES ('牛奶鸡蛋羹', '中式', 1, 3, 5, 1,
+        '微波炉 5 分钟搞定的嫩滑蛋羹,像布丁一样',
+        '知识库', '../../_GourmetLib/09_健康快手食谱/健康快手食谱.md#L340', 0);
+
+INSERT INTO ingredient (recipe_id, name, qty, unit, note, is_optional, order_no) VALUES
+    (17, '鸡蛋', 2, '个', '常温', 0, 1),
+    (17, '牛奶', 200, 'ml', '或温水', 0, 2),
+    (17, '盐', 1, 'g', '提底味', 0, 3),
+    (17, '生抽', 0.5, '勺', '调味', 0, 4),
+    (17, '香油', 0.5, '勺', '增香', 0, 5),
+    (17, '葱花', 3, 'g', '点缀', 0, 6),
+    (17, '虾皮', 1, 'g', '提鲜', 1, 7);
+
+INSERT INTO step (recipe_id, step_no, content, duration_sec, tip) VALUES
+    (17, 1, '鸡蛋打散,加牛奶 + 盐 搅匀(1:1.5 蛋液:奶比例最嫩)', 30, '别打太发,有气泡'),
+    (17, 2, '过筛 1-2 次去掉气泡(嫩滑关键)', 30, '过筛不可省'),
+    (17, 3, '盖保鲜膜,微波中火 3-4 分钟(中途观察防溢出)', 240, '中火比高火嫩'),
+    (17, 4, '出锅淋生抽 + 香油 + 葱花,完成', 15, '趁热吃最嫩');
+
+INSERT INTO nutrition (recipe_id, calories_kcal, protein_g, carb_g, fat_g, fiber_g, sodium_mg, source, note) VALUES
+    (17, 220, 14, 8, 14, 0, 480, '估算', '1 人份;嫩滑高蛋白');
+
+INSERT OR IGNORE INTO tag (name, category) VALUES ('宵夜', 'scenario');
+INSERT INTO recipe_tag (recipe_id, tag_id)
+    SELECT 17, id FROM tag WHERE name = '宵夜' AND category = 'scenario';
+INSERT INTO recipe_tag (recipe_id, tag_id)
+    SELECT 17, id FROM tag WHERE name = '早餐' AND category = 'scenario';
+INSERT INTO recipe_tag (recipe_id, tag_id)
+    SELECT 17, id FROM tag WHERE name = '微波' AND category = 'scenario';
+INSERT INTO recipe_tag (recipe_id, tag_id)
+    SELECT 17, id FROM tag WHERE name = '咸鲜' AND category = 'flavor';
+
+-- ============================================================================
+-- 18. 凉拌木耳(凉菜 · 8 分钟 · 浙菜 · 素食 · 低脂)
+-- ============================================================================
+INSERT INTO recipe (name, cuisine, difficulty, prep_time_min, cook_time_min, servings,
+                    description, source, source_ref, is_ai_generated)
+VALUES ('凉拌木耳', '浙菜', 1, 5, 3, 2,
+        '清爽开胃 · 凉拌经典 · 素食餐桌常客',
+        '知识库', '../../_GourmetLib/09_健康快手食谱/健康快手食谱.md#L368', 0);
+
+INSERT INTO ingredient (recipe_id, name, qty, unit, note, is_optional, order_no) VALUES
+    (18, '干黑木耳', 20, 'g', '冷水泡发 2 小时', 0, 1),
+    (18, '蒜末', 15, 'g', '约 1.5 勺', 0, 2),
+    (18, '小米辣', 2, '个', '切圈,不吃辣可省', 1, 3),
+    (18, '香菜', 5, 'g', '切段', 0, 4),
+    (18, '生抽', 2, '勺', NULL, 0, 5),
+    (18, '香醋', 1.5, '勺', NULL, 0, 6),
+    (18, '白糖', 1, '勺', '提鲜', 0, 7),
+    (18, '香油', 1, '勺', NULL, 0, 8),
+    (18, '盐', 2, 'g', NULL, 0, 9);
+
+INSERT INTO step (recipe_id, step_no, content, duration_sec, tip) VALUES
+    (18, 1, '木耳泡发后撕小朵,沸水焯 2 分钟捞出过凉水', 120, '过凉保持脆感'),
+    (18, 2, '蒜末 + 小米辣 + 生抽 + 醋 + 糖 + 香油 + 盐 调汁', 30, '酸甜比例可按口味调'),
+    (18, 3, '木耳沥干水分,淋上料汁拌匀,撒香菜', 30, '现拌现吃最脆');
+
+INSERT INTO nutrition (recipe_id, calories_kcal, protein_g, carb_g, fat_g, fiber_g, sodium_mg, source, note) VALUES
+    (18, 90, 3, 12, 4, 6, 580, '估算', '2 人份分摊;素食低脂,木耳富含膳食纤维');
+
+INSERT INTO recipe_tag (recipe_id, tag_id)
+    SELECT 18, id FROM tag WHERE name = '浙菜' AND category = 'cuisine';
+INSERT INTO recipe_tag (recipe_id, tag_id)
+    SELECT 18, id FROM tag WHERE name = '凉菜' AND category = 'scenario';
+INSERT INTO recipe_tag (recipe_id, tag_id)
+    SELECT 18, id FROM tag WHERE name = '素食' AND category = 'diet';
+INSERT INTO recipe_tag (recipe_id, tag_id)
+    SELECT 18, id FROM tag WHERE name = '低脂' AND category = 'diet';
+INSERT INTO recipe_tag (recipe_id, tag_id)
+    SELECT 18, id FROM tag WHERE name = '酸辣' AND category = 'flavor';
+
+-- ============================================================================
+-- 19. 冬瓜排骨汤(汤品 · 60 分钟 · 浙菜 · 煲汤 · 宴客)
+-- ============================================================================
+INSERT INTO recipe (name, cuisine, difficulty, prep_time_min, cook_time_min, servings,
+                    description, source, source_ref, is_ai_generated)
+VALUES ('冬瓜排骨汤', '浙菜', 2, 10, 50, 3,
+        '经典家常汤 · 清淡不腻 · 夏日消暑首选',
+        '知识库', '../../_GourmetLib/09_健康快手食谱/健康快手食谱.md#L395', 0);
+
+INSERT INTO ingredient (recipe_id, name, qty, unit, note, is_optional, order_no) VALUES
+    (19, '猪肋排', 500, 'g', '斩小块', 0, 1),
+    (19, '冬瓜', 400, 'g', '去皮去瓤切块', 0, 2),
+    (19, '姜片', 15, 'g', '约 5 片', 0, 3),
+    (19, '料酒', 1, '勺', '焯水用', 0, 4),
+    (19, '盐', 5, 'g', '出锅前调', 0, 5),
+    (19, '葱段', 10, 'g', '点缀', 0, 6),
+    (19, '白胡椒粉', 1, 'g', '去腥提鲜', 1, 7);
+
+INSERT INTO step (recipe_id, step_no, content, duration_sec, tip) VALUES
+    (19, 1, '排骨冷水下锅 + 姜片 + 料酒,焯水 3 分钟去血沫', 180, '冷水下锅,血沫出得净'),
+    (19, 2, '捞出温水冲净,转砂锅加热水 + 姜片,大火烧开', 60, '热水下锅,汤更清'),
+    (19, 3, '转小火炖 40 分钟,放入冬瓜块再炖 15 分钟', 2700, '小火慢炖,汤色奶白'),
+    (19, 4, '出锅前 5 分钟加盐 + 白胡椒粉调味,撒葱段', 30, '盐别早放,肉发柴');
+
+INSERT INTO nutrition (recipe_id, calories_kcal, protein_g, carb_g, fat_g, fiber_g, sodium_mg, source, note) VALUES
+    (19, 280, 22, 8, 18, 1, 620, '估算', '3 人份分摊;清淡低脂,夏日首选');
+
+INSERT OR IGNORE INTO tag (name, category) VALUES ('煲汤', 'scenario');
+INSERT INTO recipe_tag (recipe_id, tag_id)
+    SELECT 19, id FROM tag WHERE name = '煲汤' AND category = 'scenario';
+INSERT INTO recipe_tag (recipe_id, tag_id)
+    SELECT 19, id FROM tag WHERE name = '汤品' AND category = 'scenario';
+INSERT INTO recipe_tag (recipe_id, tag_id)
+    SELECT 19, id FROM tag WHERE name = '咸鲜' AND category = 'flavor';
+
+-- ============================================================================
+-- 20. 黑椒牛柳(主菜 · 20 分钟 · 粤菜 · 增肌 · 快手)
+-- ============================================================================
+INSERT INTO recipe (name, cuisine, difficulty, prep_time_min, cook_time_min, servings,
+                    description, source, source_ref, is_ai_generated)
+VALUES ('黑椒牛柳', '粤菜', 2, 10, 10, 2,
+        '嫩滑牛柳 · 黑椒香气扑鼻 · 增肌补铁首选',
+        '知识库', '../../_GourmetLib/09_健康快手食谱/健康快手食谱.md#L420', 0);
+
+INSERT INTO ingredient (recipe_id, name, qty, unit, note, is_optional, order_no) VALUES
+    (20, '牛里脊', 300, 'g', '切条,逆纹', 0, 1),
+    (20, '青椒', 1, '个', '切块', 0, 2),
+    (20, '洋葱', 0.5, '个', '切丝', 0, 3),
+    (20, '蒜末', 10, 'g', '约 1 勺', 0, 4),
+    (20, '黑胡椒碎', 1, '勺', '现磨更香', 0, 5),
+    (20, '生抽', 1.5, '勺', NULL, 0, 6),
+    (20, '蚝油', 1, '勺', NULL, 0, 7),
+    (20, '料酒', 1, '勺', NULL, 0, 8),
+    (20, '淀粉', 1, '勺', '嫩滑关键', 0, 9),
+    (20, '蛋清', 1, '个', '嫩滑关键', 0, 10),
+    (20, '盐', 2, 'g', '腌制', 0, 11),
+    (20, '油', 2, '勺', '滑炒用', 0, 12);
+
+INSERT INTO step (recipe_id, step_no, content, duration_sec, tip) VALUES
+    (20, 1, '牛柳 + 盐 + 料酒 + 蛋清 + 淀粉 抓匀,腌 10 分钟', 600, '顺时针搅打上劲'),
+    (20, 2, '热锅热油,牛柳滑炒至变色盛出(7 成熟)', 90, '大火快炒,别久'),
+    (20, 3, '余油爆香蒜末 + 洋葱,加青椒翻炒 1 分钟', 60, '青椒别炒太久,保脆'),
+    (20, 4, '回锅牛柳 + 生抽 + 蚝油 + 黑胡椒碎,大火翻匀出锅', 60, '黑椒最后下,香气浓');
+
+INSERT INTO nutrition (recipe_id, calories_kcal, protein_g, carb_g, fat_g, fiber_g, sodium_mg, source, note) VALUES
+    (20, 380, 32, 10, 22, 1, 680, '估算', '2 人份分摊;高蛋白补铁,增肌首选');
+
+INSERT OR IGNORE INTO tag (name, category) VALUES ('增肌', 'diet');
+INSERT INTO recipe_tag (recipe_id, tag_id)
+    SELECT 20, id FROM tag WHERE name = '增肌' AND category = 'diet';
+INSERT INTO recipe_tag (recipe_id, tag_id)
+    SELECT 20, id FROM tag WHERE name = '高蛋白' AND category = 'diet';
+INSERT INTO recipe_tag (recipe_id, tag_id)
+    SELECT 20, id FROM tag WHERE name = '快手' AND category = 'scenario';
+INSERT INTO recipe_tag (recipe_id, tag_id)
+    SELECT 20, id FROM tag WHERE name = '糊辣' AND category = 'flavor';
+
+-- ============================================================================
+-- v0.4 seed 结束 · 20 道菜谱已就位
+-- 累计:早餐 4 / 凉菜 5 / 汤品 2 / 主菜 6 / 主食 1 / 蒸菜 1 / 宵夜 1 = 20 道
+-- 菜系分布:川菜 3 / 粤菜 5 / 鲁菜 1 / 浙菜 3 / 中式 4 / 西餐 3 / 鲁菜 1 = 7 类
+-- 标签字典累计:35 个(新增 海鲜/宵夜/煲汤/增肌)
 -- 验证方法:
 --   sqlite3 gourmet.db < db/schema.sql
 --   sqlite3 gourmet.db < db/seed_recipes.sql
 --   sqlite3 gourmet.db "SELECT r.name, r.cuisine, COUNT(i.id) AS ingredients
 --                       FROM recipe r LEFT JOIN ingredient i ON i.recipe_id = r.id
 --                       GROUP BY r.id ORDER BY r.id;"
--- 预期(新增段):
---   蔬菜蛋饼|中式|6
---   黄瓜拌鸡胸丝|中式|9
---   清蒸鲈鱼|粤菜|8
---   蒜蓉粉丝蒸娃娃菜|粤菜|9
---   越南春卷|西餐|10
+-- 预期(v0.4 新增段):
+--   蒜蓉蒸虾|粤菜|9
+--   牛奶鸡蛋羹|中式|7
+--   凉拌木耳|浙菜|9
+--   冬瓜排骨汤|浙菜|7
+--   黑椒牛柳|粤菜|12
 -- ============================================================================
