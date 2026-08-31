@@ -812,3 +812,239 @@ INSERT INTO recipe_tag (recipe_id, tag_id)
 --   冬瓜排骨汤|浙菜|7
 --   黑椒牛柳|粤菜|12
 -- ============================================================================
+
+-- ============================================================================
+-- v0.5 seed · 20→25 道 · 新增 4 大菜系(湘/徽/东北/闽)+ 1 经典淮扬
+-- 21-25 · 选菜规则:补齐巡检建议的 4 个空白菜系 + 1 道淮扬名菜代表
+-- ============================================================================
+
+-- ============================================================================
+-- 21. 剁椒鱼头(主菜 · 30 分钟 · 湘菜 · 蒸菜 · 宴客)
+-- ============================================================================
+INSERT INTO recipe (name, cuisine, difficulty, prep_time_min, cook_time_min, servings,
+                    description, source, source_ref, is_ai_generated)
+VALUES ('剁椒鱼头', '湘菜', 3, 10, 20, 3,
+        '湘菜名菜 · 鱼头肥嫩 · 剁椒鲜辣开胃',
+        '知识库', '../../_GourmetLib/06_烹饪方法与营养保留/烹饪方法与营养保留.md#蒸', 0);
+
+INSERT INTO ingredient (recipe_id, name, qty, unit, note, is_optional, order_no) VALUES
+    (21, '胖头鱼头', 1, '个', '约 1000g,从背部剖开', 0, 1),
+    (21, '剁椒', 150, 'g', '市售坛装剁椒', 0, 2),
+    (21, '蒜末', 20, 'g', '约 1 勺半', 0, 3),
+    (21, '姜末', 10, 'g', '约 1 勺', 0, 4),
+    (21, '豆豉', 10, 'g', '切碎', 0, 5),
+    (21, '小葱', 10, 'g', '葱花', 0, 6),
+    (21, '蒸鱼豉油', 2, '勺', NULL, 0, 7),
+    (21, '料酒', 1, '勺', '去腥', 0, 8),
+    (21, '盐', 3, 'g', '腌鱼头', 0, 9),
+    (21, '油', 2, '勺', '激香用', 0, 10);
+
+INSERT INTO step (recipe_id, step_no, content, duration_sec, tip) VALUES
+    (21, 1, '鱼头剖开,抹盐 + 料酒,腌 10 分钟入味去腥', 600, '鱼头背部剖开更易入味'),
+    (21, 2, '摆盘,铺剁椒 + 蒜末 + 姜末 + 豆豉,淋蒸鱼豉油', 60, '剁椒铺满,味才足'),
+    (21, 3, '水开后大火蒸 12 分钟(鱼眼发白即熟)', 720, '超时鱼肉发柴'),
+    (21, 4, '出锅撒葱花,烧热油至 200°C 浇上激香', 30, '热油激香,葱味瞬间释放');
+
+INSERT INTO nutrition (recipe_id, calories_kcal, protein_g, carb_g, fat_g, fiber_g, sodium_mg, source, note) VALUES
+    (21, 320, 32, 6, 18, 0, 720, '估算', '3 人份分摊;高蛋白低脂,但钠偏高(剁椒+豉油)');
+
+INSERT OR IGNORE INTO tag (name, category) VALUES ('香辣', 'flavor');
+INSERT OR IGNORE INTO tag (name, category) VALUES ('蒸菜', 'scenario');
+INSERT INTO recipe_tag (recipe_id, tag_id)
+    SELECT 21, id FROM tag WHERE name = '湘菜' AND category = 'cuisine';
+INSERT INTO recipe_tag (recipe_id, tag_id)
+    SELECT 21, id FROM tag WHERE name = '宴客' AND category = 'scenario';
+INSERT INTO recipe_tag (recipe_id, tag_id)
+    SELECT 21, id FROM tag WHERE name = '蒸菜' AND category = 'scenario';
+INSERT INTO recipe_tag (recipe_id, tag_id)
+    SELECT 21, id FROM tag WHERE name = '海鲜' AND category = 'scenario';
+INSERT INTO recipe_tag (recipe_id, tag_id)
+    SELECT 21, id FROM tag WHERE name = '麻辣' AND category = 'flavor';
+INSERT INTO recipe_tag (recipe_id, tag_id)
+    SELECT 21, id FROM tag WHERE name = '香辣' AND category = 'flavor';
+
+-- ============================================================================
+-- 22. 徽州毛豆腐(主菜/小吃 · 20 分钟 · 徽菜 · 素食 · 特色)
+-- ============================================================================
+INSERT INTO recipe (name, cuisine, difficulty, prep_time_min, cook_time_min, servings,
+                    description, source, source_ref, is_ai_generated)
+VALUES ('徽州毛豆腐', '徽菜', 3, 5, 15, 2,
+        '徽州传统发酵豆腐 · 煎至两面金黄 · 外脆内嫩如奶酪',
+        '知识库', '../../_GourmetLib/06_烹饪方法与营养保留/烹饪方法与营养保留.md#煎', 0);
+
+INSERT INTO ingredient (recipe_id, name, qty, unit, note, is_optional, order_no) VALUES
+    (22, '毛豆腐', 400, 'g', '发酵豆腐,表面有白色菌丝', 0, 1),
+    (22, '油', 3, '勺', '平底锅煎用', 0, 2),
+    (22, '盐', 2, 'g', '出锅前撒', 0, 3),
+    (22, '葱花', 5, 'g', NULL, 0, 4),
+    (22, '香菜', 5, 'g', '提香', 1, 5),
+    (22, '辣酱', 1, '勺', '蘸食,可选', 1, 6);
+
+INSERT INTO step (recipe_id, step_no, content, duration_sec, tip) VALUES
+    (22, 1, '毛豆腐切 1.5cm 厚片,小心保持完整', 120, '菌丝是精华,别洗太狠'),
+    (22, 2, '平底锅热油,中火下毛豆腐煎 3 分钟定型', 180, '别急着翻,等底面金黄'),
+    (22, 3, '翻面再煎 3 分钟至两面金黄外壳酥脆', 180, '中火慢煎,外脆内嫩'),
+    (22, 4, '出锅撒盐 + 葱花 + 香菜,配辣酱蘸食', 30, '趁热吃,凉了外壳不脆');
+
+INSERT INTO nutrition (recipe_id, calories_kcal, protein_g, carb_g, fat_g, fiber_g, sodium_mg, source, note) VALUES
+    (22, 280, 18, 8, 20, 1, 480, '估算', '2 人份分摊;发酵豆制品含益生菌,助消化');
+
+INSERT INTO recipe_tag (recipe_id, tag_id)
+    SELECT 22, id FROM tag WHERE name = '徽菜' AND category = 'cuisine';
+INSERT INTO recipe_tag (recipe_id, tag_id)
+    SELECT 22, id FROM tag WHERE name = '素食' AND category = 'diet';
+INSERT INTO recipe_tag (recipe_id, tag_id)
+    SELECT 22, id FROM tag WHERE name = '快手' AND category = 'scenario';
+INSERT INTO recipe_tag (recipe_id, tag_id)
+    SELECT 22, id FROM tag WHERE name = '咸鲜' AND category = 'flavor';
+
+-- ============================================================================
+-- 23. 锅包肉(主菜 · 25 分钟 · 东北菜 · 宴客 · 酸甜)
+-- ============================================================================
+INSERT INTO recipe (name, cuisine, difficulty, prep_time_min, cook_time_min, servings,
+                    description, source, source_ref, is_ai_generated)
+VALUES ('锅包肉', '东北菜', 3, 10, 15, 2,
+        '东北名菜 · 猪里脊酥脆 · 糖醋汁挂满金黄',
+        '知识库', '../../_GourmetLib/06_烹饪方法与营养保留/烹饪方法与营养保留.md#炸', 0);
+
+INSERT INTO ingredient (recipe_id, name, qty, unit, note, is_optional, order_no) VALUES
+    (23, '猪里脊', 300, 'g', '切 0.5cm 厚片', 0, 1),
+    (23, '土豆淀粉', 100, 'g', '挂糊用', 0, 2),
+    (23, '蛋清', 1, '个', '调糊', 0, 3),
+    (23, '油', 500, 'ml', '实耗 50ml,炸用', 0, 4),
+    (23, '白糖', 50, 'g', '糖醋汁', 0, 5),
+    (23, '米醋', 50, 'ml', '糖醋汁', 0, 6),
+    (23, '生抽', 1, '勺', '调色', 0, 7),
+    (23, '葱丝', 10, 'g', NULL, 0, 8),
+    (23, '姜丝', 5, 'g', NULL, 0, 9),
+    (23, '蒜末', 5, 'g', NULL, 0, 10),
+    (23, '香菜', 5, 'g', '点缀', 0, 11),
+    (23, '盐', 3, 'g', '腌肉', 0, 12);
+
+INSERT INTO step (recipe_id, step_no, content, duration_sec, tip) VALUES
+    (23, 1, '里脊片 + 盐 腌 10 分钟,土豆淀粉 + 蛋清 + 少量水调成稠糊', 600, '淀粉糊要稠到挂得住'),
+    (23, 2, '肉片裹糊,油烧 170°C 下锅炸 3 分钟至金黄捞出', 180, '第一遍定型'),
+    (23, 3, '油温升到 180°C,肉片复炸 30 秒至外壳酥脆', 30, '复炸是酥脆关键'),
+    (23, 4, '留底油爆香葱姜蒜,加糖 + 醋 + 生抽煮沸成糖醋汁', 60, '糖醋比 1:1 是经典'),
+    (23, 5, '倒炸肉大火快速翻匀,挂满糖醋汁,撒香菜出锅', 30, '快翻快出,保持酥脆');
+
+INSERT INTO nutrition (recipe_id, calories_kcal, protein_g, carb_g, fat_g, fiber_g, sodium_mg, source, note) VALUES
+    (23, 520, 28, 52, 22, 1, 580, '估算', '2 人份分摊;酸甜开胃但糖油偏高,建议配青菜');
+
+INSERT OR IGNORE INTO tag (name, category) VALUES ('东北菜', 'cuisine');
+INSERT OR IGNORE INTO tag (name, category) VALUES ('闽菜', 'cuisine');
+INSERT OR IGNORE INTO tag (name, category) VALUES ('淮扬菜', 'cuisine');
+INSERT INTO recipe_tag (recipe_id, tag_id)
+    SELECT 23, id FROM tag WHERE name = '东北菜' AND category = 'cuisine';
+INSERT INTO recipe_tag (recipe_id, tag_id)
+    SELECT 23, id FROM tag WHERE name = '宴客' AND category = 'scenario';
+INSERT INTO recipe_tag (recipe_id, tag_id)
+    SELECT 23, id FROM tag WHERE name = '酸甜' AND category = 'flavor';
+
+-- ============================================================================
+-- 24. 沙茶面(主食 · 15 分钟 · 闽菜 · 早餐 · 海鲜)
+-- ============================================================================
+INSERT INTO recipe (name, cuisine, difficulty, prep_time_min, cook_time_min, servings,
+                    description, source, source_ref, is_ai_generated)
+VALUES ('沙茶面', '闽菜', 2, 5, 10, 1,
+        '厦门街头经典 · 沙茶酱浓香 · 海鲜汤底鲜甜',
+        '知识库', '../../_GourmetLib/06_烹饪方法与营养保留/烹饪方法与营养保留.md#煮', 0);
+
+INSERT INTO ingredient (recipe_id, name, qty, unit, note, is_optional, order_no) VALUES
+    (24, '碱水油面', 200, 'g', '或普通碱面', 0, 1),
+    (24, '沙茶酱', 2, '勺', '潮汕/厦门风味', 0, 2),
+    (24, '花生酱', 1, '勺', '增香增稠', 0, 3),
+    (24, '鲜虾', 50, 'g', '去壳去虾线', 0, 4),
+    (24, '鱿鱼', 50, 'g', '切花刀', 0, 5),
+    (24, '猪肉片', 50, 'g', '里脊或梅花肉', 0, 6),
+    (24, '小白菜', 50, 'g', '或油菜', 0, 7),
+    (24, '高汤', 400, 'ml', '鸡/骨汤', 0, 8),
+    (24, '蒜末', 5, 'g', NULL, 0, 9),
+    (24, '葱花', 5, 'g', NULL, 0, 10),
+    (24, '盐', 2, 'g', '调味', 0, 11);
+
+INSERT INTO step (recipe_id, step_no, content, duration_sec, tip) VALUES
+    (24, 1, '高汤烧开,加沙茶酱 + 花生酱搅匀煮沸出香', 90, '花生酱先用温水调开,免结块'),
+    (24, 2, '放入猪肉片、鱿鱼、虾烫熟(约 2 分钟)', 120, '海鲜别久烫,保嫩'),
+    (24, 3, '另锅煮面 3 分钟至弹牙,捞入碗中', 180, '碱水面不易煮烂'),
+    (24, 4, '小白菜烫 30 秒铺面上,浇汤,撒蒜末葱花', 30, '小白菜烫过即可,保色保脆');
+
+INSERT INTO nutrition (recipe_id, calories_kcal, protein_g, carb_g, fat_g, fiber_g, sodium_mg, source, note) VALUES
+    (24, 580, 28, 65, 22, 2, 920, '估算', '1 人份;沙茶酱+花生酱热量高,钠偏高');
+
+INSERT INTO recipe_tag (recipe_id, tag_id)
+    SELECT 24, id FROM tag WHERE name = '闽菜' AND category = 'cuisine';
+INSERT INTO recipe_tag (recipe_id, tag_id)
+    SELECT 24, id FROM tag WHERE name = '海鲜' AND category = 'scenario';
+INSERT INTO recipe_tag (recipe_id, tag_id)
+    SELECT 24, id FROM tag WHERE name = '宵夜' AND category = 'scenario';
+INSERT INTO recipe_tag (recipe_id, tag_id)
+    SELECT 24, id FROM tag WHERE name = '快手' AND category = 'scenario';
+INSERT INTO recipe_tag (recipe_id, tag_id)
+    SELECT 24, id FROM tag WHERE name = '糊辣' AND category = 'flavor';
+
+-- ============================================================================
+-- 25. 蟹粉狮子头(主菜/汤品 · 60 分钟 · 淮扬菜 · 宴客 · 经典)
+-- ============================================================================
+INSERT INTO recipe (name, cuisine, difficulty, prep_time_min, cook_time_min, servings,
+                    description, source, source_ref, is_ai_generated)
+VALUES ('蟹粉狮子头', '淮扬菜', 4, 20, 45, 3,
+        '淮扬名菜 · 手工切肉 · 入口即化 · 蟹粉提鲜',
+        '知识库', '../../_GourmetLib/06_烹饪方法与营养保留/烹饪方法与营养保留.md#炖', 0);
+
+INSERT INTO ingredient (recipe_id, name, qty, unit, note, is_optional, order_no) VALUES
+    (25, '猪五花肉', 500, 'g', '肥瘦 3:7,手工切丁不绞', 0, 1),
+    (25, '蟹粉', 50, 'g', '或蟹黄+蟹肉', 0, 2),
+    (25, '荸荠', 100, 'g', '切小丁,增脆', 0, 3),
+    (25, '葱姜水', 50, 'ml', '葱姜泡温水 10 分钟', 0, 4),
+    (25, '盐', 5, 'g', NULL, 0, 5),
+    (25, '料酒', 1, '勺', NULL, 0, 6),
+    (25, '淀粉', 2, '勺', '土豆/玉米淀粉', 0, 7),
+    (25, '蛋清', 1, '个', NULL, 0, 8),
+    (25, '小白菜', 200, 'g', '铺底', 0, 9),
+    (25, '高汤', 500, 'ml', '鸡/骨汤', 0, 10),
+    (25, '白胡椒粉', 1, 'g', '出锅前撒', 0, 11);
+
+INSERT INTO step (recipe_id, step_no, content, duration_sec, tip) VALUES
+    (25, 1, '五花肉手工切 0.5cm 丁(不用绞肉机,保口感)', 600, '手工切才松软,绞肉发柴'),
+    (25, 2, '肉丁 + 葱姜水顺时针摔打 5 分钟上劲,加蟹粉、荸荠丁、盐、料酒、淀粉、蛋清拌匀', 600, '摔打出胶是关键,丸子才嫩'),
+    (25, 3, '双手团成 4 个大丸子(直径 6-7cm),表面光滑', 120, '两手倒替摔几下排气'),
+    (25, 4, '砂锅铺小白菜,放丸子,加高汤没过一半,大火烧开', 120, '汤别全没过,上半部蒸下半部煮'),
+    (25, 5, '转小火盖盖炖 45 分钟,出锅撒白胡椒粉', 2700, '小火慢炖,肥肉化渣,瘦肉不柴');
+
+INSERT INTO nutrition (recipe_id, calories_kcal, protein_g, carb_g, fat_g, fiber_g, sodium_mg, source, note) VALUES
+    (25, 420, 28, 12, 30, 2, 680, '估算', '3 人份分摊;肥瘦相间但长时间炖后肥肉化渣,口感不腻');
+
+INSERT INTO recipe_tag (recipe_id, tag_id)
+    SELECT 25, id FROM tag WHERE name = '淮扬菜' AND category = 'cuisine';
+INSERT INTO recipe_tag (recipe_id, tag_id)
+    SELECT 25, id FROM tag WHERE name = '宴客' AND category = 'scenario';
+INSERT INTO recipe_tag (recipe_id, tag_id)
+    SELECT 25, id FROM tag WHERE name = '汤品' AND category = 'scenario';
+INSERT INTO recipe_tag (recipe_id, tag_id)
+    SELECT 25, id FROM tag WHERE name = '咸鲜' AND category = 'flavor';
+INSERT INTO recipe_tag (recipe_id, tag_id)
+    SELECT 25, id FROM tag WHERE name = '高蛋白' AND category = 'diet';
+
+-- ============================================================================
+-- v0.5 seed 结束 · 25 道菜谱已就位
+-- 累计:早餐 5 / 凉菜 5 / 汤品 3 / 主菜 9 / 主食 2 / 蒸菜 1 = 25 道
+-- 菜系分布:川菜 3 / 粤菜 5 / 鲁菜 1 / 浙菜 3 / 中式 4 / 西餐 3 / 湘菜 1 / 徽菜 1 / 东北菜 1 / 闽菜 1 / 淮扬菜 1 = 11 类
+-- 标签字典累计:40 个(新增 香辣/蒸菜/东北菜/闽菜/淮扬菜)
+-- 验证方法:
+--   sqlite3 gourmet.db < db/schema.sql
+--   sqlite3 gourmet.db < db/seed_recipes.sql
+--   sqlite3 gourmet.db "SELECT r.name, r.cuisine, COUNT(i.id) AS ingredients
+--                       FROM recipe r LEFT JOIN ingredient i ON i.recipe_id = r.id
+--                       GROUP BY r.id ORDER BY r.id;"
+--   sqlite3 gourmet.db "SELECT cuisine, COUNT(*) FROM recipe GROUP BY cuisine ORDER BY 2 DESC;"
+-- 预期(v0.5 新增段):
+--   剁椒鱼头|湘菜|10
+--   徽州毛豆腐|徽菜|6
+--   锅包肉|东北菜|12
+--   沙茶面|闽菜|11
+--   蟹粉狮子头|淮扬菜|11
+-- 预期(菜系分布):
+--   粤菜|5  中式|4  川菜|3  西餐|3  浙菜|3
+--   鲁菜|1  湘菜|1  徽菜|1  东北菜|1  闽菜|1  淮扬菜|1
+-- ============================================================================
