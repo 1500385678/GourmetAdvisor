@@ -1,6 +1,6 @@
 -- ============================================================================
 -- GourmetAdvisor · 菜谱库 Schema v0.1
--- 项目代号:GourmetAdvisor · 内部代号 03-美食 · 2026-08-26
+-- 项目代号:GourmetAdvisor · 内部代号 03-美食 · 2026-08-26(初版)→ 2026-09-03 增 2 tag
 -- 关联文件:项目开发计划.md Phase 0 · 任务 6 (设计菜谱表)
 -- 引擎:SQLite 3(Phase 0) → PostgreSQL 14+(Phase 1 迁移)
 -- 设计原则:5 张主表 + 1 张多对多桥接表,留好 FK 与索引
@@ -123,6 +123,7 @@ INSERT OR IGNORE INTO tag (name, category) VALUES
     ('麻辣', 'flavor'), ('咸鲜', 'flavor'), ('清淡', 'flavor'), ('酸甜', 'flavor'),
     -- 场景
     ('快手', 'scenario'), ('宴客', 'scenario'), ('便当', 'scenario'), ('宵夜', 'scenario'),
+    ('甜品', 'scenario'), ('微波', 'scenario'),
     -- 饮食目标
     ('低糖', 'diet'), ('低脂', 'diet'), ('减脂', 'diet'), ('增肌', 'diet'),
     ('高蛋白', 'diet'), ('控盐', 'diet'), ('素食', 'diet');

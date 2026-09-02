@@ -1,9 +1,9 @@
 -- ============================================================================
 -- GourmetAdvisor · 菜谱 Seed 数据 v0.1
--- 项目代号:GourmetAdvisor · 内部代号 03-美食 · 2026-08-27
+-- 项目代号:GourmetAdvisor · 内部代号 03-美食 · 2026-08-27 起步
 -- 关联文件:schema.sql(同目录)· 项目开发计划.md Phase 0 · 任务 2 起步
--- 数据来源:知识库 _GourmetLib/09_健康快手食谱/健康快手食谱.md
--- 数据量:10 道(目标 200+,v0.1 首批 5 道 + v0.2 追加 5 道 2026-08-28)
+-- 数据来源:知识库 _GourmetLib/09_健康快手食谱/健康快手食谱.md + 06_烹饪方法与营养保留
+-- 数据量:35 道(目标 200+,v0.7 截至 2026-09-03)
 -- 执行:sqlite3 gourmet.db < schema.sql && sqlite3 gourmet.db < seed_recipes.sql
 -- ============================================================================
 
@@ -1247,11 +1247,256 @@ INSERT INTO recipe_tag (recipe_id, tag_id)
     SELECT 30, id FROM tag WHERE name = '增肌' AND category = 'diet';
 
 -- ============================================================================
--- v0.6 seed 结束 · 30 道菜谱已就位
--- 累计:早餐 6 / 凉菜 5 / 汤品 5 / 主菜 10 / 主食 2 / 蒸菜 1 / 宵夜 1 = 30 道
--- 菜系分布:川菜 3 / 粤菜 5 / 鲁菜 1 / 浙菜 3 / 中式 4 / 西餐 3
---           湘菜 2 / 徽菜 2 / 东北菜 2 / 闽菜 2 / 淮扬菜 2 = 11 类(闽/淮扬/东北/徽/湘 五系均达 2 道)
--- 标签字典:33 个(本次未新增,全部复用 v0.5 字典)
+-- v0.7 seed · 2026-09-03 新增 5 道(30 → 35)
+-- 选菜思路:补 鲁菜(1→2) 唯一空白,川/浙/西餐各补 1 道,新开「微波」场景
+-- 标签字典:全部复用,无新增(微波已在字典)
+-- ============================================================================
+
+-- ----------------------------------------------------------------------------
+-- 31. 九转大肠(鲁菜 · 宴客 · 30 分钟)
+-- ----------------------------------------------------------------------------
+INSERT INTO recipe (name, cuisine, difficulty, prep_time_min, cook_time_min, servings,
+                    description, source, source_ref, is_ai_generated)
+VALUES ('九转大肠', '鲁菜', 3, 10, 20, 2,
+        '鲁菜扛鼎 · 猪大肠先煮后烧 · 9 道工序 · 甜酸苦辣咸五味俱全',
+        '知识库', '../../_GourmetLib/06_烹饪方法与营养保留/烹饪方法与营养保留.md#烧', 0);
+
+INSERT INTO ingredient (recipe_id, name, qty, unit, note, is_optional, order_no) VALUES
+    (31, '熟猪大肠', 500, 'g', '市售半熟品,或自行煮至八成熟', 0, 1),
+    (31, '白砂糖', 60, 'g', '出"甜"味第一关', 0, 2),
+    (31, '米醋', 40, 'ml', '出"酸"味第二关', 0, 3),
+    (31, '酱油', 25, 'ml', '生抽老抽 1:1 兑', 0, 4),
+    (31, '料酒', 20, 'ml', '去腥', 0, 5),
+    (31, '盐', 2, 'g', '后加', 0, 6),
+    (31, '葱段', 15, 'g', NULL, 0, 7),
+    (31, '姜片', 10, 'g', NULL, 0, 8),
+    (31, '蒜末', 10, 'g', NULL, 0, 9),
+    (31, '花椒', 10, '粒', '少量', 0, 10),
+    (31, '肉桂粉', 1, 'g', '或桂皮 1 小段', 0, 11),
+    (31, '香菜末', 5, 'g', '出锅点缀', 1, 12),
+    (31, '食用油', 30, 'ml', '炒糖色用', 0, 13);
+
+INSERT INTO step (recipe_id, step_no, content, duration_sec, tip) VALUES
+    (31, 1, '大肠切 3cm 段,冷水入锅加葱姜料酒煮 5 分钟去异味,捞出沥干', 300, '二次去腥,正式烧前不能有杂味'),
+    (31, 2, '热锅冷油下白砂糖小火炒至琥珀色冒细泡(糖色)', 180, '糖色关键,小泡转大泡立即下料,苦了就没救'),
+    (31, 3, '下大肠快速翻炒裹匀糖色,加葱姜蒜花椒肉桂粉爆香', 60, '动作要快,糖色凝固前包住大肠'),
+    (31, 4, '加米醋、酱油、料酒、热水没过一半,大火烧开转小火', 60, '醋要早下,挥发后只留香不留酸'),
+    (31, 5, '小火收汁 12 分钟,期间不断翻动,汤汁浓稠挂勺时关火', 720, '收汁要勤翻,免糊底,挂勺即成'),
+    (31, 6, '撒香菜末(或葱花)出锅,趁热装盘', 20, '热吃最佳,凉了糖汁凝住风味减半');
+
+INSERT INTO nutrition (recipe_id, calories_kcal, protein_g, carb_g, fat_g, fiber_g, sodium_mg, source, note) VALUES
+    (31, 520, 22, 28, 36, 0, 880, '估算', '2 人份;高脂高糖,大肠胆固醇偏高,控脂人群少量尝味');
+
+INSERT INTO recipe_tag (recipe_id, tag_id)
+    SELECT 31, id FROM tag WHERE name = '鲁菜' AND category = 'cuisine';
+INSERT INTO recipe_tag (recipe_id, tag_id)
+    SELECT 31, id FROM tag WHERE name = '宴客' AND category = 'scenario';
+INSERT INTO recipe_tag (recipe_id, tag_id)
+    SELECT 31, id FROM tag WHERE name = '咸鲜' AND category = 'flavor';
+INSERT INTO recipe_tag (recipe_id, tag_id)
+    SELECT 31, id FROM tag WHERE name = '酸甜' AND category = 'flavor';
+
+-- ----------------------------------------------------------------------------
+-- 32. 鱼香肉丝(川菜 · 主菜/快手 · 15 分钟)
+-- ----------------------------------------------------------------------------
+INSERT INTO recipe (name, cuisine, difficulty, prep_time_min, cook_time_min, servings,
+                    description, source, source_ref, is_ai_generated)
+VALUES ('鱼香肉丝', '川菜', 2, 10, 5, 2,
+        '川菜"鱼香味"代表 · 糖醋泡椒调汁 · 咸甜酸辣四味合一',
+        '知识库', '../../_GourmetLib/06_烹饪方法与营养保留/烹饪方法与营养保留.md#炒', 0);
+
+INSERT INTO ingredient (recipe_id, name, qty, unit, note, is_optional, order_no) VALUES
+    (32, '猪里脊', 200, 'g', '切细丝,顺纹切', 0, 1),
+    (32, '木耳', 50, 'g', '泡发后切丝', 0, 2),
+    (32, '冬笋', 50, 'g', '或茭白,切丝', 0, 3),
+    (32, '胡萝卜', 30, 'g', '配色用,切丝', 1, 4),
+    (32, '泡椒', 20, 'g', '鱼香味灵魂,剁碎', 0, 5),
+    (32, '葱末', 10, 'g', NULL, 0, 6),
+    (32, '姜末', 10, 'g', NULL, 0, 7),
+    (32, '蒜末', 15, 'g', '蒜多才地道', 0, 8),
+    (32, '生抽', 15, 'ml', NULL, 0, 9),
+    (32, '米醋', 20, 'ml', NULL, 0, 10),
+    (32, '白糖', 20, 'g', '糖醋比 1:1', 0, 11),
+    (32, '料酒', 10, 'ml', NULL, 0, 12),
+    (32, '生粉', 5, 'g', '肉丝上浆', 0, 13),
+    (32, '盐', 1, 'g', '后加', 0, 14),
+    (32, '食用油', 40, 'ml', '分两次下', 0, 15);
+
+INSERT INTO step (recipe_id, step_no, content, duration_sec, tip) VALUES
+    (32, 1, '肉丝+生抽+料酒+生粉抓匀上浆,静置 5 分钟', 300, '上浆静置让肉吸饱水,嫩滑关键'),
+    (32, 2, '调汁:生抽+米醋+白糖+少量清水+生粉兑成"鱼香汁"', 60, '汁要提前调好,炒时没时间现兑'),
+    (32, 3, '热锅宽油下肉丝滑散至变色,捞出沥油', 90, '滑油不滑炒,肉才嫩'),
+    (32, 4, '锅留底油下泡椒末+姜蒜末小火炒香出红油', 30, '泡椒要炒透,生辣变香辣'),
+    (32, 5, '下木耳丝+冬笋丝+胡萝卜丝翻炒 1 分钟', 60, '断生即可,后续还要回锅'),
+    (32, 6, '回肉丝,淋鱼香汁大火翻匀,撒葱末出锅', 45, '大火快收,汁挂肉即成,30 秒出锅');
+
+INSERT INTO nutrition (recipe_id, calories_kcal, protein_g, carb_g, fat_g, fiber_g, sodium_mg, source, note) VALUES
+    (32, 360, 22, 22, 20, 2, 720, '估算', '2 人份;高蛋白中糖,泡椒钠高控盐人群注意');
+
+INSERT INTO recipe_tag (recipe_id, tag_id)
+    SELECT 32, id FROM tag WHERE name = '川菜' AND category = 'cuisine';
+INSERT INTO recipe_tag (recipe_id, tag_id)
+    SELECT 32, id FROM tag WHERE name = '快手' AND category = 'scenario';
+INSERT INTO recipe_tag (recipe_id, tag_id)
+    SELECT 32, id FROM tag WHERE name = '酸甜' AND category = 'flavor';
+INSERT INTO recipe_tag (recipe_id, tag_id)
+    SELECT 32, id FROM tag WHERE name = '酸辣' AND category = 'flavor';
+INSERT INTO recipe_tag (recipe_id, tag_id)
+    SELECT 32, id FROM tag WHERE name = '高蛋白' AND category = 'diet';
+
+-- ----------------------------------------------------------------------------
+-- 33. 西湖醋鱼(浙菜 · 宴客 · 25 分钟)
+-- ----------------------------------------------------------------------------
+INSERT INTO recipe (name, cuisine, difficulty, prep_time_min, cook_time_min, servings,
+                    description, source, source_ref, is_ai_generated)
+VALUES ('西湖醋鱼', '浙菜', 3, 10, 15, 2,
+        '杭帮名菜 · 草鱼饿养吐土 · 沸水"饿杀" · 醋汁姜香 · 鲜嫩微酸',
+        '知识库', '../../_GourmetLib/06_烹饪方法与营养保留/烹饪方法与营养保留.md#氽', 0);
+
+INSERT INTO ingredient (recipe_id, name, qty, unit, note, is_optional, order_no) VALUES
+    (33, '草鱼', 1, '条', '约 750g,饿养 1 天吐土', 0, 1),
+    (33, '米醋', 60, 'ml', '正宗用镇江香醋', 0, 2),
+    (33, '白糖', 30, 'g', '糖醋平衡', 0, 3),
+    (33, '酱油', 15, 'ml', '老抽上色', 0, 4),
+    (33, '姜末', 20, 'g', '姜香是灵魂', 0, 5),
+    (33, '葱段', 15, 'g', NULL, 0, 6),
+    (33, '料酒', 20, 'ml', '去腥', 0, 7),
+    (33, '生粉', 5, 'g', '勾芡用', 0, 8),
+    (33, '盐', 2, 'g', NULL, 0, 9),
+    (33, '胡椒粉', 1, 'g', NULL, 0, 10),
+    (33, '热水', 800, 'ml', '煮鱼用,水量要够', 0, 11);
+
+INSERT INTO step (recipe_id, step_no, content, duration_sec, tip) VALUES
+    (33, 1, '草鱼宰杀洗净,沿脊骨剖成雌雄片(连背不连腹),保留整鱼形状', 600, '饿养 1 天土腥味大减,正宗做法'),
+    (33, 2, '鱼身抹盐+料酒+姜片腌 10 分钟,热水大火烧开', 600, '热水量要够,没过鱼身 2cm'),
+    (33, 3, '鱼入沸水锅,加葱段大火"饿杀" 8 分钟(不加盖)', 480, '不加盖是"饿杀"精髓,鱼腥随蒸汽散'),
+    (33, 4, '捞出沥水装盘,留煮鱼原汤 200ml', 60, '原汤是醋汁基底'),
+    (33, 5, '原汤回锅加米醋+白糖+酱油+姜末烧开,生粉水勾薄芡', 180, '芡要薄,浇上去能流动'),
+    (33, 6, '芡汁均匀浇在鱼身上,撒剩余姜末上桌', 30, '姜末分两次,煮时+浇后,香更立体');
+
+INSERT INTO nutrition (recipe_id, calories_kcal, protein_g, carb_g, fat_g, fiber_g, sodium_mg, source, note) VALUES
+    (33, 280, 38, 12, 8, 0, 580, '估算', '2 人份;高蛋白低脂,水煮工艺少油,但醋多胃酸者适量');
+
+INSERT INTO recipe_tag (recipe_id, tag_id)
+    SELECT 33, id FROM tag WHERE name = '浙菜' AND category = 'cuisine';
+INSERT INTO recipe_tag (recipe_id, tag_id)
+    SELECT 33, id FROM tag WHERE name = '宴客' AND category = 'scenario';
+INSERT INTO recipe_tag (recipe_id, tag_id)
+    SELECT 33, id FROM tag WHERE name = '酸甜' AND category = 'flavor';
+INSERT INTO recipe_tag (recipe_id, tag_id)
+    SELECT 33, id FROM tag WHERE name = '海鲜' AND category = 'flavor';
+INSERT INTO recipe_tag (recipe_id, tag_id)
+    SELECT 33, id FROM tag WHERE name = '高蛋白' AND category = 'diet';
+INSERT INTO recipe_tag (recipe_id, tag_id)
+    SELECT 33, id FROM tag WHERE name = '减脂' AND category = 'diet';
+
+-- ----------------------------------------------------------------------------
+-- 34. 西班牙番茄冷汤 Gazpacho(西餐 · 凉菜 · 10 分钟)
+-- ----------------------------------------------------------------------------
+INSERT INTO recipe (name, cuisine, difficulty, prep_time_min, cook_time_min, servings,
+                    description, source, source_ref, is_ai_generated)
+VALUES ('番茄冷汤 Gazpacho', '西餐', 1, 10, 0, 2,
+        '安达卢西亚夏日汤 · 番茄+黄瓜+面包打碎冰镇 · 清爽不加热',
+        '知识库', '../../_GourmetLib/06_烹饪方法与营养保留/烹饪方法与营养保留.md#生食', 0);
+
+INSERT INTO ingredient (recipe_id, name, qty, unit, note, is_optional, order_no) VALUES
+    (34, '熟透番茄', 500, 'g', '要熟透的,顶部划十字去皮', 0, 1),
+    (34, '黄瓜', 150, 'g', '1 根,留 1/4 切丁装饰', 0, 2),
+    (34, '彩椒', 80, 'g', '红/黄 1 个,增加甜度', 0, 3),
+    (34, '法棍面包', 50, 'g', '或吐司,撕块泡软', 0, 4),
+    (34, '蒜瓣', 2, '个', '生蒜味冲,不能多', 0, 5),
+    (34, '橄榄油', 30, 'ml', '特级初榨', 0, 6),
+    (34, '雪利酒醋', 15, 'ml', '或米醋', 0, 7),
+    (34, '盐', 3, 'g', '后加', 0, 8),
+    (34, '黑胡椒', 1, 'g', '现磨', 0, 9),
+    (34, '冰水', 150, 'ml', '决定浓稠度', 0, 10);
+
+INSERT INTO step (recipe_id, step_no, content, duration_sec, tip) VALUES
+    (34, 1, '番茄顶部划十字,沸水烫 30 秒后冰水过凉去皮,切大块', 300, '熟透番茄一烫就脱皮'),
+    (34, 2, '黄瓜、彩椒切大块(留 1/4 黄瓜切小丁装饰),蒜瓣拍碎', 120, '留装饰丁再切,边角料才打碎'),
+    (34, 3, '面包撕块泡清水 2 分钟变软,挤干水分', 120, '面包是增稠剂,代替传统乳化'),
+    (34, 4, '所有大块食材+面包+橄榄油+雪利酒醋入料理机,加冰水', 60, '冰水是汤底冰镇的关键,别用常温水'),
+    (34, 5, '高速打 60 秒至顺滑,过筛 1 次口感更细腻', 60, '过筛去番茄籽和菜筋,口感升一档'),
+    (34, 6, '加盐黑胡椒调味,冷藏 30 分钟上桌,撒黄瓜丁+淋橄榄油', 30, '冷汤一定要冰镇,现做现喝风味差');
+
+INSERT INTO nutrition (recipe_id, calories_kcal, protein_g, carb_g, fat_g, fiber_g, sodium_mg, source, note) VALUES
+    (34, 180, 4, 18, 10, 3, 380, '估算', '2 人份;低卡高纤,维 C 番茄红素丰富,夏日减脂首选');
+
+INSERT INTO recipe_tag (recipe_id, tag_id)
+    SELECT 34, id FROM tag WHERE name = '快手' AND category = 'scenario';
+INSERT INTO recipe_tag (recipe_id, tag_id)
+    SELECT 34, id FROM tag WHERE name = '凉菜' AND category = 'scenario';
+INSERT INTO recipe_tag (recipe_id, tag_id)
+    SELECT 34, id FROM tag WHERE name = '清淡' AND category = 'flavor';
+INSERT INTO recipe_tag (recipe_id, tag_id)
+    SELECT 34, id FROM tag WHERE name = '低脂' AND category = 'diet';
+INSERT INTO recipe_tag (recipe_id, tag_id)
+    SELECT 34, id FROM tag WHERE name = '减脂' AND category = 'diet';
+INSERT INTO recipe_tag (recipe_id, tag_id)
+    SELECT 34, id FROM tag WHERE name = '素食' AND category = 'diet';
+
+-- ----------------------------------------------------------------------------
+-- 35. 葡式蛋挞(西餐 · 微波 · 早餐 · 20 分钟)
+-- ----------------------------------------------------------------------------
+INSERT INTO recipe (name, cuisine, difficulty, prep_time_min, cook_time_min, servings,
+                    description, source, source_ref, is_ai_generated)
+VALUES ('葡式蛋挞', '西餐', 2, 15, 5, 6,
+        '澳门改良版 · 微波速成 · 酥皮现成 + 蛋奶液 5 分钟烤',
+        '知识库', '../../_GourmetLib/06_烹饪方法与营养保留/烹饪方法与营养保留.md#烘', 0);
+
+INSERT INTO ingredient (recipe_id, name, qty, unit, note, is_optional, order_no) VALUES
+    (35, '蛋挞皮', 6, '个', '市售冷冻,提前 10 分钟回温', 0, 1),
+    (35, '鸡蛋黄', 2, '个', '全蛋也行,口感略粗', 0, 2),
+    (35, '淡奶油', 80, 'ml', '蛋挞液奶香关键', 0, 3),
+    (35, '牛奶', 100, 'ml', '稀释用', 0, 4),
+    (35, '白糖', 30, 'g', '微甜', 0, 5),
+    (35, '炼乳', 15, 'g', '可选,增加奶香', 1, 6),
+    (35, '香草精', 2, '滴', '去蛋腥', 1, 7);
+
+INSERT INTO step (recipe_id, step_no, content, duration_sec, tip) VALUES
+    (35, 1, '蛋挞皮从冷冻室取出,室温回温 10 分钟(去霜即可,别太软)', 600, '太软烤时塌陷,半冻状态烤最酥'),
+    (35, 2, '蛋黄打散+白糖搅至糖化(不要打发,免烤后起泡)', 60, '手动搅就行,打蛋器打发后蛋液膨胀烤焦'),
+    (35, 3, '加淡奶油+牛奶+炼乳+香草精搅匀,过筛 2 次去蛋筋', 120, '过筛决定细腻度,懒这一步口感差 50%'),
+    (35, 4, '蛋挞液倒入挞皮 7 分满(留膨胀空间)', 60, '7 分满,8 分会溢'),
+    (35, 5, '微波炉高火 5 分钟(单个)或 8 分钟(6 个同烤)', 300, '微波炉火力不同,看表面微焦带焦斑即成');
+
+INSERT INTO nutrition (recipe_id, calories_kcal, protein_g, carb_g, fat_g, fiber_g, sodium_mg, source, note) VALUES
+    (35, 320, 6, 28, 20, 0, 180, '估算', '6 个;单约 53 kcal,下午茶配咖啡合适,控糖人群减半');
+
+INSERT INTO recipe_tag (recipe_id, tag_id)
+    SELECT 35, id FROM tag WHERE name = '微波' AND category = 'scenario';
+INSERT INTO recipe_tag (recipe_id, tag_id)
+    SELECT 35, id FROM tag WHERE name = '早餐' AND category = 'scenario';
+INSERT INTO recipe_tag (recipe_id, tag_id)
+    SELECT 35, id FROM tag WHERE name = '快手' AND category = 'scenario';
+INSERT INTO recipe_tag (recipe_id, tag_id)
+    SELECT 35, id FROM tag WHERE name = '甜品' AND category = 'scenario';
+
+-- ============================================================================
+-- v0.7 seed 结束 · 35 道菜谱已就位
+-- 累计:早餐 7 / 凉菜 6 / 汤品 5 / 主菜 12 / 主食 2 / 蒸菜 1 / 宵夜 1 / 微波 1 = 35 道
+--       (新开「微波」场景 +1,「甜品」场景 +1)
+-- 菜系分布:粤菜 6 / 中式 4 / 川菜 4 / 西餐 5 / 浙菜 4
+--           鲁菜 2 / 湘菜 2 / 徽菜 2 / 东北菜 2 / 闽菜 2 / 淮扬菜 2
+-- 标签字典:32 个(本次新增「甜品」1 个场景标签)
+-- 验证方法:
+--   sqlite3 gourmet.db < db/schema.sql
+--   sqlite3 gourmet.db < db/seed_recipes.sql
+--   sqlite3 gourmet.db "SELECT r.name, r.cuisine, COUNT(i.id) AS ingredients
+--                       FROM recipe r LEFT JOIN ingredient i ON i.recipe_id = r.id
+--                       WHERE r.id BETWEEN 31 AND 35
+--                       GROUP BY r.id ORDER BY r.id;"
+--   sqlite3 gourmet.db "SELECT cuisine, COUNT(*) FROM recipe GROUP BY cuisine ORDER BY 2 DESC, 1;"
+-- 预期(v0.7 新增段):
+--   九转大肠|鲁菜|13
+--   鱼香肉丝|川菜|15
+--   西湖醋鱼|浙菜|11
+--   番茄冷汤 Gazpacho|西餐|10
+--   葡式蛋挞|西餐|7
+-- 预期(菜系分布):
+--   粤菜|6  西餐|5  中式|4  川菜|4  浙菜|4
+--   鲁菜|2  湘菜|2  徽菜|2  东北菜|2  闽菜|2  淮扬菜|2
+-- ============================================================================
 -- 验证方法:
 --   sqlite3 gourmet.db < db/schema.sql
 --   sqlite3 gourmet.db < db/seed_recipes.sql

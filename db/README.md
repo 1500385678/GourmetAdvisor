@@ -83,7 +83,7 @@
 ### 3.4 tag 字典
 
 - 4 类：`flavor`（风味）/ `scenario`（场景）/ `diet`（饮食目标）/ `cuisine`（菜系补充）
-- 已预置 23 个高频标签（见 schema.sql 末尾 `INSERT OR IGNORE`），Phase 0 任务 2 提取菜谱可直接复用
+- 已预置 25 个高频标签（见 schema.sql 末尾 `INSERT OR IGNORE`，v0.1 初始 23 + 2026-09-03 新增「甜品」+「微波」），Phase 0 任务 2 提取菜谱可直接复用
 - **不用 VARCHAR enum**：字典表更易扩展（"增肌"是新加的，`category='diet'` 直接 insert）
 
 ### 3.5 nutrition 营养
@@ -121,7 +121,7 @@ Neo4j 同步策略（v1.1）：
 
 ## 五、当前 v0.1 状态
 
-- ✅ schema.sql 已落地（7,854 字节，含 23 个标签种子）
+- ✅ schema.sql 已落地（v0.1 初始 + 2026-09-03 增 2 tag → 25 个标签种子，10 cuisine / 9 flavor / 7 diet / 10 scenario）
 - ⏳ Phase 0 任务 2「菜谱 200+ 提取」待启动（schema 已就绪可灌数据）
 - ⏳ Phase 0 任务 4「中国食物成分表导入」待启动（nutrition.source 待关联）
 - ⏳ Phase 0 任务 7「SQLite → PG/Neo4j 迁移脚本」待启动（迁移清单已在上节列清）
