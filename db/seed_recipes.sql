@@ -1472,13 +1472,263 @@ INSERT INTO recipe_tag (recipe_id, tag_id)
 INSERT INTO recipe_tag (recipe_id, tag_id)
     SELECT 35, id FROM tag WHERE name = '甜品' AND category = 'scenario';
 
+-- ----------------------------------------------------------------------------
+-- 36. 担担面(川菜 · 主食/宵夜 · 15 分钟)
+-- ----------------------------------------------------------------------------
+INSERT INTO recipe (name, cuisine, difficulty, prep_time_min, cook_time_min, servings,
+                    description, source, source_ref, is_ai_generated)
+VALUES ('担担面', '川菜', 2, 5, 10, 1,
+        '四川街边名小吃 · 细面 + 肉臊 + 芽菜 + 红油 + 花椒 · 麻辣鲜香一碗成',
+        '知识库', '../../_GourmetLib/06_烹饪方法与营养保留/烹饪方法与营养保留.md#煮', 0);
+
+INSERT INTO ingredient (recipe_id, name, qty, unit, note, is_optional, order_no) VALUES
+    (36, '细面条', 100, 'g', '碱水面最正宗', 0, 1),
+    (36, '猪肉末', 60, 'g', '肥瘦 3:7 更香', 0, 2),
+    (36, '芽菜', 30, 'g', '宜宾碎米芽菜,灵魂', 0, 3),
+    (36, '葱花', 10, 'g', '出锅撒', 0, 4),
+    (36, '蒜末', 5, 'g', NULL, 0, 5),
+    (36, '姜末', 5, 'g', NULL, 0, 6),
+    (36, '辣椒油', 20, 'ml', '红油,带白芝麻', 0, 7),
+    (36, '花椒粉', 2, 'g', '现磨更香', 0, 8),
+    (36, '生抽', 10, 'ml', NULL, 0, 9),
+    (36, '米醋', 5, 'ml', '少许提鲜', 0, 10),
+    (36, '芝麻酱', 10, 'g', '调稀用', 1, 11),
+    (36, '料酒', 5, 'ml', '炒肉用', 0, 12),
+    (36, '盐', 2, 'g', NULL, 0, 13);
+
+INSERT INTO step (recipe_id, step_no, content, duration_sec, tip) VALUES
+    (36, 1, '猪肉末+料酒+姜末抓匀腌 3 分钟,芽菜洗净切碎', 180, '芽菜本身咸,后面盐要减半'),
+    (36, 2, '热锅冷油下肉末小火炒散,炒至微黄出油', 180, '肉臊要炒到吐油才香,别急着下芽菜'),
+    (36, 3, '下芽菜继续炒 1 分钟,盛出备用', 60, '芽菜炒香后香气层次出'),
+    (36, 4, '调碗底:辣椒油+花椒粉+生抽+米醋+蒜末+芝麻酱兑成"红油汁"', 60, '碗底先调,面捞出直接拌'),
+    (36, 5, '另锅烧水,水开下面条煮 2 分钟(碱水面 2 分钟刚好,保持嚼劲)', 120, '面条过凉白开能更弹,但正宗不过水'),
+    (36, 6, '面捞入碗中,浇肉臊芽菜+红油汁,撒葱花上桌', 30, '葱花最后撒,留翠绿与香气');
+
+INSERT INTO nutrition (recipe_id, calories_kcal, protein_g, carb_g, fat_g, fiber_g, sodium_mg, source, note) VALUES
+    (36, 520, 18, 62, 22, 3, 880, '估算', '1 人份;高碳水高钠,宵夜解馋,控盐人群减半辣椒油');
+
+INSERT INTO recipe_tag (recipe_id, tag_id)
+    SELECT 36, id FROM tag WHERE name = '川菜' AND category = 'cuisine';
+INSERT INTO recipe_tag (recipe_id, tag_id)
+    SELECT 36, id FROM tag WHERE name = '宵夜' AND category = 'scenario';
+INSERT INTO recipe_tag (recipe_id, tag_id)
+    SELECT 36, id FROM tag WHERE name = '快手' AND category = 'scenario';
+INSERT INTO recipe_tag (recipe_id, tag_id)
+    SELECT 36, id FROM tag WHERE name = '麻辣' AND category = 'flavor';
+
+-- ----------------------------------------------------------------------------
+-- 37. 葱烧海参(鲁菜 · 宴客 · 30 分钟)
+-- ----------------------------------------------------------------------------
+INSERT INTO recipe (name, cuisine, difficulty, prep_time_min, cook_time_min, servings,
+                    description, source, source_ref, is_ai_generated)
+VALUES ('葱烧海参', '鲁菜', 4, 20, 10, 2,
+        '鲁菜"葱烧"代表 · 即食辽参 + 大葱白烧制 · 葱香浓郁软糯入味',
+        '知识库', '../../_GourmetLib/06_烹饪方法与营养保留/烹饪方法与营养保留.md#烧', 0);
+
+INSERT INTO ingredient (recipe_id, name, qty, unit, note, is_optional, order_no) VALUES
+    (37, '即食辽参', 4, '只', '已发好的,免泡发', 0, 1),
+    (37, '大葱白', 200, 'g', '只取葱白,2 根大葱的量', 0, 2),
+    (37, '姜片', 10, 'g', NULL, 0, 3),
+    (37, '生抽', 20, 'ml', NULL, 0, 4),
+    (37, '老抽', 5, 'ml', '上色用,几滴即可', 0, 5),
+    (37, '白糖', 15, 'g', '鲁菜偏甜口', 0, 6),
+    (37, '料酒', 20, 'ml', NULL, 0, 7),
+    (37, '高汤', 300, 'ml', '鸡汤/骨汤,无则清水+鸡精', 0, 8),
+    (37, '水淀粉', 30, 'ml', '生粉+水 1:3', 0, 9),
+    (37, '食用油', 50, 'ml', '炸葱用', 0, 10);
+
+INSERT INTO step (recipe_id, step_no, content, duration_sec, tip) VALUES
+    (37, 1, '即食辽参对半剖开去内脏,沸水汆 30 秒去腥,捞出沥干', 60, '即食参本身已熟,汆水为去腥定型'),
+    (37, 2, '大葱白切 5cm 段,分葱芯葱白(芯先炸)', 60, '葱芯先下,炸透再下葱白,层次出'),
+    (37, 3, '冷油下葱芯小火慢炸 5 分钟至金黄,再下葱白炸 2 分钟出香,葱油留用', 420, '炸葱油是鲁菜精髓,葱焦黄不可黑'),
+    (37, 4, '葱油锅内留 2 勺,加姜片+高汤+生抽+老抽+白糖+料酒烧开', 90, '高汤是胶质来源,替代品鸡精水差很多'),
+    (37, 5, '下海参小火煨 5 分钟入味,大火收汁', 300, '海参不能大火,会收缩变硬'),
+    (37, 6, '水淀粉勾薄芡,淋剩余葱油翻匀,装盘撒葱丝', 30, '明油亮芡是鲁菜"红烧"标准');
+
+INSERT INTO nutrition (recipe_id, calories_kcal, protein_g, carb_g, fat_g, fiber_g, sodium_mg, source, note) VALUES
+    (37, 240, 18, 8, 14, 0, 620, '估算', '2 人份;高蛋白低脂,海参胶原丰富,宴客体面又健康');
+
+INSERT INTO recipe_tag (recipe_id, tag_id)
+    SELECT 37, id FROM tag WHERE name = '鲁菜' AND category = 'cuisine';
+INSERT INTO recipe_tag (recipe_id, tag_id)
+    SELECT 37, id FROM tag WHERE name = '宴客' AND category = 'scenario';
+INSERT INTO recipe_tag (recipe_id, tag_id)
+    SELECT 37, id FROM tag WHERE name = '海鲜' AND category = 'flavor';
+INSERT INTO recipe_tag (recipe_id, tag_id)
+    SELECT 37, id FROM tag WHERE name = '高蛋白' AND category = 'diet';
+INSERT INTO recipe_tag (recipe_id, tag_id)
+    SELECT 37, id FROM tag WHERE name = '减脂' AND category = 'diet';
+
+-- ----------------------------------------------------------------------------
+-- 38. 蚝油生菜(粤菜 · 快手 · 5 分钟)
+-- ----------------------------------------------------------------------------
+INSERT INTO recipe (name, cuisine, difficulty, prep_time_min, cook_time_min, servings,
+                    description, source, source_ref, is_ai_generated)
+VALUES ('蚝油生菜', '粤菜', 1, 3, 2, 2,
+        '粤式"白灼"代表 · 翠绿生菜 + 滚水+蚝油 · 5 分钟清甜上桌',
+        '知识库', '../../_GourmetLib/06_烹饪方法与营养保留/烹饪方法与营养保留.md#灼', 0);
+
+INSERT INTO ingredient (recipe_id, name, qty, unit, note, is_optional, order_no) VALUES
+    (38, '罗马生菜', 300, 'g', '或球生菜,叶片大更易摆盘', 0, 1),
+    (38, '蚝油', 20, 'ml', '粤菜灵魂调味', 0, 2),
+    (38, '生抽', 10, 'ml', '配蚝油提鲜', 0, 3),
+    (38, '白糖', 3, 'g', '平衡咸味,几粒即可', 0, 4),
+    (38, '蒜末', 10, 'g', '可加可不加', 1, 5),
+    (38, '食用油', 15, 'ml', '淋明油用', 0, 6),
+    (38, '盐', 2, 'g', '焯水用', 0, 7);
+
+INSERT INTO step (recipe_id, step_no, content, duration_sec, tip) VALUES
+    (38, 1, '生菜逐叶掰开洗净,沥干(根部泥土多,要泡 5 分钟再冲)', 120, '罗马生菜比本地生菜耐烫,不易烂'),
+    (38, 2, '大锅宽水烧开+1 勺盐+几滴油,下生菜叶烫 30 秒立即捞出', 30, '加油保色加盐固色,30 秒就够,超时就蔫'),
+    (38, 3, '捞出沥水摆盘(可卷成卷摆,或直接铺)', 30, '沥干后才能挂汁,否则汤汤水水'),
+    (38, 4, '碗中调汁:蚝油+生抽+白糖+2 勺清水搅匀', 30, '蚝油本身稠,加一点水才化得开'),
+    (38, 5, '热锅冷油下蒜末爆香(可选),倒汁烧开', 30, '蒜爆香是变体,正宗可省'),
+    (38, 6, '滚汁浇在生菜上,听"嗞"一声,完成', 10, '热汁浇冷菜瞬间激发香气');
+
+INSERT INTO nutrition (recipe_id, calories_kcal, protein_g, carb_g, fat_g, fiber_g, sodium_mg, source, note) VALUES
+    (38, 95, 3, 8, 6, 2, 380, '估算', '2 人份;超低卡高纤,减脂期配饭一绝');
+
+INSERT INTO recipe_tag (recipe_id, tag_id)
+    SELECT 38, id FROM tag WHERE name = '粤菜' AND category = 'cuisine';
+INSERT INTO recipe_tag (recipe_id, tag_id)
+    SELECT 38, id FROM tag WHERE name = '快手' AND category = 'scenario';
+INSERT INTO recipe_tag (recipe_id, tag_id)
+    SELECT 38, id FROM tag WHERE name = '清淡' AND category = 'flavor';
+INSERT INTO recipe_tag (recipe_id, tag_id)
+    SELECT 38, id FROM tag WHERE name = '素食' AND category = 'diet';
+INSERT INTO recipe_tag (recipe_id, tag_id)
+    SELECT 38, id FROM tag WHERE name = '低脂' AND category = 'diet';
+
+-- ----------------------------------------------------------------------------
+-- 39. 日式咖喱饭(西餐 · 便当/主食 · 20 分钟)
+-- ----------------------------------------------------------------------------
+INSERT INTO recipe (name, cuisine, difficulty, prep_time_min, cook_time_min, servings,
+                    description, source, source_ref, is_ai_generated)
+VALUES ('日式咖喱饭', '西餐', 1, 5, 15, 2,
+        '日式"甘口"咖喱块 · 鸡腿肉+土豆+胡萝卜 · 浓稠裹饭一锅出',
+        '知识库', '../../_GourmetLib/06_烹饪方法与营养保留/烹饪方法与营养保留.md#炖', 0);
+
+INSERT INTO ingredient (recipe_id, name, qty, unit, note, is_optional, order_no) VALUES
+    (39, '去骨鸡腿肉', 250, 'g', '比鸡胸嫩,带皮更香', 0, 1),
+    (39, '土豆', 200, 'g', '2 个中等大小', 0, 2),
+    (39, '胡萝卜', 150, 'g', '1 根', 0, 3),
+    (39, '洋葱', 100, 'g', '半颗,日式甘口关键', 0, 4),
+    (39, '日式咖喱块', 100, 'g', '甘口/中辛各 50g 拼配最香', 0, 5),
+    (39, '米饭', 400, 'g', '2 碗', 0, 6),
+    (39, '食用油', 20, 'ml', NULL, 0, 7),
+    (39, '水', 500, 'ml', '高汤更佳', 0, 8);
+
+INSERT INTO step (recipe_id, step_no, content, duration_sec, tip) VALUES
+    (39, 1, '鸡腿肉切 2cm 块,土豆胡萝卜滚刀切(比麻将大一点,炖化后刚熟),洋葱切大块', 300, '土豆切太小会化,块大点保持口感'),
+    (39, 2, '热锅冷油,鸡块下锅煎至表面金黄,盛出备用', 180, '先煎鸡块定形锁汁,炖时不柴'),
+    (39, 3, '原锅下洋葱炒至半透明,加土豆胡萝卜翻炒 2 分钟', 120, '洋葱出甜是日式咖喱甘口关键'),
+    (39, 4, '加水 500ml+鸡块,大火烧开撇浮沫,转中小火炖 10 分钟', 600, '水一次加足,中途加水咖喱味会淡'),
+    (39, 5, '关火,掰开咖喱块放入,搅至完全融化,再开小火煮 3 分钟浓稠', 180, '必须关火放咖喱块,沸腾加易结块'),
+    (39, 6, '米饭扣盘,浇咖喱汁,撒熟芝麻或煎蛋(可选)', 30, '煎蛋半熟戳破流黄拌饭,正宗日式吃法');
+
+INSERT INTO nutrition (recipe_id, calories_kcal, protein_g, carb_g, fat_g, fiber_g, sodium_mg, source, note) VALUES
+    (39, 580, 22, 78, 18, 4, 920, '估算', '2 人份;高碳水高蛋白,便当首选,配煎蛋更香');
+
+INSERT INTO recipe_tag (recipe_id, tag_id)
+    SELECT 39, id FROM tag WHERE name = '便当' AND category = 'scenario';
+INSERT INTO recipe_tag (recipe_id, tag_id)
+    SELECT 39, id FROM tag WHERE name = '咸鲜' AND category = 'flavor';
+INSERT INTO recipe_tag (recipe_id, tag_id)
+    SELECT 39, id FROM tag WHERE name = '增肌' AND category = 'diet';
+INSERT INTO recipe_tag (recipe_id, tag_id)
+    SELECT 39, id FROM tag WHERE name = '高蛋白' AND category = 'diet';
+
+-- ----------------------------------------------------------------------------
+-- 40. 桂花酒酿圆子(中式 · 甜品/早餐 · 15 分钟)
+-- ----------------------------------------------------------------------------
+INSERT INTO recipe (name, cuisine, difficulty, prep_time_min, cook_time_min, servings,
+                    description, source, source_ref, is_ai_generated)
+VALUES ('桂花酒酿圆子', '中式', 2, 10, 5, 2,
+        '江南传统甜羹 · 小圆子+酒酿+桂花 · 酒香甜润驱寒暖胃',
+        '知识库', '../../_GourmetLib/09_健康快手食谱/健康快手食谱.md#L42', 0);
+
+INSERT INTO ingredient (recipe_id, name, qty, unit, note, is_optional, order_no) VALUES
+    (40, '小汤圆', 200, 'g', '市售冷冻或现搓糯米小圆子', 0, 1),
+    (40, '酒酿', 200, 'g', '超市瓶装,选"醪糟"原味', 0, 2),
+    (40, '桂花', 5, 'g', '干桂花或糖桂花', 0, 3),
+    (40, '冰糖', 20, 'g', '或白糖', 0, 4),
+    (40, '枸杞', 10, 'g', '点缀用,可选', 1, 5),
+    (40, '水淀粉', 20, 'ml', '勾薄芡用', 0, 6),
+    (40, '水', 400, 'ml', '煮圆子用', 0, 7);
+
+INSERT INTO step (recipe_id, step_no, content, duration_sec, tip) VALUES
+    (40, 1, '小汤圆常温解冻 5 分钟(冻的直接下会粘锅)', 300, '解冻后下锅不破皮,完整圆润'),
+    (40, 2, '锅中烧水 400ml,水开下小汤圆煮至浮起(约 3 分钟)', 180, '浮起即熟,过煮会塌'),
+    (40, 3, '加冰糖搅至化开,转小火', 30, '冰糖比白糖清透,甜而不腻'),
+    (40, 4, '倒酒酿+桂花(留 1/3 桂花最后撒),小火煮 1 分钟(不要沸腾)', 60, '酒酿不能大火煮,酒精蒸发香气尽失'),
+    (40, 5, '水淀粉勾薄芡,撒枸杞点缀', 30, '薄芡让甜羹挂勺,太稠成糊'),
+    (40, 6, '盛碗,撒剩余桂花,趁热喝', 10, '桂花最后撒,香气扑鼻,视觉满分');
+
+INSERT INTO nutrition (recipe_id, calories_kcal, protein_g, carb_g, fat_g, fiber_g, sodium_mg, source, note) VALUES
+    (40, 240, 4, 48, 3, 1, 80, '估算', '2 人份;低脂驱寒,经期/冬季暖身,酒酿含少量酒精');
+
+INSERT INTO recipe_tag (recipe_id, tag_id)
+    SELECT 40, id FROM tag WHERE name = '中式' AND category = 'cuisine';
+INSERT INTO recipe_tag (recipe_id, tag_id)
+    SELECT 40, id FROM tag WHERE name = '甜品' AND category = 'scenario';
+INSERT INTO recipe_tag (recipe_id, tag_id)
+    SELECT 40, id FROM tag WHERE name = '早餐' AND category = 'scenario';
+INSERT INTO recipe_tag (recipe_id, tag_id)
+    SELECT 40, id FROM tag WHERE name = '低脂' AND category = 'diet';
+
 -- ============================================================================
--- v0.7 seed 结束 · 35 道菜谱已就位
--- 累计:早餐 7 / 凉菜 6 / 汤品 5 / 主菜 12 / 主食 2 / 蒸菜 1 / 宵夜 1 / 微波 1 = 35 道
---       (新开「微波」场景 +1,「甜品」场景 +1)
--- 菜系分布:粤菜 6 / 中式 4 / 川菜 4 / 西餐 5 / 浙菜 4
---           鲁菜 2 / 湘菜 2 / 徽菜 2 / 东北菜 2 / 闽菜 2 / 淮扬菜 2
--- 标签字典:32 个(本次新增「甜品」1 个场景标签)
+-- v0.8 seed 结束 · 40 道菜谱已就位
+-- 累计:早餐 8 / 凉菜 6 / 汤品 5 / 主菜 12 / 主食 4 / 蒸菜 1 / 宵夜 2 / 微波 1 / 甜品 2 = 40 道
+--       (新开「便当」场景 +1,「中式」菜系 +1 · 5 道新菜齐位)
+-- 菜系分布:粤菜 7 / 中式 5 / 川菜 5 / 西餐 6 / 浙菜 4
+--           鲁菜 3 / 湘菜 2 / 徽菜 2 / 东北菜 2 / 闽菜 2 / 淮扬菜 2 = **11 类**
+-- 标签字典:36 个(v0.2 补 11 个幽灵 tag,本次未新增)
+-- 累计:40 道 / 食材行+44 / 步骤+21 / 标签桥接+25 = 累计 370+ 食材行 / 184 步骤 / 172 标签桥接
+-- 验证方法:
+--   sqlite3 gourmet.db < db/schema.sql
+--   sqlite3 gourmet.db < db/seed_recipes.sql
+--   sqlite3 gourmet.db "SELECT r.name, r.cuisine, COUNT(i.id) AS ingredients
+--                       FROM recipe r LEFT JOIN ingredient i ON i.recipe_id = r.id
+--                       WHERE r.id BETWEEN 36 AND 40
+--                       GROUP BY r.id ORDER BY r.id;"
+--   sqlite3 gourmet.db "SELECT cuisine, COUNT(*) FROM recipe GROUP BY cuisine ORDER BY 2 DESC, 1;"
+--   sqlite3 gourmet.db "SELECT t.name, t.category, COUNT(rt.recipe_id) AS used
+--                       FROM tag t LEFT JOIN recipe_tag rt ON rt.tag_id = t.id
+--                       GROUP BY t.id HAVING used > 0
+--                       ORDER BY used DESC, t.name;"
+-- 预期(v0.8 新增段):
+--   担担面|川菜|13
+--   葱烧海参|鲁菜|10
+--   蚝油生菜|粤菜|7
+--   日式咖喱饭|西餐|8
+--   桂花酒酿圆子|中式|7
+-- 预期(菜系分布):
+--   粤菜|7  西餐|6  中式|5  川菜|5  浙菜|4
+--   鲁菜|3  湘菜|2  徽菜|2  东北菜|2  闽菜|2  淮扬菜|2
+-- 预期(tag 字典·v0.2 修复后应当无幽灵 tag 0-use):
+--   川菜|9  粤菜|7  浙菜|4  鲁菜|3  中式|2  湘菜|2  徽菜|2  闽菜|2  东北菜|2  淮扬菜|2  西餐|6
+--   快手|14  宴客|9  微波|2  宵夜|3  早餐|3  便当|3  凉菜|6  汤品|5  煲汤|2  蒸菜|2  甜品|3
+--   清淡|10 麻辣|6 海鲜|5 酸甜|3 酸辣|2 咸鲜|5 咸甜|1 糊辣|1 香辣|2
+--   减脂|9  高蛋白|11 素食|8 低脂|8 增肌|5 低糖|2 控盐|1
+-- ============================================================================
+-- 验证方法:
+--   sqlite3 gourmet.db < db/schema.sql
+--   sqlite3 gourmet.db < db/seed_recipes.sql
+--   sqlite3 gourmet.db "SELECT r.name, r.cuisine, COUNT(i.id) AS ingredients
+--                       FROM recipe r LEFT JOIN ingredient i ON i.recipe_id = r.id
+--                       WHERE r.id BETWEEN 31 AND 35
+--                       GROUP BY r.id ORDER BY r.id;"
+--   sqlite3 gourmet.db "SELECT cuisine, COUNT(*) FROM recipe GROUP BY cuisine ORDER BY 2 DESC, 1;"
+-- 预期(v0.7 新增段):
+--   九转大肠|鲁菜|13
+--   鱼香肉丝|川菜|15
+--   西湖醋鱼|浙菜|11
+--   番茄冷汤 Gazpacho|西餐|10
+--   葡式蛋挞|西餐|7
+-- 预期(菜系分布):
+--   粤菜|6  西餐|5  中式|4  川菜|4  浙菜|4
+--   鲁菜|2  湘菜|2  徽菜|2  东北菜|2  闽菜|2  淮扬菜|2
+-- ============================================================================
 -- 验证方法:
 --   sqlite3 gourmet.db < db/schema.sql
 --   sqlite3 gourmet.db < db/seed_recipes.sql
