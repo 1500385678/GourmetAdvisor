@@ -1676,12 +1676,220 @@ INSERT INTO recipe_tag (recipe_id, tag_id)
 INSERT INTO recipe_tag (recipe_id, tag_id)
     SELECT 40, id FROM tag WHERE name = '低脂' AND category = 'diet';
 
+-- ----------------------------------------------------------------------------
+-- 41. 白切鸡(粤菜 · 宴客/凉菜 · 60 分钟 · 经典粤菜代表)
+-- ----------------------------------------------------------------------------
+INSERT INTO recipe (name, cuisine, difficulty, prep_time_min, cook_time_min, servings,
+                    description, source, source_ref, is_ai_generated)
+VALUES ('白切鸡', '粤菜', 3, 20, 30, 2,
+        '三黄鸡整只 · 姜葱蘸料 · 皮 Q 肉嫩 · 粤菜宴客代表',
+        '知识库', '../../_GourmetLib/06_烹饪方法与营养保留/烹饪方法与营养保留.md#煮', 0);
+
+INSERT INTO ingredient (recipe_id, name, qty, unit, note, is_optional, order_no) VALUES
+    (41, '三黄鸡', 800, 'g', '半只整鸡,1kg 以内最佳', 0, 1),
+    (41, '姜', 30, 'g', '20g 拍散塞鸡肚,10g 切末做蘸料', 0, 2),
+    (41, '葱', 50, 'g', '30g 打结塞鸡肚,20g 切葱花蘸料', 0, 3),
+    (41, '料酒', 30, 'ml', '去腥', 0, 4),
+    (41, '盐', 5, 'g', '整鸡抹盐底味', 0, 5),
+    (41, '冰块', 500, 'g', '过冰河锁汁关键', 0, 6),
+    (41, '花生油', 30, 'ml', '热油激姜葱', 0, 7);
+
+INSERT INTO step (recipe_id, step_no, content, duration_sec, tip) VALUES
+    (41, 1, '整鸡清洗沥干,抹盐 5g,姜片葱段塞鸡肚,腌制 20 分钟', 1200, '提前腌制入底味,腹腔也要抹'),
+    (41, 2, '烧一锅开水(水量没过整鸡),放料酒+姜片 10g,大火烧开', 300, '水量要足,小锅鸡挤不舒展'),
+    (41, 3, '拎鸡三进三出(每次浸 5 秒提 5 秒),让鸡皮遇热快速定型', 30, '三进三出皮脆的关键,不要省略'),
+    (41, 4, '整鸡入锅,小火保持微沸(不翻滚),煮 12 分钟,关火焖 15 分钟', 1620, '微沸保持嫩度,大火翻滚肉柴'),
+    (41, 5, '捞出立刻过冰水 5 分钟至完全冷透(过冰河)', 300, '过冰河锁汁,皮 Q 弹肉嫩多汁'),
+    (41, 6, '沥干切件摆盘,姜葱切末+盐 2g+热油激香作蘸料', 120, '热油浇姜葱,香气四溢,正宗粤式吃法');
+
+INSERT INTO nutrition (recipe_id, calories_kcal, protein_g, carb_g, fat_g, fiber_g, sodium_mg, source, note) VALUES
+    (41, 280, 38, 2, 12, 0, 580, '估算', '2 人份;低脂高蛋白,经典粤菜代表,过冰河是关键');
+
+INSERT INTO recipe_tag (recipe_id, tag_id)
+    SELECT 41, id FROM tag WHERE name = '粤菜' AND category = 'cuisine';
+INSERT INTO recipe_tag (recipe_id, tag_id)
+    SELECT 41, id FROM tag WHERE name = '宴客' AND category = 'scenario';
+INSERT INTO recipe_tag (recipe_id, tag_id)
+    SELECT 41, id FROM tag WHERE name = '凉菜' AND category = 'scenario';
+INSERT INTO recipe_tag (recipe_id, tag_id)
+    SELECT 41, id FROM tag WHERE name = '咸鲜' AND category = 'flavor';
+INSERT INTO recipe_tag (recipe_id, tag_id)
+    SELECT 41, id FROM tag WHERE name = '清淡' AND category = 'flavor';
+INSERT INTO recipe_tag (recipe_id, tag_id)
+    SELECT 41, id FROM tag WHERE name = '高蛋白' AND category = 'diet';
+
+-- ----------------------------------------------------------------------------
+-- 42. 重庆酸辣粉(川菜 · 宵夜/快手 · 20 分钟 · 川渝宵夜灵魂)
+-- ----------------------------------------------------------------------------
+INSERT INTO recipe (name, cuisine, difficulty, prep_time_min, cook_time_min, servings,
+                    description, source, source_ref, is_ai_generated)
+VALUES ('重庆酸辣粉', '川菜', 2, 30, 5, 2,
+        '红薯粉+辣椒油+陈醋+花生碎 · 酸辣开胃 · 川渝宵夜街霸',
+        '知识库', '../../_GourmetLib/09_健康快手食谱/健康快手食谱.md#L80', 0);
+
+INSERT INTO ingredient (recipe_id, name, qty, unit, note, is_optional, order_no) VALUES
+    (42, '红薯粉', 200, 'g', '1 把,提前温水泡 30 分钟', 0, 1),
+    (42, '辣椒油', 30, 'ml', '灵魂,自制: 辣椒粉+花椒粉+热油激', 0, 2),
+    (42, '醋', 20, 'ml', '陈醋+米醋 1:1 拼配更香', 0, 3),
+    (42, '生抽', 15, 'ml', NULL, 0, 4),
+    (42, '花生碎', 30, 'g', '提香关键,油炸花生压碎', 0, 5),
+    (42, '黄豆', 30, 'g', '炸酥,可选', 1, 6),
+    (42, '榨菜末', 20, 'g', '涪陵榨菜切末', 0, 7),
+    (42, '香菜', 10, 'g', '点缀', 1, 8),
+    (42, '葱花', 10, 'g', NULL, 0, 9),
+    (42, '蒜末', 10, 'g', NULL, 0, 10);
+
+INSERT INTO step (recipe_id, step_no, content, duration_sec, tip) VALUES
+    (42, 1, '红薯粉温水泡 30 分钟至软(温水比冷水快,口感更 Q)', 1800, '温水 40℃ 泡最合适,冷水泡要 1 小时'),
+    (42, 2, '调料汁: 碗底放辣椒油+醋+生抽+蒜末+盐 3g,加 200ml 高汤或温水搅匀', 60, '高汤底优于清水,鲜味足层次多'),
+    (42, 3, '烧水至沸腾,下泡好的红薯粉煮 3 分钟至透明', 180, '透明即熟,过煮会糊'),
+    (42, 4, '捞出沥干入碗,浇调料汁拌匀', 30, '沥干再入碗,汤汁不被稀释'),
+    (42, 5, '撒花生碎+黄豆+榨菜末+香菜+葱花,趁热上桌', 30, '趁热撒,香气最佳,冷了粉会坨');
+
+INSERT INTO nutrition (recipe_id, calories_kcal, protein_g, carb_g, fat_g, fiber_g, sodium_mg, source, note) VALUES
+    (42, 380, 6, 65, 12, 3, 720, '估算', '2 人份;经典川渝宵夜,酸辣开胃,红薯粉低 GI');
+
+INSERT INTO recipe_tag (recipe_id, tag_id)
+    SELECT 42, id FROM tag WHERE name = '川菜' AND category = 'cuisine';
+INSERT INTO recipe_tag (recipe_id, tag_id)
+    SELECT 42, id FROM tag WHERE name = '宵夜' AND category = 'scenario';
+INSERT INTO recipe_tag (recipe_id, tag_id)
+    SELECT 42, id FROM tag WHERE name = '快手' AND category = 'scenario';
+INSERT INTO recipe_tag (recipe_id, tag_id)
+    SELECT 42, id FROM tag WHERE name = '酸辣' AND category = 'flavor';
+INSERT INTO recipe_tag (recipe_id, tag_id)
+    SELECT 42, id FROM tag WHERE name = '麻辣' AND category = 'flavor';
+
+-- ----------------------------------------------------------------------------
+-- 43. 龙井虾仁(浙菜 · 宴客 · 25 分钟 · 杭帮菜代表)
+-- ----------------------------------------------------------------------------
+INSERT INTO recipe (name, cuisine, difficulty, prep_time_min, cook_time_min, servings,
+                    description, source, source_ref, is_ai_generated)
+VALUES ('龙井虾仁', '浙菜', 3, 15, 10, 2,
+        '河虾仁+明前龙井+蛋清上浆 · 茶香虾鲜 · 杭帮清雅代表',
+        '知识库', '../../_GourmetLib/06_烹饪方法与营养保留/烹饪方法与营养保留.md#滑炒', 0);
+
+INSERT INTO ingredient (recipe_id, name, qty, unit, note, is_optional, order_no) VALUES
+    (43, '河虾仁', 300, 'g', '新鲜河虾剥仁,蛋清+盐+生粉上浆', 0, 1),
+    (43, '龙井茶', 5, 'g', '明前最佳,80℃ 泡 5 分钟取茶汤 50ml', 0, 2),
+    (43, '鸡蛋清', 1, '个', '上浆用,约 30g', 0, 3),
+    (43, '盐', 3, 'g', '1g 腌虾仁,2g 调底味', 0, 4),
+    (43, '生粉', 10, 'g', '5g 上浆,5g 勾芡', 0, 5),
+    (43, '料酒', 10, 'ml', '去腥', 0, 6),
+    (43, '葱', 5, 'g', '切马耳形', 0, 7),
+    (43, '姜', 5, 'g', '切末', 0, 8),
+    (43, '食用油', 30, 'ml', '滑炒用', 0, 9);
+
+INSERT INTO step (recipe_id, step_no, content, duration_sec, tip) VALUES
+    (43, 1, '虾仁洗净沥干,加蛋清+盐 1g+生粉 5g 抓匀上浆,冷藏 10 分钟', 600, '上浆冷藏,虾仁更滑嫩'),
+    (43, 2, '龙井茶 80℃ 温水泡 5 分钟,取茶汤 50ml(茶叶留用)', 300, '80℃ 不烫熟茶多酚,色泽翠绿'),
+    (43, 3, '热锅冷油,中火(4 成热)下虾仁滑散至变色盛出', 90, '油温 4 成热下锅,避免猛火炒老'),
+    (43, 4, '原锅留底油,下葱姜末爆香', 15, '小火爆香,不焦苦'),
+    (43, 5, '倒茶汤+料酒,下虾仁+茶叶翻炒 30 秒', 30, '茶汤下锅时间短,保持翠绿'),
+    (43, 6, '勾薄芡(生粉 5g+水 20ml)翻匀出锅', 15, '薄芡挂汁不糊,保持虾仁光洁');
+
+INSERT INTO nutrition (recipe_id, calories_kcal, protein_g, carb_g, fat_g, fiber_g, sodium_mg, source, note) VALUES
+    (43, 220, 32, 3, 8, 0, 480, '估算', '2 人份;高蛋白低脂,茶香虾鲜,杭帮代表');
+
+INSERT INTO recipe_tag (recipe_id, tag_id)
+    SELECT 43, id FROM tag WHERE name = '浙菜' AND category = 'cuisine';
+INSERT INTO recipe_tag (recipe_id, tag_id)
+    SELECT 43, id FROM tag WHERE name = '宴客' AND category = 'scenario';
+INSERT INTO recipe_tag (recipe_id, tag_id)
+    SELECT 43, id FROM tag WHERE name = '清淡' AND category = 'flavor';
+INSERT INTO recipe_tag (recipe_id, tag_id)
+    SELECT 43, id FROM tag WHERE name = '海鲜' AND category = 'flavor';
+INSERT INTO recipe_tag (recipe_id, tag_id)
+    SELECT 43, id FROM tag WHERE name = '高蛋白' AND category = 'diet';
+
+-- ----------------------------------------------------------------------------
+-- 44. 德州扒鸡(鲁菜 · 宴客 · 90 分钟 · 鲁菜五香脱骨)
+-- ----------------------------------------------------------------------------
+INSERT INTO recipe (name, cuisine, difficulty, prep_time_min, cook_time_min, servings,
+                    description, source, source_ref, is_ai_generated)
+VALUES ('德州扒鸡', '鲁菜', 4, 30, 90, 4,
+        '整鸡+五香卤水+麦芽糖上色 · 脱骨透香 · 鲁菜硬菜',
+        '知识库', '../../_GourmetLib/06_烹饪方法与营养保留/烹饪方法与营养保留.md#卤', 0);
+
+INSERT INTO ingredient (recipe_id, name, qty, unit, note, is_optional, order_no) VALUES
+    (44, '整鸡', 1200, 'g', '散养小公鸡,不要太大', 0, 1),
+    (44, '砂仁', 5, 'g', NULL, 0, 2),
+    (44, '豆蔻', 5, 'g', NULL, 0, 3),
+    (44, '肉桂', 5, 'g', NULL, 0, 4),
+    (44, '丁香', 2, 'g', '量少,多了苦', 0, 5),
+    (44, '陈皮', 5, 'g', NULL, 0, 6),
+    (44, '酱油', 100, 'ml', '50ml 腌制,50ml 调卤水', 0, 7),
+    (44, '麦芽糖', 30, 'g', '上色用,比白糖色泽红亮', 0, 8),
+    (44, '盐', 15, 'g', NULL, 0, 9),
+    (44, '姜', 20, 'g', '拍散', 0, 10),
+    (44, '葱', 30, 'g', '切段', 0, 11);
+
+INSERT INTO step (recipe_id, step_no, content, duration_sec, tip) VALUES
+    (44, 1, '整鸡清洗,抹盐 15g+酱油 50ml 腌制 30 分钟', 1800, '抹匀,腹腔也要抹到'),
+    (44, 2, '香料(砂仁/豆蔻/肉桂/丁香/陈皮)研末或整粒塞鸡肚', 120, '丁香量少,多了发苦'),
+    (44, 3, '烧一锅卤水: 清水 2000ml+剩余酱油 50ml+盐+姜+葱+香料包,大火烧开', 300, '卤水要够味,后续可重复使用'),
+    (44, 4, '整鸡入卤水,小火保持微沸,卤 60 分钟(中途翻面 2 次)', 3600, '小火慢卤入味,大火翻滚肉柴'),
+    (44, 5, '捞出沥干,刷麦芽糖液(麦芽糖 30g+热水 20ml 化开)', 60, '麦芽糖比白糖色泽红亮,正宗扒鸡色'),
+    (44, 6, '晾凉或风干 30 分钟,切件摆盘', 1800, '凉透后切,肉不散,骨肉分离');
+
+INSERT INTO nutrition (recipe_id, calories_kcal, protein_g, carb_g, fat_g, fiber_g, sodium_mg, source, note) VALUES
+    (44, 320, 35, 4, 18, 0, 1500, '估算', '4 人份;经典鲁菜,五香脱骨,宴客硬菜,钠较高');
+
+INSERT INTO recipe_tag (recipe_id, tag_id)
+    SELECT 44, id FROM tag WHERE name = '鲁菜' AND category = 'cuisine';
+INSERT INTO recipe_tag (recipe_id, tag_id)
+    SELECT 44, id FROM tag WHERE name = '宴客' AND category = 'scenario';
+INSERT INTO recipe_tag (recipe_id, tag_id)
+    SELECT 44, id FROM tag WHERE name = '咸鲜' AND category = 'flavor';
+INSERT INTO recipe_tag (recipe_id, tag_id)
+    SELECT 44, id FROM tag WHERE name = '高蛋白' AND category = 'diet';
+
+-- ----------------------------------------------------------------------------
+-- 45. 桂花糖藕(中式 · 凉菜/甜品 · 60 分钟 · 中秋临近应景)
+-- ----------------------------------------------------------------------------
+INSERT INTO recipe (name, cuisine, difficulty, prep_time_min, cook_time_min, servings,
+                    description, source, source_ref, is_ai_generated)
+VALUES ('桂花糖藕', '中式', 2, 10, 60, 4,
+        '7 孔藕+糯米塞藕孔+冰糖红糖慢煮 · 甜糯桂花香 · 江南中秋甜品',
+        '知识库', '../../_GourmetLib/08_节气饮食与文化/节气饮食与文化.md#秋分', 0);
+
+INSERT INTO ingredient (recipe_id, name, qty, unit, note, is_optional, order_no) VALUES
+    (45, '莲藕', 500, 'g', '2 节,选 7 孔藕,粉糯', 0, 1),
+    (45, '糯米', 100, 'g', '提前泡 2 小时', 0, 2),
+    (45, '冰糖', 80, 'g', '主要甜味', 0, 3),
+    (45, '红糖', 30, 'g', '上色用,让藕红亮', 0, 4),
+    (45, '桂花', 5, 'g', '糖桂花更佳,出锅撒', 0, 5),
+    (45, '盐', 2, 'g', '提甜,少许', 0, 6),
+    (45, '水', 1500, 'ml', '没过藕', 0, 7);
+
+INSERT INTO step (recipe_id, step_no, content, duration_sec, tip) VALUES
+    (45, 1, '莲藕去皮,一端切盖(留作封口),泡好的糯米用筷子塞入藕孔(要塞紧不留空隙)', 300, '用筷子辅助,不要留空隙,糯米要塞满'),
+    (45, 2, '切下的藕盖用牙签固定回原位(防煮时散开)', 30, '牙签 3-4 根固定,煮时不散'),
+    (45, 3, '藕入锅,加水 1500ml 没藕,加冰糖+红糖+盐 2g,大火烧开', 300, '水量要够,中途不加水'),
+    (45, 4, '转小火慢煮 50 分钟,中途翻面 2 次(均匀上色)', 3000, '小火慢煮,糯米才糯'),
+    (45, 5, '关火后继续浸泡 30 分钟入味(糖色渗透更透)', 1800, '关火浸泡,糖色渗透'),
+    (45, 6, '取出晾凉切厚片,淋糖汁撒桂花', 120, '凉切不碎,糖汁浓稠挂勺');
+
+INSERT INTO nutrition (recipe_id, calories_kcal, protein_g, carb_g, fat_g, fiber_g, sodium_mg, source, note) VALUES
+    (45, 280, 4, 65, 0, 3, 120, '估算', '4 人份;经典江南甜品,补血养颜,中秋前后正当时');
+
+INSERT INTO recipe_tag (recipe_id, tag_id)
+    SELECT 45, id FROM tag WHERE name = '中式' AND category = 'cuisine';
+INSERT INTO recipe_tag (recipe_id, tag_id)
+    SELECT 45, id FROM tag WHERE name = '凉菜' AND category = 'scenario';
+INSERT INTO recipe_tag (recipe_id, tag_id)
+    SELECT 45, id FROM tag WHERE name = '甜品' AND category = 'scenario';
+INSERT INTO recipe_tag (recipe_id, tag_id)
+    SELECT 45, id FROM tag WHERE name = '咸甜' AND category = 'flavor';
+INSERT INTO recipe_tag (recipe_id, tag_id)
+    SELECT 45, id FROM tag WHERE name = '低脂' AND category = 'diet';
+
 -- ============================================================================
--- v0.8 seed 结束 · 40 道菜谱已就位
--- 累计:早餐 8 / 凉菜 6 / 汤品 5 / 主菜 12 / 主食 4 / 蒸菜 1 / 宵夜 2 / 微波 1 / 甜品 2 = 40 道
---       (新开「便当」场景 +1,「中式」菜系 +1 · 5 道新菜齐位)
--- 菜系分布:粤菜 7 / 中式 5 / 川菜 5 / 西餐 6 / 浙菜 4
---           鲁菜 3 / 湘菜 2 / 徽菜 2 / 东北菜 2 / 闽菜 2 / 淮扬菜 2 = **11 类**
+-- v0.9 seed 结束 · 45 道菜谱已就位
+-- 累计:早餐 8 / 凉菜 7 / 汤品 5 / 主菜 14 / 主食 4 / 蒸菜 1 / 宵夜 3 / 微波 1 / 甜品 3 = 45 道
+--       (粤菜宴客 +1 / 川菜宵夜 +1 / 浙菜宴客 +1 / 鲁菜宴客 +1 / 中式甜品 +1 · 5 道新菜齐位)
+-- 菜系分布:粤菜 8 / 西餐 6 / 中式 6 / 川菜 6 / 浙菜 5 / 鲁菜 4
+--           湘菜 2 / 徽菜 2 / 东北菜 2 / 闽菜 2 / 淮扬菜 2 = **11 类**
 -- 标签字典:36 个(v0.2 补 11 个幽灵 tag,本次未新增)
 -- 累计:40 道 / 食材行+44 / 步骤+21 / 标签桥接+25 = 累计 370+ 食材行 / 184 步骤 / 172 标签桥接
 -- 验证方法:
@@ -1764,4 +1972,28 @@ INSERT INTO recipe_tag (recipe_id, tag_id)
 -- 预期(菜系分布):
 --   粤菜|5  中式|4  川菜|3  西餐|3  浙菜|3
 --   湘菜|2  徽菜|2  东北菜|2  闽菜|2  淮扬菜|2  鲁菜|1
+-- ============================================================================
+-- v0.9 验证方法(2026-09-05 新增):
+--   sqlite3 gourmet.db < db/schema.sql
+--   sqlite3 gourmet.db < db/seed_recipes.sql
+--   sqlite3 gourmet.db "SELECT r.name, r.cuisine, COUNT(i.id) AS ingredients
+--                       FROM recipe r LEFT JOIN ingredient i ON i.recipe_id = r.id
+--                       WHERE r.id BETWEEN 41 AND 45
+--                       GROUP BY r.id ORDER BY r.id;"
+--   sqlite3 gourmet.db "SELECT cuisine, COUNT(*) FROM recipe GROUP BY cuisine ORDER BY 2 DESC, 1;"
+-- 预期(v0.9 新增段):
+--   白切鸡|粤菜|7
+--   重庆酸辣粉|川菜|10
+--   龙井虾仁|浙菜|9
+--   德州扒鸡|鲁菜|11
+--   桂花糖藕|中式|7
+-- 预期(菜系分布 v0.9):
+--   粤菜|8  西餐|6  中式|6  川菜|6  浙菜|5  鲁菜|4
+--   湘菜|2  徽菜|2  东北菜|2  闽菜|2  淮扬菜|2
+-- 预期(tag 字典·v0.9 应当无新增,全部复用 36 tag):
+--   早晚餐场景:早餐|3  宵夜|3  宴客|11  快手|15  便当|3
+--   凉汤:凉菜|7  汤品|5  煲汤|2  蒸菜|2  甜品|4  微波|2
+--   风味:清淡|11 麻辣|7 咸鲜|6 酸甜|3 酸辣|3 咸甜|2 糊辣|1 香辣|2 海鲜|6
+--   菜系:川菜|11  粤菜|8  浙菜|5  鲁菜|4  中式|6  湘菜|2  徽菜|2  闽菜|2  东北菜|2  淮扬菜|2  西餐|6
+--   饮食:减脂|9  高蛋白|13  素食|8  低脂|9  增肌|5  低糖|2  控盐|1
 -- ============================================================================
