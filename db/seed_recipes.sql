@@ -1884,14 +1884,269 @@ INSERT INTO recipe_tag (recipe_id, tag_id)
 INSERT INTO recipe_tag (recipe_id, tag_id)
     SELECT 45, id FROM tag WHERE name = '低脂' AND category = 'diet';
 
+-- ----------------------------------------------------------------------------
+-- 46. 糖醋里脊(鲁菜 · 宴客/酸甜 · 25 分钟 · 鲁菜经典 · 焦炸糖醋汁)
+-- ----------------------------------------------------------------------------
+INSERT INTO recipe (name, cuisine, difficulty, prep_time_min, cook_time_min, servings,
+                    description, source, source_ref, is_ai_generated)
+VALUES ('糖醋里脊', '鲁菜', 3, 10, 15, 2,
+        '猪里脊裹蛋清淀粉炸至金黄 + 番茄酱/醋/糖调汁挂芡 · 鲁菜宴客代表 · 酸甜焦香',
+        '知识库', '../../_GourmetLib/09_健康快手食谱/健康快手食谱.md#糖醋里脊', 0);
+
+INSERT INTO ingredient (recipe_id, name, qty, unit, note, is_optional, order_no) VALUES
+    (46, '猪里脊', 300, 'g', '切 1.5cm 厚条,筋膜剔除', 0, 1),
+    (46, '鸡蛋清', 1, '个', '腌肉用,让肉嫩', 0, 2),
+    (46, '淀粉', 30, 'g', '红薯淀粉最佳,挂糊酥脆', 0, 3),
+    (46, '面粉', 20, 'g', '与淀粉 3:2 配比,糊更稳', 0, 4),
+    (46, '番茄酱', 30, 'g', '主调色+酸甜底', 0, 5),
+    (46, '白醋', 20, 'ml', '酸度主力', 0, 6),
+    (46, '白糖', 40, 'g', '糖醋比例 2:1:1 经典', 0, 7),
+    (46, '生抽', 5, 'ml', '提鲜,少许', 0, 8),
+    (46, '盐', 2, 'g', '腌肉底味', 0, 9),
+    (46, '料酒', 10, 'ml', '去腥', 0, 10),
+    (46, '姜末', 5, 'g', '增香', 0, 11),
+    (46, '蒜末', 5, 'g', '增香', 0, 12),
+    (46, '油', 500, 'ml', '实耗 50ml,炸用', 0, 13);
+
+INSERT INTO step (recipe_id, step_no, content, duration_sec, tip) VALUES
+    (46, 1, '里脊条加盐+料酒+蛋清抓匀,腌 10 分钟入味', 600, '蛋清先打散再加,均匀挂肉'),
+    (46, 2, '淀粉+面粉 3:2 调成稠糊,倒入腌好的肉条拌匀(每条都裹满)', 300, '糊不能太稀,否则挂不住'),
+    (46, 3, '油烧至 170℃(筷子周围密集小泡),下肉条炸 2 分钟定型捞出', 120, '油温要够,定型不吸油'),
+    (46, 4, '油温升到 180℃,复炸 30 秒至金黄酥脆,捞出沥油', 30, '复炸逼油,口感才酥'),
+    (46, 5, '锅留底油,爆姜蒜末,加番茄酱+糖+醋+生抽+少量水调成糖醋汁', 60, '糖醋比 2:1:1,大火熬'),
+    (46, 6, '糖醋汁起大泡变稠,淋少许水淀粉勾芡,倒入炸好的里脊快速翻匀', 30, '翻锅要快,裹满不脱芡'),
+    (46, 7, '装盘撒熟芝麻(可选增香)', 10, '白芝麻点缀,色香俱全');
+
+INSERT INTO nutrition (recipe_id, calories_kcal, protein_g, carb_g, fat_g, fiber_g, sodium_mg, source, note) VALUES
+    (46, 420, 28, 35, 22, 1, 680, '估算', '2 人份;鲁菜宴客代表,糖醋比 2:1:1,外酥里嫩');
+
+INSERT INTO recipe_tag (recipe_id, tag_id)
+    SELECT 46, id FROM tag WHERE name = '鲁菜' AND category = 'cuisine';
+INSERT INTO recipe_tag (recipe_id, tag_id)
+    SELECT 46, id FROM tag WHERE name = '宴客' AND category = 'scenario';
+INSERT INTO recipe_tag (recipe_id, tag_id)
+    SELECT 46, id FROM tag WHERE name = '酸甜' AND category = 'flavor';
+INSERT INTO recipe_tag (recipe_id, tag_id)
+    SELECT 46, id FROM tag WHERE name = '高蛋白' AND category = 'diet';
+
+-- ----------------------------------------------------------------------------
+-- 47. 宋嫂鱼羹(浙菜 · 汤品/海鲜/宴客 · 30 分钟 · 南宋宫廷名菜)
+-- ----------------------------------------------------------------------------
+INSERT INTO recipe (name, cuisine, difficulty, prep_time_min, cook_time_min, servings,
+                    description, source, source_ref, is_ai_generated)
+VALUES ('宋嫂鱼羹', '浙菜', 3, 15, 15, 2,
+        '鳜鱼/草鱼茸+蛋清+火腿+香菇+姜丝+醋+胡椒勾薄芡 · 南宋名羹 · 酸鲜嫩滑',
+        '知识库', '../../_GourmetLib/06_烹饪方法与营养保留/烹饪方法与营养保留.md#宋嫂鱼羹', 0);
+
+INSERT INTO ingredient (recipe_id, name, qty, unit, note, is_optional, order_no) VALUES
+    (47, '鳜鱼', 200, 'g', '草鱼亦可,取净鱼肉', 0, 1),
+    (47, '熟火腿', 20, 'g', '切丝,提鲜增色', 0, 2),
+    (47, '香菇', 3, '朵', '泡发切丝', 0, 3),
+    (47, '鸡蛋清', 1, '个', '打散勾芡用', 0, 4),
+    (47, '姜丝', 10, 'g', '去腥提鲜', 0, 5),
+    (47, '葱段', 10, 'g', '增香', 0, 6),
+    (47, '米醋', 20, 'ml', '酸鲜灵魂', 0, 7),
+    (47, '白胡椒粉', 2, 'g', '点睛之笔', 0, 8),
+    (47, '淀粉', 10, 'g', '调水淀粉勾薄芡', 0, 9),
+    (47, '盐', 3, 'g', '底味', 0, 10),
+    (47, '料酒', 10, 'ml', '去腥', 0, 11),
+    (47, '高汤', 500, 'ml', '鸡/骨汤均可', 0, 12),
+    (47, '油', 15, 'ml', '滑鱼茸用', 0, 13);
+
+INSERT INTO step (recipe_id, step_no, content, duration_sec, tip) VALUES
+    (47, 1, '鳜鱼蒸熟(8 分钟),剔骨取净肉,撕成细茸(越细口感越嫩)', 600, '蒸鱼时放葱姜去腥'),
+    (47, 2, '香菇泡发切丝,火腿切细丝,姜切细丝,葱切段', 300, '配料切细,成品才精致'),
+    (47, 3, '热锅温油,下姜丝葱段爆香,加高汤+料酒+香菇丝煮开', 180, '高汤要够鲜,这是羹底'),
+    (47, 4, '放入鱼茸轻轻拨散,加醋+盐+胡椒粉调味,小火煮 3 分钟', 180, '小火防鱼肉散碎'),
+    (47, 5, '淋水淀粉勾薄芡(边倒边搅),至羹汁稠而不厚', 30, '薄芡才能"羹"的状态'),
+    (47, 6, '关火淋蛋清液,边淋边搅出蛋花(细密如云)', 30, '蛋清转小火,搅出丝状'),
+    (47, 7, '盛碗撒火腿丝+姜丝,点几滴香油', 10, '火腿丝浮面,色香味形俱全');
+
+INSERT INTO nutrition (recipe_id, calories_kcal, protein_g, carb_g, fat_g, fiber_g, sodium_mg, source, note) VALUES
+    (47, 180, 22, 8, 6, 1, 580, '估算', '2 人份;南宋御膳流传,酸鲜嫩滑,宴客汤品首选');
+
+INSERT INTO recipe_tag (recipe_id, tag_id)
+    SELECT 47, id FROM tag WHERE name = '浙菜' AND category = 'cuisine';
+INSERT INTO recipe_tag (recipe_id, tag_id)
+    SELECT 47, id FROM tag WHERE name = '汤品' AND category = 'scenario';
+INSERT INTO recipe_tag (recipe_id, tag_id)
+    SELECT 47, id FROM tag WHERE name = '宴客' AND category = 'scenario';
+INSERT INTO recipe_tag (recipe_id, tag_id)
+    SELECT 47, id FROM tag WHERE name = '海鲜' AND category = 'flavor';
+INSERT INTO recipe_tag (recipe_id, tag_id)
+    SELECT 47, id FROM tag WHERE name = '清淡' AND category = 'flavor';
+INSERT INTO recipe_tag (recipe_id, tag_id)
+    SELECT 47, id FROM tag WHERE name = '高蛋白' AND category = 'diet';
+INSERT INTO recipe_tag (recipe_id, tag_id)
+    SELECT 47, id FROM tag WHERE name = '低脂' AND category = 'diet';
+
+-- ----------------------------------------------------------------------------
+-- 48. 东安子鸡(湘菜 · 宴客/酸辣 · 30 分钟 · 湘菜八大名菜 · 三大魂:酸/辣/鲜)
+-- ----------------------------------------------------------------------------
+INSERT INTO recipe (name, cuisine, difficulty, prep_time_min, cook_time_min, servings,
+                    description, source, source_ref, is_ai_generated)
+VALUES ('东安子鸡', '湘菜', 3, 10, 20, 3,
+        '嫩子鸡切丁+小米椒+米醋+姜蒜爆炒 · 湘菜宴客代表 · 酸辣鲜香嫩五味齐',
+        '知识库', '../../_GourmetLib/07_中式养生食疗/中式养生食疗.md#东安子鸡', 0);
+
+INSERT INTO ingredient (recipe_id, name, qty, unit, note, is_optional, order_no) VALUES
+    (48, '童子鸡', 500, 'g', '半只,选未生蛋小母鸡,肉嫩', 0, 1),
+    (48, '小米椒', 30, 'g', '酸辣主辣源,切碎', 0, 2),
+    (48, '米醋', 30, 'ml', '酸度主力,选老陈醋', 0, 3),
+    (48, '生姜', 20, 'g', '切末,酸辣必备', 0, 4),
+    (48, '大蒜', 20, 'g', '切末', 0, 5),
+    (48, '葱', 15, 'g', '切段', 0, 6),
+    (48, '花椒', 10, '粒', '麻香点睛', 0, 7),
+    (48, '生抽', 10, 'ml', '底味', 0, 8),
+    (48, '料酒', 15, 'ml', '去腥', 0, 9),
+    (48, '盐', 3, 'g', '底味', 0, 10),
+    (48, '淀粉', 10, 'g', '抓鸡丁用', 0, 11),
+    (48, '油', 30, 'ml', '爆炒用', 0, 12);
+
+INSERT INTO step (recipe_id, step_no, content, duration_sec, tip) VALUES
+    (48, 1, '童子鸡洗净剔骨,带皮切 1.5cm 丁,加盐+料酒+淀粉抓匀腌 10 分钟', 600, '选未下蛋小母鸡,肉最嫩'),
+    (48, 2, '米醋+生抽+少量糖调成碗汁(糖 5g 平衡酸,出锅前淋)', 60, '碗汁提前调,炒时火急'),
+    (48, 3, '热锅宽油,油温 180℃,下鸡丁快速滑散至变色,捞出沥油', 60, '大火快滑,锁住嫩度'),
+    (48, 4, '锅留底油,中火爆香姜蒜末+花椒+小米椒碎,出红油', 30, '小米椒要爆出红油才够香'),
+    (48, 5, '下鸡丁翻炒,淋料酒去腥,倒入碗汁快速翻匀', 30, '大火快翻,均匀裹汁'),
+    (48, 6, '撒葱段翻匀,出锅装盘(葱不能久炒,要脆)', 10, '葱段出锅前下,留脆感');
+
+INSERT INTO nutrition (recipe_id, calories_kcal, protein_g, carb_g, fat_g, fiber_g, sodium_mg, source, note) VALUES
+    (48, 320, 35, 8, 18, 1, 720, '估算', '3 人份;湘菜八大名菜,酸辣鲜香嫩五味齐');
+
+INSERT INTO recipe_tag (recipe_id, tag_id)
+    SELECT 48, id FROM tag WHERE name = '湘菜' AND category = 'cuisine';
+INSERT INTO recipe_tag (recipe_id, tag_id)
+    SELECT 48, id FROM tag WHERE name = '宴客' AND category = 'scenario';
+INSERT INTO recipe_tag (recipe_id, tag_id)
+    SELECT 48, id FROM tag WHERE name = '酸辣' AND category = 'flavor';
+INSERT INTO recipe_tag (recipe_id, tag_id)
+    SELECT 48, id FROM tag WHERE name = '麻辣' AND category = 'flavor';
+INSERT INTO recipe_tag (recipe_id, tag_id)
+    SELECT 48, id FROM tag WHERE name = '高蛋白' AND category = 'diet';
+
+-- ----------------------------------------------------------------------------
+-- 49. 黄山炖鸽(徽菜 · 宴客/咸鲜 · 120 分钟 · 徽菜传统功夫菜 · 山珍野味)
+-- ----------------------------------------------------------------------------
+INSERT INTO recipe (name, cuisine, difficulty, prep_time_min, cook_time_min, servings,
+                    description, source, source_ref, is_ai_generated)
+VALUES ('黄山炖鸽', '徽菜', 4, 20, 100, 2,
+        '乳鸽+黄山笋干+火腿+姜片小火慢炖 · 徽菜代表功夫菜 · 汤清味醇野香',
+        '知识库', '../../_GourmetLib/06_烹饪方法与营养保留/烹饪方法与营养保留.md#黄山炖鸽', 0);
+
+INSERT INTO ingredient (recipe_id, name, qty, unit, note, is_optional, order_no) VALUES
+    (49, '乳鸽', 2, '只', '约 500g/只,选 28 天乳鸽', 0, 1),
+    (49, '黄山笋干', 50, 'g', '提前泡 8 小时,徽菜山珍', 0, 2),
+    (49, '火腿', 30, 'g', '金华火腿,切薄片', 0, 3),
+    (49, '生姜', 20, 'g', '拍扁,去腥', 0, 4),
+    (49, '葱', 15, 'g', '打结', 0, 5),
+    (49, '料酒', 20, 'ml', '去腥', 0, 6),
+    (49, '盐', 5, 'g', '出锅前调味', 0, 7),
+    (49, '白胡椒粉', 2, 'g', '提香', 0, 8),
+    (49, '清水', 1500, 'ml', '没过鸽身', 0, 9);
+
+INSERT INTO step (recipe_id, step_no, content, duration_sec, tip) VALUES
+    (49, 1, '乳鸽去内脏洗净,冷水下锅+姜片+料酒焯水 3 分钟去血沫,捞出冲净', 300, '冷水下锅,血沫出得净'),
+    (49, 2, '笋干泡发后切 3cm 段,火腿切薄片,姜拍扁,葱打结', 300, '笋干要泡透,否则有涩味'),
+    (49, 3, '砂锅加水 1500ml,放入乳鸽+笋干+火腿+姜+葱结+料酒', 60, '砂锅小火慢炖,汤才清'),
+    (49, 4, '大火烧开撇浮沫,转微火(火苗不旺)炖 90 分钟', 5400, '微火慢炖,不能大开,否则汤浊'),
+    (49, 5, '出锅前 10 分钟加盐+白胡椒调味(早放盐肉柴)', 600, '盐晚放,肉才嫩'),
+    (49, 6, '拣出姜葱,乳鸽装盘,汤过筛回锅,笋干火腿垫底', 120, '汤过筛更清,色如茶'),
+    (49, 7, '汤浇鸽身,撒葱花点缀', 10, '汤色清亮,鸽身完整');
+
+INSERT INTO nutrition (recipe_id, calories_kcal, protein_g, carb_g, fat_g, fiber_g, sodium_mg, source, note) VALUES
+    (49, 380, 42, 12, 18, 3, 820, '估算', '2 人份;徽菜传统功夫菜,火功菜,汤清味醇');
+
+INSERT INTO recipe_tag (recipe_id, tag_id)
+    SELECT 49, id FROM tag WHERE name = '徽菜' AND category = 'cuisine';
+INSERT INTO recipe_tag (recipe_id, tag_id)
+    SELECT 49, id FROM tag WHERE name = '宴客' AND category = 'scenario';
+INSERT INTO recipe_tag (recipe_id, tag_id)
+    SELECT 49, id FROM tag WHERE name = '咸鲜' AND category = 'flavor';
+INSERT INTO recipe_tag (recipe_id, tag_id)
+    SELECT 49, id FROM tag WHERE name = '高蛋白' AND category = 'diet';
+INSERT INTO recipe_tag (recipe_id, tag_id)
+    SELECT 49, id FROM tag WHERE name = '煲汤' AND category = 'scenario';
+
+-- ----------------------------------------------------------------------------
+-- 50. 福建肉燕(闽菜 · 汤品/海鲜/快手 · 30 分钟 · 福州名小吃 · 肉包肉)
+-- ----------------------------------------------------------------------------
+INSERT INTO recipe (name, cuisine, difficulty, prep_time_min, cook_time_min, servings,
+                    description, source, source_ref, is_ai_generated)
+VALUES ('福建肉燕', '闽菜', 3, 20, 10, 2,
+        '猪后腿肉打成燕皮(肉茸+淀粉擀薄)+肉馅包制+高汤煮透 · 福州宴客小吃 · 皮滑馅鲜',
+        '知识库', '../../_GourmetLib/09_健康快手食谱/健康快手食谱.md#福建肉燕', 0);
+
+INSERT INTO ingredient (recipe_id, name, qty, unit, note, is_optional, order_no) VALUES
+    (50, '猪后腿肉', 300, 'g', '瘦七肥三,燕皮用 200g+馅用 100g', 0, 1),
+    (50, '红薯淀粉', 100, 'g', '燕皮专用,韧性足', 0, 2),
+    (50, '荸荠', 50, 'g', '切末,馅料增脆', 0, 3),
+    (50, '葱', 15, 'g', '切末', 0, 4),
+    (50, '姜', 10, 'g', '切末', 0, 5),
+    (50, '生抽', 10, 'ml', '馅料底味', 0, 6),
+    (50, '料酒', 10, 'ml', '去腥', 0, 7),
+    (50, '盐', 4, 'g', '燕皮 1g+馅 3g', 0, 8),
+    (50, '白胡椒粉', 1, 'g', '馅料点睛', 0, 9),
+    (50, '鸡骨高汤', 800, 'ml', '汤底,清鸡汤最佳', 0, 10),
+    (50, '紫菜', 5, 'g', '汤底点缀', 0, 11),
+    (50, '虾皮', 5, 'g', '提鲜,可选', 1, 12),
+    (50, '香油', 5, 'ml', '出锅点', 0, 13);
+
+INSERT INTO step (recipe_id, step_no, content, duration_sec, tip) VALUES
+    (50, 1, '猪后腿肉 200g 切小块,用刀背剁成细腻肉茸(燕皮关键,不能绞肉机要口感)', 600, '刀背剁,留肉纤维,口感筋道'),
+    (50, 2, '肉茸分次加红薯淀粉+少量盐+少许水,反复揉至起胶(胶状才能擀薄)', 600, '加粉要分次,慢慢起胶'),
+    (50, 3, '起胶后擀成 1mm 薄片(撒淀粉防粘),切成 8cm 方块即燕皮', 600, '擀得越薄越透,可见手指'),
+    (50, 4, '剩余 100g 猪肉剁成馅,加荸荠末+葱姜末+生抽+料酒+盐+胡椒拌匀', 300, '荸荠增脆,不能省'),
+    (50, 5, '取一燕皮,放一勺肉馅,对折成三角形再卷起(福州肉燕独特包法)', 300, '皮要包紧,不能漏馅'),
+    (50, 6, '高汤煮开,下肉燕,中小火煮 5 分钟至浮起(皮透明即熟)', 300, '浮起+透明=熟'),
+    (50, 7, '碗底放紫菜+虾皮+盐,盛入肉燕和汤,淋香油撒葱花', 30, '紫菜铺底,汤鲜味齐');
+
+INSERT INTO nutrition (recipe_id, calories_kcal, protein_g, carb_g, fat_g, fiber_g, sodium_mg, source, note) VALUES
+    (50, 320, 22, 38, 8, 1, 780, '估算', '2 人份;福州宴客小吃,皮薄如纸馅鲜美,燕皮是技术活');
+
+INSERT INTO recipe_tag (recipe_id, tag_id)
+    SELECT 50, id FROM tag WHERE name = '闽菜' AND category = 'cuisine';
+INSERT INTO recipe_tag (recipe_id, tag_id)
+    SELECT 50, id FROM tag WHERE name = '汤品' AND category = 'scenario';
+INSERT INTO recipe_tag (recipe_id, tag_id)
+    SELECT 50, id FROM tag WHERE name = '宴客' AND category = 'scenario';
+INSERT INTO recipe_tag (recipe_id, tag_id)
+    SELECT 50, id FROM tag WHERE name = '海鲜' AND category = 'flavor';
+INSERT INTO recipe_tag (recipe_id, tag_id)
+    SELECT 50, id FROM tag WHERE name = '咸鲜' AND category = 'flavor';
+INSERT INTO recipe_tag (recipe_id, tag_id)
+    SELECT 50, id FROM tag WHERE name = '清淡' AND category = 'flavor';
+INSERT INTO recipe_tag (recipe_id, tag_id)
+    SELECT 50, id FROM tag WHERE name = '高蛋白' AND category = 'diet';
+
 -- ============================================================================
--- v0.9 seed 结束 · 45 道菜谱已就位
--- 累计:早餐 8 / 凉菜 7 / 汤品 5 / 主菜 14 / 主食 4 / 蒸菜 1 / 宵夜 3 / 微波 1 / 甜品 3 = 45 道
---       (粤菜宴客 +1 / 川菜宵夜 +1 / 浙菜宴客 +1 / 鲁菜宴客 +1 / 中式甜品 +1 · 5 道新菜齐位)
--- 菜系分布:粤菜 8 / 西餐 6 / 中式 6 / 川菜 6 / 浙菜 5 / 鲁菜 4
---           湘菜 2 / 徽菜 2 / 东北菜 2 / 闽菜 2 / 淮扬菜 2 = **11 类**
--- 标签字典:36 个(v0.2 补 11 个幽灵 tag,本次未新增)
--- 累计:40 道 / 食材行+44 / 步骤+21 / 标签桥接+25 = 累计 370+ 食材行 / 184 步骤 / 172 标签桥接
+-- v0.10 seed 结束 · 50 道菜谱已就位(2026-09-08 · 5 道新菜齐位)
+-- 累计:早餐 8 / 凉菜 7 / 汤品 7 / 主菜 14 / 主食 4 / 蒸菜 1 / 宵夜 3 / 微波 1 / 甜品 3 / 宴客 16 / 煲汤 3 = 50 道
+--       (鲁菜糖醋里脊 +1 · 浙菜宋嫂鱼羹 +1 · 湘菜东安子鸡 +1 · 徽菜黄山炖鸽 +1 · 闽菜福建肉燕 +1)
+-- 菜系分布:粤菜 8 / 西餐 6 / 中式 6 / 川菜 6 / 浙菜 6 / 鲁菜 5
+--           湘菜 3 / 徽菜 3 / 闽菜 3 / 东北菜 2 / 淮扬菜 2 = **11 类**
+-- 标签字典:37 个(v0.2 补 11 幽灵 tag + 9-01 锅包肉新增「东北菜」= 36 → 本次未新增,全部复用)
+-- 累计:50 道 / 食材行+60 / 步骤+34 / 标签桥接+28 = 累计 475 食材行 / 256 步骤 / 222 标签桥接
+--        营养:50 条全齐(50 道菜全部含 kcal / P / C / F / 纤维 / 钠)
+-- 累计 5 道新菜的"净增量"= 60 食材行 + 34 步骤 + 28 标签桥接 + 5 营养记录
+-- 验证方法:
+--   sqlite3 gourmet.db < db/schema.sql
+--   sqlite3 gourmet.db < db/seed_recipes.sql
+--   sqlite3 gourmet.db "SELECT r.name, r.cuisine, COUNT(i.id) AS ingredients
+--                       FROM recipe r LEFT JOIN ingredient i ON i.recipe_id = r.id
+--                       WHERE r.id BETWEEN 46 AND 50
+--                       GROUP BY r.id ORDER BY r.id;"
+--   sqlite3 gourmet.db "SELECT cuisine, COUNT(*) FROM recipe GROUP BY cuisine ORDER BY 2 DESC, 1;"
+-- 预期(v0.10 新增段):
+--   糖醋里脊|鲁菜|13
+--   宋嫂鱼羹|浙菜|13
+--   东安子鸡|湘菜|12
+--   黄山炖鸽|徽菜|9
+--   福建肉燕|闽菜|13
+-- 预期(菜系分布 v0.10):
+--   粤菜|8  西餐|6  中式|6  川菜|6  浙菜|6  鲁菜|5
+--   湘菜|3  徽菜|3  闽菜|3  东北菜|2  淮扬菜|2
+-- ============================================================================
 -- 验证方法:
 --   sqlite3 gourmet.db < db/schema.sql
 --   sqlite3 gourmet.db < db/seed_recipes.sql
