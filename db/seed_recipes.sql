@@ -2119,16 +2119,242 @@ INSERT INTO recipe_tag (recipe_id, tag_id)
 INSERT INTO recipe_tag (recipe_id, tag_id)
     SELECT 50, id FROM tag WHERE name = '高蛋白' AND category = 'diet';
 
+-- ----------------------------------------------------------------------------
+-- 51. 猪肉炖粉条(东北菜 · 主食/炖菜 · 50 分钟 · 东北名菜 · 酸菜解腻粉条筋道)
+-- ----------------------------------------------------------------------------
+INSERT INTO recipe (name, cuisine, difficulty, prep_time_min, cook_time_min, servings,
+                    description, source, source_ref, is_ai_generated)
+VALUES ('猪肉炖粉条', '东北菜', 2, 15, 35, 3,
+        '五花肉+酸菜+红薯粉条+冻豆腐慢炖 · 东北名菜 · 酸香解腻粉条筋道',
+        '知识库', '../../_GourmetLib/09_健康快手食谱/健康快手食谱.md#东北炖菜', 0);
+
+INSERT INTO ingredient (recipe_id, name, qty, unit, note, is_optional, order_no) VALUES
+    (51, '五花肉', 300, 'g', '切 2cm 厚片,肥瘦相间', 0, 1),
+    (51, '酸菜', 200, 'g', '东北酸菜切丝,解腻关键', 0, 2),
+    (51, '红薯粉条', 150, 'g', '提前温水泡 30 分钟', 0, 3),
+    (51, '冻豆腐', 200, 'g', '解冻切块,吸汁入味', 0, 4),
+    (51, '葱', 15, 'g', '切段', 0, 5),
+    (51, '姜', 10, 'g', '切片', 0, 6),
+    (51, '八角', 2, '个', '增香', 0, 7),
+    (51, '花椒', 10, '粒', '提香', 0, 8),
+    (51, '生抽', 20, 'ml', '底味', 0, 9),
+    (51, '料酒', 15, 'ml', '去腥', 0, 10),
+    (51, '盐', 5, 'g', '出锅前调味', 0, 11),
+    (51, '油', 20, 'ml', '煸肉用', 0, 12);
+
+INSERT INTO step (recipe_id, step_no, content, duration_sec, tip) VALUES
+    (51, 1, '五花肉冷水下锅+姜片+料酒焯水 5 分钟,撇沫捞出切厚片', 300, '冷水下锅,血沫出得净'),
+    (51, 2, '热锅温油,下八角花椒爆香,下肉片煸出油至微黄(油多要倒出一些)', 300, '煸出油,肉才不腻'),
+    (51, 3, '加葱姜+生抽+料酒翻炒上色,倒入热水没过肉,大火烧开', 60, '热水下锅,汤不腥'),
+    (51, 4, '放酸菜+冻豆腐,转小火炖 20 分钟', 1200, '小火慢炖,酸菜才入味'),
+    (51, 5, '下粉条再炖 8 分钟至粉条透明(粉条吸汤,中途不加水)', 480, '粉条透明=熟,过煮会糊'),
+    (51, 6, '加盐调味,大火收汁 1 分钟出锅', 60, '盐晚放,肉才嫩');
+
+INSERT INTO nutrition (recipe_id, calories_kcal, protein_g, carb_g, fat_g, fiber_g, sodium_mg, source, note) VALUES
+    (51, 480, 18, 45, 26, 3, 980, '估算', '3 人份;东北名菜,酸香解腻,粉条筋道,冻豆腐吸汁');
+
+INSERT INTO recipe_tag (recipe_id, tag_id)
+    SELECT 51, id FROM tag WHERE name = '东北菜' AND category = 'cuisine';
+INSERT INTO recipe_tag (recipe_id, tag_id)
+    SELECT 51, id FROM tag WHERE name = '煲汤' AND category = 'scenario';
+INSERT INTO recipe_tag (recipe_id, tag_id)
+    SELECT 51, id FROM tag WHERE name = '咸鲜' AND category = 'flavor';
+INSERT INTO recipe_tag (recipe_id, tag_id)
+    SELECT 51, id FROM tag WHERE name = '酸辣' AND category = 'flavor';
+INSERT INTO recipe_tag (recipe_id, tag_id)
+    SELECT 51, id FROM tag WHERE name = '高蛋白' AND category = 'diet';
+
+-- ----------------------------------------------------------------------------
+-- 52. 地三鲜(东北菜 · 素菜/快手 · 20 分钟 · 东北家常素菜代表 · 茄子土豆青椒)
+-- ----------------------------------------------------------------------------
+INSERT INTO recipe (name, cuisine, difficulty, prep_time_min, cook_time_min, servings,
+                    description, source, source_ref, is_ai_generated)
+VALUES ('地三鲜', '东北菜', 2, 10, 10, 2,
+        '茄子+土豆+青椒过油 + 蒜末酱油糖调汁 · 东北家常素菜 · 软糯鲜香下饭神器',
+        '知识库', '../../_GourmetLib/09_健康快手食谱/健康快手食谱.md#地三鲜', 0);
+
+INSERT INTO ingredient (recipe_id, name, qty, unit, note, is_optional, order_no) VALUES
+    (52, '茄子', 200, 'g', '紫皮长茄,切滚刀块,盐水泡 5 分钟防氧化', 0, 1),
+    (52, '土豆', 200, 'g', '切滚刀块', 0, 2),
+    (52, '青椒', 1, '个', '切块,约 100g', 0, 3),
+    (52, '蒜', 20, 'g', '切末,灵魂,分两次下', 0, 4),
+    (52, '生抽', 20, 'ml', '底味', 0, 5),
+    (52, '老抽', 5, 'ml', '上色,少许', 0, 6),
+    (52, '糖', 10, 'g', '平衡咸鲜', 0, 7),
+    (52, '盐', 3, 'g', '底味', 0, 8),
+    (52, '淀粉', 10, 'g', '勾芡', 0, 9),
+    (52, '水', 50, 'ml', '调汁', 0, 10),
+    (52, '油', 300, 'ml', '实耗 40ml,过油用', 0, 11);
+
+INSERT INTO step (recipe_id, step_no, content, duration_sec, tip) VALUES
+    (52, 1, '茄子滚刀块盐水泡 5 分钟,沥干裹薄淀粉(吸油少,口感好)', 300, '盐水泡+裹粉,茄子省油'),
+    (52, 2, '土豆块清水洗去淀粉,沥干', 60, '洗去淀粉,炸时不溅'),
+    (52, 3, '油温 170℃,土豆先炸 3 分钟至金黄,再下茄子炸 2 分钟,最后青椒过油 10 秒,全部捞出', 300, '土豆最硬先炸,青椒最后保色'),
+    (52, 4, '锅留底油,中火爆香一半蒜末(出香不焦)', 15, '中火爆香,留一半生蒜末出锅前下'),
+    (52, 5, '加生抽+老抽+糖+盐+水 50ml 烧开,淋水淀粉勾薄芡', 60, '薄芡挂汁,不要太厚'),
+    (52, 6, '倒入炸好的三鲜快速翻匀,撒剩余生蒜末翻两下出锅', 15, '生蒜末出锅前下,蒜香最浓');
+
+INSERT INTO nutrition (recipe_id, calories_kcal, protein_g, carb_g, fat_g, fiber_g, sodium_mg, source, note) VALUES
+    (52, 280, 5, 32, 16, 5, 520, '估算', '2 人份;东北家常素菜,过油+蒜末是关键,下饭神器');
+
+INSERT INTO recipe_tag (recipe_id, tag_id)
+    SELECT 52, id FROM tag WHERE name = '东北菜' AND category = 'cuisine';
+INSERT INTO recipe_tag (recipe_id, tag_id)
+    SELECT 52, id FROM tag WHERE name = '快手' AND category = 'scenario';
+INSERT INTO recipe_tag (recipe_id, tag_id)
+    SELECT 52, id FROM tag WHERE name = '咸鲜' AND category = 'flavor';
+INSERT INTO recipe_tag (recipe_id, tag_id)
+    SELECT 52, id FROM tag WHERE name = '素食' AND category = 'diet';
+INSERT INTO recipe_tag (recipe_id, tag_id)
+    SELECT 52, id FROM tag WHERE name = '低脂' AND category = 'diet';
+
+-- ----------------------------------------------------------------------------
+-- 53. 文思豆腐(淮扬菜 · 刀工/宴客/清淡 · 20 分钟 · 淮扬细刀工代表 · 豆腐切丝如发)
+-- ----------------------------------------------------------------------------
+INSERT INTO recipe (name, cuisine, difficulty, prep_time_min, cook_time_min, servings,
+                    description, source, source_ref, is_ai_generated)
+VALUES ('文思豆腐', '淮扬菜', 4, 15, 5, 2,
+        '嫩豆腐切细丝(刀工核心)+香菇丝+火腿丝+鸡丝+清汤 · 淮扬刀工巅峰 · 清淡精致',
+        '知识库', '../../_GourmetLib/06_烹饪方法与营养保留/烹饪方法与营养保留.md#文思豆腐', 0);
+
+INSERT INTO ingredient (recipe_id, name, qty, unit, note, is_optional, order_no) VALUES
+    (53, '嫩豆腐', 400, 'g', '内酯豆腐最佳,切丝后清水泡', 0, 1),
+    (53, '熟火腿', 20, 'g', '切细丝', 0, 2),
+    (53, '香菇', 2, '朵', '泡发切细丝', 0, 3),
+    (53, '鸡胸肉', 50, 'g', '煮熟撕细丝,可用熟火腿丝替代', 1, 4),
+    (53, '冬笋', 30, 'g', '切细丝,焯水', 0, 5),
+    (53, '清鸡汤', 600, 'ml', '汤底,清鸡汤最佳', 0, 6),
+    (53, '盐', 3, 'g', '底味,清淡为主', 0, 7),
+    (53, '白胡椒粉', 1, 'g', '点睛', 0, 8),
+    (53, '水淀粉', 20, 'ml', '勾薄芡', 0, 9),
+    (53, '香菜', 5, 'g', '点缀,可选', 1, 10);
+
+INSERT INTO step (recipe_id, step_no, content, duration_sec, tip) VALUES
+    (53, 1, '嫩豆腐取出切 0.5cm 薄片,再切细丝(刀工核心,每刀间隔 1mm)', 600, '切丝刀要锋利,动作轻推不压'),
+    (53, 2, '豆腐丝入清水泡 5 分钟(去豆腥,防碎),捞出沥干', 300, '清水泡,豆腐丝挺括不碎'),
+    (53, 3, '香菇+冬笋焯水切丝,火腿切丝,鸡胸煮熟撕丝', 300, '配料切得和豆腐丝一样细'),
+    (53, 4, '清鸡汤烧开,下香菇丝+冬笋丝+鸡丝煮 2 分钟', 120, '高汤要清,这是羹的底'),
+    (53, 5, '轻轻下豆腐丝(用漏勺托着入汤),小火煮 1 分钟(不翻搅)', 60, '不翻搅,豆腐丝才成形'),
+    (53, 6, '加盐+白胡椒调味,淋水淀粉勾薄芡至"羹"状', 30, '薄芡挂汁,豆腐丝不沉底'),
+    (53, 7, '盛碗撒火腿丝+香菜,点几滴香油', 10, '火腿丝浮面,色香俱全');
+
+INSERT INTO nutrition (recipe_id, calories_kcal, protein_g, carb_g, fat_g, fiber_g, sodium_mg, source, note) VALUES
+    (53, 160, 14, 6, 8, 1, 580, '估算', '2 人份;淮扬刀工巅峰,清淡精致,宴客汤品');
+
+INSERT INTO recipe_tag (recipe_id, tag_id)
+    SELECT 53, id FROM tag WHERE name = '淮扬菜' AND category = 'cuisine';
+INSERT INTO recipe_tag (recipe_id, tag_id)
+    SELECT 53, id FROM tag WHERE name = '宴客' AND category = 'scenario';
+INSERT INTO recipe_tag (recipe_id, tag_id)
+    SELECT 53, id FROM tag WHERE name = '汤品' AND category = 'scenario';
+INSERT INTO recipe_tag (recipe_id, tag_id)
+    SELECT 53, id FROM tag WHERE name = '清淡' AND category = 'flavor';
+INSERT INTO recipe_tag (recipe_id, tag_id)
+    SELECT 53, id FROM tag WHERE name = '咸鲜' AND category = 'flavor';
+INSERT INTO recipe_tag (recipe_id, tag_id)
+    SELECT 53, id FROM tag WHERE name = '低脂' AND category = 'diet';
+
+-- ----------------------------------------------------------------------------
+-- 54. 徽式双冬(徽菜 · 煲汤/素食 · 30 分钟 · 徽菜山珍素味 · 冬笋冬菇)
+-- ----------------------------------------------------------------------------
+INSERT INTO recipe (name, cuisine, difficulty, prep_time_min, cook_time_min, servings,
+                    description, source, source_ref, is_ai_generated)
+VALUES ('徽式双冬', '徽菜', 2, 15, 15, 2,
+        '冬笋+冬菇+火腿高汤慢烧 · 徽菜山珍素味 · 鲜香清淡',
+        '知识库', '../../_GourmetLib/06_烹饪方法与营养保留/烹饪方法与营养保留.md#徽式双冬', 0);
+
+INSERT INTO ingredient (recipe_id, name, qty, unit, note, is_optional, order_no) VALUES
+    (54, '冬笋', 300, 'g', '去壳切滚刀块,焯水去涩', 0, 1),
+    (54, '干冬菇', 50, 'g', '约 8-10 朵,温水泡 2 小时', 0, 2),
+    (54, '火腿', 30, 'g', '切薄片,提鲜关键', 0, 3),
+    (54, '姜', 10, 'g', '切片', 0, 4),
+    (54, '葱', 10, 'g', '切段', 0, 5),
+    (54, '生抽', 10, 'ml', '底味', 0, 6),
+    (54, '盐', 3, 'g', '底味', 0, 7),
+    (54, '糖', 5, 'g', '提鲜,少许', 0, 8),
+    (54, '高汤', 400, 'ml', '鸡汤/骨汤均可', 0, 9),
+    (54, '水淀粉', 15, 'ml', '薄芡', 0, 10),
+    (54, '油', 20, 'ml', '煸炒用', 0, 11);
+
+INSERT INTO step (recipe_id, step_no, content, duration_sec, tip) VALUES
+    (54, 1, '冬笋剥壳去老根,切滚刀块,冷水下锅+盐 1g 焯水 3 分钟去涩,捞出', 300, '焯水去涩,这是冬笋关键'),
+    (54, 2, '冬菇温水泡 2 小时至软,挤干切片(泡菇水沉淀后留用)', 7200, '泡菇水沉淀后入菜,鲜味翻倍'),
+    (54, 3, '热锅温油,下姜片+火腿片小火煸出香味(火腿出油是核心)', 60, '火腿要煸出油,香才透'),
+    (54, 4, '下冬菇翻炒 1 分钟出香,加冬笋+高汤+泡菇水 100ml+生抽+糖', 60, '泡菇水沉淀去渣,只用清液'),
+    (54, 5, '大火烧开转小火焖 10 分钟(汤剩 1/3)', 600, '小火焖,冬笋才入味'),
+    (54, 6, '加盐调味,淋水淀粉勾薄芡,撒葱段翻匀出锅', 30, '薄芡挂汁,出锅前撒葱');
+
+INSERT INTO nutrition (recipe_id, calories_kcal, protein_g, carb_g, fat_g, fiber_g, sodium_mg, source, note) VALUES
+    (54, 180, 8, 18, 8, 6, 520, '估算', '2 人份;徽菜山珍素味,高纤维低脂,冬笋冬菇双鲜');
+
+INSERT INTO recipe_tag (recipe_id, tag_id)
+    SELECT 54, id FROM tag WHERE name = '徽菜' AND category = 'cuisine';
+INSERT INTO recipe_tag (recipe_id, tag_id)
+    SELECT 54, id FROM tag WHERE name = '煲汤' AND category = 'scenario';
+INSERT INTO recipe_tag (recipe_id, tag_id)
+    SELECT 54, id FROM tag WHERE name = '清淡' AND category = 'flavor';
+INSERT INTO recipe_tag (recipe_id, tag_id)
+    SELECT 54, id FROM tag WHERE name = '咸鲜' AND category = 'flavor';
+INSERT INTO recipe_tag (recipe_id, tag_id)
+    SELECT 54, id FROM tag WHERE name = '素食' AND category = 'diet';
+INSERT INTO recipe_tag (recipe_id, tag_id)
+    SELECT 54, id FROM tag WHERE name = '低脂' AND category = 'diet';
+
+-- ----------------------------------------------------------------------------
+-- 55. 微波葱姜鸡(粤菜 · 微波/快手/宵夜 · 12 分钟 · 粤式微波鸡 · 皮滑肉嫩零油烟)
+-- ----------------------------------------------------------------------------
+INSERT INTO recipe (name, cuisine, difficulty, prep_time_min, cook_time_min, servings,
+                    description, source, source_ref, is_ai_generated)
+VALUES ('微波葱姜鸡', '粤菜', 2, 5, 7, 2,
+        '鸡腿肉+姜葱+生抽蚝油+料酒,微波 5 分钟焖 2 分钟 · 粤式快手 · 皮滑肉嫩零油烟',
+        '知识库', '../../_GourmetLib/09_健康快手食谱/健康快手食谱.md#微波', 0);
+
+INSERT INTO ingredient (recipe_id, name, qty, unit, note, is_optional, order_no) VALUES
+    (55, '鸡腿肉', 400, 'g', '去骨整块,带皮,约 2 个大鸡腿', 0, 1),
+    (55, '姜', 20, 'g', '切丝,量大提香去腥', 0, 2),
+    (55, '葱', 30, 'g', '切段,分两次下', 0, 3),
+    (55, '生抽', 20, 'ml', '底味', 0, 4),
+    (55, '蚝油', 10, 'ml', '提鲜', 0, 5),
+    (55, '料酒', 15, 'ml', '去腥', 0, 6),
+    (55, '糖', 5, 'g', '提鲜,少许', 0, 7),
+    (55, '盐', 2, 'g', '底味', 0, 8),
+    (55, '白胡椒粉', 1, 'g', '点睛', 0, 9),
+    (55, '香油', 5, 'ml', '出锅点', 0, 10);
+
+INSERT INTO step (recipe_id, step_no, content, duration_sec, tip) VALUES
+    (55, 1, '鸡腿肉去骨摊平(留皮),用牙签在皮面戳小孔(防微波爆皮)', 120, '戳孔防爆皮,微波专用技巧'),
+    (55, 2, '姜丝+葱段+生抽+蚝油+料酒+糖+盐+胡椒调成腌汁', 60, '腌汁提前调,均匀裹肉'),
+    (55, 3, '鸡腿肉放入腌汁抓匀,皮面朝上,腌 5 分钟入味', 300, '腌 5 分钟,入味且不柴'),
+    (55, 4, '微波炉专用盘铺葱段,鸡腿皮面朝上放葱上,淋剩余腌汁', 30, '皮朝上,葱段托底防糊'),
+    (55, 5, '覆微波炉专用盖或保鲜膜(留透气孔),高火微波 5 分钟', 300, '高火 5 分钟,中间不开门'),
+    (55, 6, '取出静置 2 分钟(利用余热焖熟内部,防血丝),切件装盘,淋盘底汁+香油', 120, '焖 2 分钟最关键,防血丝');
+
+INSERT INTO nutrition (recipe_id, calories_kcal, protein_g, carb_g, fat_g, fiber_g, sodium_mg, source, note) VALUES
+    (55, 280, 32, 3, 16, 0, 620, '估算', '2 人份;粤式微波菜,零油烟,快手夜宵,皮滑肉嫩');
+
+INSERT INTO recipe_tag (recipe_id, tag_id)
+    SELECT 55, id FROM tag WHERE name = '粤菜' AND category = 'cuisine';
+INSERT INTO recipe_tag (recipe_id, tag_id)
+    SELECT 55, id FROM tag WHERE name = '微波' AND category = 'scenario';
+INSERT INTO recipe_tag (recipe_id, tag_id)
+    SELECT 55, id FROM tag WHERE name = '宵夜' AND category = 'scenario';
+INSERT INTO recipe_tag (recipe_id, tag_id)
+    SELECT 55, id FROM tag WHERE name = '咸鲜' AND category = 'flavor';
+INSERT INTO recipe_tag (recipe_id, tag_id)
+    SELECT 55, id FROM tag WHERE name = '高蛋白' AND category = 'diet';
+
 -- ============================================================================
--- v0.10 seed 结束 · 50 道菜谱已就位(2026-09-08 · 5 道新菜齐位)
--- 累计:早餐 8 / 凉菜 7 / 汤品 7 / 主菜 14 / 主食 4 / 蒸菜 1 / 宵夜 3 / 微波 1 / 甜品 3 / 宴客 16 / 煲汤 3 = 50 道
---       (鲁菜糖醋里脊 +1 · 浙菜宋嫂鱼羹 +1 · 湘菜东安子鸡 +1 · 徽菜黄山炖鸽 +1 · 闽菜福建肉燕 +1)
--- 菜系分布:粤菜 8 / 西餐 6 / 中式 6 / 川菜 6 / 浙菜 6 / 鲁菜 5
---           湘菜 3 / 徽菜 3 / 闽菜 3 / 东北菜 2 / 淮扬菜 2 = **11 类**
--- 标签字典:37 个(v0.2 补 11 幽灵 tag + 9-01 锅包肉新增「东北菜」= 36 → 本次未新增,全部复用)
--- 累计:50 道 / 食材行+60 / 步骤+34 / 标签桥接+28 = 累计 475 食材行 / 256 步骤 / 222 标签桥接
---        营养:50 条全齐(50 道菜全部含 kcal / P / C / F / 纤维 / 钠)
--- 累计 5 道新菜的"净增量"= 60 食材行 + 34 步骤 + 28 标签桥接 + 5 营养记录
+-- v0.11 seed 结束 · 55 道菜谱已就位(2026-09-09 · 5 道新菜齐位 · 深耕东北/淮扬 + 新开「微波」场景)
+-- 累计:早餐 8 / 凉菜 7 / 汤品 9 / 主菜 14 / 主食 5 / 蒸菜 1 / 宵夜 4 / 微波 2 / 甜品 3 / 宴客 17 / 煲汤 5 = 55 道
+--       (东北菜猪肉炖粉条 +1 · 东北菜地三鲜 +1 · 淮扬菜文思豆腐 +1 · 徽菜徽式双冬 +1 · 粤菜微波葱姜鸡 +1)
+-- 菜系分布:粤菜 9 / 西餐 6 / 中式 6 / 川菜 6 / 浙菜 6 / 鲁菜 5
+--           徽菜 4 / 东北菜 4 / 湘菜 3 / 闽菜 3 / 淮扬菜 3 = **11 类**
+-- 标签字典:37 个(本次未新增,全部复用 v0.10 字典;新增「微波」场景桥接 +1)
+-- 累计:55 道 / 食材行+54 / 步骤+31 / 标签桥接+27 = 累计 529 食材行 / 287 步骤 / 249 标签桥接
+--        营养:55 条全齐(55 道菜全部含 kcal / P / C / F / 纤维 / 钠)
+-- 累计 5 道新菜的"净增量"= 54 食材行 + 31 步骤 + 27 标签桥接 + 5 营养记录
+-- 200+ 闭环进度:55/200 = 27.5%(v0.10 25.0% → v0.11 27.5%,+2.5pp)
+-- 关键技法新增:文思豆腐切丝(刀工 1mm 精度)· 地三鲜双蒜下锅(熟蒜香+生蒜辛)
 -- 验证方法:
 --   sqlite3 gourmet.db < db/schema.sql
 --   sqlite3 gourmet.db < db/seed_recipes.sql
@@ -2251,4 +2477,25 @@ INSERT INTO recipe_tag (recipe_id, tag_id)
 --   风味:清淡|11 麻辣|7 咸鲜|6 酸甜|3 酸辣|3 咸甜|2 糊辣|1 香辣|2 海鲜|6
 --   菜系:川菜|11  粤菜|8  浙菜|5  鲁菜|4  中式|6  湘菜|2  徽菜|2  闽菜|2  东北菜|2  淮扬菜|2  西餐|6
 --   饮食:减脂|9  高蛋白|13  素食|8  低脂|9  增肌|5  低糖|2  控盐|1
+-- ============================================================================
+-- v0.11 验证方法(2026-09-09 新增):
+--   sqlite3 gourmet.db < db/schema.sql
+--   sqlite3 gourmet.db < db/seed_recipes.sql
+--   sqlite3 gourmet.db "SELECT r.name, r.cuisine, COUNT(i.id) AS ingredients
+--                       FROM recipe r LEFT JOIN ingredient i ON i.recipe_id = r.id
+--                       WHERE r.id BETWEEN 51 AND 55
+--                       GROUP BY r.id ORDER BY r.id;"
+--   sqlite3 gourmet.db "SELECT cuisine, COUNT(*) FROM recipe GROUP BY cuisine ORDER BY 2 DESC, 1;"
+-- 预期(v0.11 新增段):
+--   猪肉炖粉条|东北菜|12
+--   地三鲜|东北菜|11
+--   文思豆腐|淮扬菜|10
+--   徽式双冬|徽菜|11
+--   微波葱姜鸡|粤菜|10
+-- 预期(菜系分布 v0.11):
+--   粤菜|9  西餐|6  中式|6  川菜|6  浙菜|6  鲁菜|5
+--   徽菜|4  东北菜|4  湘菜|3  闽菜|3  淮扬菜|3
+-- 预期(累计 v0.11):
+--   55 道菜 / 529 食材行 / 287 步骤 / 249 标签桥接 / 55 营养记录 / 37 tag
+--   11 类菜系全 ≥ 3 道(粤 9 / 西 6 / 中 6 / 川 6 / 浙 6 / 鲁 5 / 徽 4 / 东北 4 / 湘 3 / 闽 3 / 淮扬 3)
 -- ============================================================================
