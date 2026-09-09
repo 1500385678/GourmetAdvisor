@@ -2343,18 +2343,246 @@ INSERT INTO recipe_tag (recipe_id, tag_id)
 INSERT INTO recipe_tag (recipe_id, tag_id)
     SELECT 55, id FROM tag WHERE name = '高蛋白' AND category = 'diet';
 
+-- ----------------------------------------------------------------------------
+-- 56. 永州血鸭(湘菜 · 宴客/香辣/快手 · 35 分钟 · 湘菜血鸭代表 · 鸭血嫩滑不碎是关键)
+-- ----------------------------------------------------------------------------
+INSERT INTO recipe (name, cuisine, difficulty, prep_time_min, cook_time_min, servings,
+                    description, source, source_ref, is_ai_generated)
+VALUES ('永州血鸭', '湘菜', 3, 15, 20, 3,
+        '麻鸭+鸭血+小米椒+酸豆角+茶油,鸭血凝固后回锅裹肉 · 永州血鸭是湘菜宴客代表,鸭血嫩滑不碎是灵魂',
+        '知识库', '../../_GourmetLib/07_中式养生食疗/中式养生食疗.md#血鸭', 0);
+
+INSERT INTO ingredient (recipe_id, name, qty, unit, note, is_optional, order_no) VALUES
+    (56, '麻鸭', 750, 'g', '半只,切 2cm 块', 0, 1),
+    (56, '鸭血', 200, 'g', '现取嫩血,打散备用', 0, 2),
+    (56, '小米椒', 30, 'g', '切圈,提辣', 0, 3),
+    (56, '蒜瓣', 30, 'g', '拍碎,分两次下', 0, 4),
+    (56, '姜', 20, 'g', '切片,焯水用', 0, 5),
+    (56, '酸豆角', 80, 'g', '切碎,永州血鸭灵魂', 0, 6),
+    (56, '干辣椒粉', 10, 'g', '增香上色', 0, 7),
+    (56, '料酒', 20, 'ml', '焯水去腥', 0, 8),
+    (56, '生抽', 20, 'ml', '底味', 0, 9),
+    (56, '盐', 5, 'g', '底味', 0, 10),
+    (56, '茶油', 30, 'ml', '湘菜本油,香浓', 0, 11);
+
+INSERT INTO step (recipe_id, step_no, content, duration_sec, tip) VALUES
+    (56, 1, '麻鸭切 2cm 块,冷水下锅+姜片+料酒焯水 5 分钟,捞出沥干', 300, '冷水下锅去血沫,汤清肉香'),
+    (56, 2, '鸭血打散加少许盐(防凝固过快),静置备用', 60, '鸭血现取现用,凝固即停'),
+    (56, 3, '茶油烧七成热,下鸭块煸炒至金黄出油(约 8 分钟)', 480, '煸透出油,皮酥肉香'),
+    (56, 4, '下蒜瓣+小米椒+酸豆角+干辣椒粉爆香(2 分钟)', 120, '酸豆角煸出酸香是关键'),
+    (56, 5, '倒入鸭血快速翻拌(凝固即停,保持嫩滑),加生抽+盐调味', 60, '鸭血下锅 30 秒内停火,嫩滑不碎'),
+    (56, 6, '大火收汁 30 秒,起锅装盘', 30, '留少许汤汁拌饭一绝');
+
+INSERT INTO nutrition (recipe_id, calories_kcal, protein_g, carb_g, fat_g, fiber_g, sodium_mg, source, note) VALUES
+    (56, 380, 35, 8, 24, 2, 720, '估算', '3 人份;永州血鸭香辣开胃,鸭血补铁');
+
+INSERT INTO recipe_tag (recipe_id, tag_id)
+    SELECT 56, id FROM tag WHERE name = '湘菜' AND category = 'cuisine';
+INSERT INTO recipe_tag (recipe_id, tag_id)
+    SELECT 56, id FROM tag WHERE name = '宴客' AND category = 'scenario';
+INSERT INTO recipe_tag (recipe_id, tag_id)
+    SELECT 56, id FROM tag WHERE name = '香辣' AND category = 'flavor';
+INSERT INTO recipe_tag (recipe_id, tag_id)
+    SELECT 56, id FROM tag WHERE name = '快手' AND category = 'scenario';
+INSERT INTO recipe_tag (recipe_id, tag_id)
+    SELECT 56, id FROM tag WHERE name = '高蛋白' AND category = 'diet';
+
+-- ----------------------------------------------------------------------------
+-- 57. 佛跳墙(闽菜 · 宴客/煲汤/海鲜 · 5 小时 · 闽菜宴客头牌 · 坛启荤香飘四邻)
+-- ----------------------------------------------------------------------------
+INSERT INTO recipe (name, cuisine, difficulty, prep_time_min, cook_time_min, servings,
+                    description, source, source_ref, is_ai_generated)
+VALUES ('佛跳墙', '闽菜', 5, 60, 240, 4,
+        '鲍鱼+海参+鱼翅+花胶+瑶柱+火腿+老母鸡 15 种食材高汤 4 小时 · 闽菜宴客头牌 · 坛启荤香飘四邻',
+        '知识库', '../../_GourmetLib/10_食品安全与禁忌/食品安全与禁忌.md#佛跳墙', 0);
+
+INSERT INTO ingredient (recipe_id, name, qty, unit, note, is_optional, order_no) VALUES
+    (57, '鲍鱼', 4, '只', '中等,发好', 0, 1),
+    (57, '海参', 4, '根', '发好,刺参优先', 0, 2),
+    (57, '鱼翅', 30, 'g', '发好,金钩翅', 0, 3),
+    (57, '花胶', 50, 'g', '发好,厚身', 0, 4),
+    (57, '瑶柱', 30, 'g', '泡发 2 小时', 0, 5),
+    (57, '鸽蛋', 4, '个', '煮熟剥壳', 0, 6),
+    (57, '老母鸡', 1000, 'g', '半只,高汤底', 0, 7),
+    (57, '猪骨', 500, 'g', '高汤底', 0, 8),
+    (57, '金华火腿', 50, 'g', '切薄片', 0, 9),
+    (57, '干香菇', 30, 'g', '泡发', 0, 10),
+    (57, '冬笋', 100, 'g', '切滚刀块', 0, 11),
+    (57, '姜', 30, 'g', '拍碎', 0, 12),
+    (57, '葱', 50, 'g', '切段', 0, 13),
+    (57, '料酒', 50, 'ml', '去腥', 0, 14),
+    (57, '盐', 8, 'g', '底味', 0, 15);
+
+INSERT INTO step (recipe_id, step_no, content, duration_sec, tip) VALUES
+    (57, 1, '老母鸡+猪骨+姜+葱+料酒冷水下锅,大火煮沸撇沫,转小火熬 4 小时成高汤(约剩 2 升)', 14400, '高汤是灵魂,撇沫要彻底,汤色清亮'),
+    (57, 2, '鲍鱼/海参/鱼翅/花胶/瑶柱/香菇/冬笋分别焯水 2 分钟,沥干', 600, '分别焯水防串味,保留本味'),
+    (57, 3, '砂锅或佛跳墙专用坛,底层铺火腿片+香菇+冬笋', 60, '底层铺底,防上层食材糊底'),
+    (57, 4, '中层放鲍鱼+海参+鱼翅+花胶+瑶柱+鸽蛋', 60, '中层硬料,层层叠放'),
+    (57, 5, '倒入高汤没过食材,加盐调味,盖盖', 60, '高汤温热倒入,防冷缩'),
+    (57, 6, '蒸锅大火蒸 3 小时(传统坛子菜),出锅上桌', 10800, '蒸比炖更入味,蒸满 3 小时是关键');
+
+INSERT INTO nutrition (recipe_id, calories_kcal, protein_g, carb_g, fat_g, fiber_g, sodium_mg, source, note) VALUES
+    (57, 520, 45, 12, 32, 1, 980, '估算', '4 人份;佛跳墙高汤 4 小时吊制,宴客头牌');
+
+INSERT INTO recipe_tag (recipe_id, tag_id)
+    SELECT 57, id FROM tag WHERE name = '闽菜' AND category = 'cuisine';
+INSERT INTO recipe_tag (recipe_id, tag_id)
+    SELECT 57, id FROM tag WHERE name = '宴客' AND category = 'scenario';
+INSERT INTO recipe_tag (recipe_id, tag_id)
+    SELECT 57, id FROM tag WHERE name = '煲汤' AND category = 'scenario';
+INSERT INTO recipe_tag (recipe_id, tag_id)
+    SELECT 57, id FROM tag WHERE name = '海鲜' AND category = 'flavor';
+INSERT INTO recipe_tag (recipe_id, tag_id)
+    SELECT 57, id FROM tag WHERE name = '高蛋白' AND category = 'diet';
+
+-- ----------------------------------------------------------------------------
+-- 58. 蟹粉小笼包(淮扬菜 · 早餐/宴客/海鲜 · 80 分钟 · 淮扬点心代表 · 皮薄如纸汤汁满)
+-- ----------------------------------------------------------------------------
+INSERT INTO recipe (name, cuisine, difficulty, prep_time_min, cook_time_min, servings,
+                    description, source, source_ref, is_ai_generated)
+VALUES ('蟹粉小笼包', '淮扬菜', 4, 60, 20, 2,
+        '猪肉馅+蟹粉+皮冻化汤+薄皮提褶 18 道 · 淮扬点心代表 · 皮薄如纸汤汁满',
+        '知识库', '../../_GourmetLib/09_健康快手食谱/健康快手食谱.md#小笼包', 0);
+
+INSERT INTO ingredient (recipe_id, name, qty, unit, note, is_optional, order_no) VALUES
+    (58, '中筋面粉', 200, 'g', '皮用', 0, 1),
+    (58, '猪肉馅', 250, 'g', '三分肥七分瘦', 0, 2),
+    (58, '蟹粉', 50, 'g', '大闸蟹蒸熟拆粉', 0, 3),
+    (58, '皮冻', 100, 'g', '猪皮熬化冻成,切碎', 0, 4),
+    (58, '姜', 20, 'g', '泡水用', 0, 5),
+    (58, '葱', 30, 'g', '切末', 0, 6),
+    (58, '料酒', 15, 'ml', '去腥', 0, 7),
+    (58, '生抽', 20, 'ml', '底味', 0, 8),
+    (58, '香油', 10, 'ml', '提香', 0, 9),
+    (58, '盐', 5, 'g', '底味', 0, 10),
+    (58, '糖', 8, 'g', '提鲜', 0, 11),
+    (58, '白胡椒粉', 2, 'g', '点睛', 0, 12);
+
+INSERT INTO step (recipe_id, step_no, content, duration_sec, tip) VALUES
+    (58, 1, '面粉+温水(40℃) 100ml 揉成光滑面团,盖湿布醒 30 分钟', 1800, '水温 40℃ 是面团软硬关键'),
+    (58, 2, '猪肉馅+姜水(分 3 次打)+蟹粉+皮冻碎+葱末+料酒+生抽+香油+盐+糖+胡椒搅打上劲(顺时针 5 分钟)', 300, '顺时针搅打上劲,汤汁饱满'),
+    (58, 3, '醒好的面团搓长条,切成 12 个剂子(约 20g/个)', 300, '剂子均匀,大小一致'),
+    (58, 4, '剂子擀成直径 8cm 薄皮(边缘薄中间略厚)', 360, '边缘薄中间厚,提褶不破皮'),
+    (58, 5, '皮包馅 25g,提褶 18 道成小笼包生坯', 600, '提褶 18 道是淮扬标准,褶多汤多'),
+    (58, 6, '蒸锅水开,小笼包生坯入笼,大火蒸 8 分钟(皮冻化汤的关键),出锅', 480, '皮冻化汤需 8 分钟,蒸过则塌');
+
+INSERT INTO nutrition (recipe_id, calories_kcal, protein_g, carb_g, fat_g, fiber_g, sodium_mg, source, note) VALUES
+    (58, 480, 24, 52, 18, 1, 580, '估算', '2 人份 12 只;蟹粉小笼包皮冻化汤是核心');
+
+INSERT INTO recipe_tag (recipe_id, tag_id)
+    SELECT 58, id FROM tag WHERE name = '淮扬菜' AND category = 'cuisine';
+INSERT INTO recipe_tag (recipe_id, tag_id)
+    SELECT 58, id FROM tag WHERE name = '早餐' AND category = 'scenario';
+INSERT INTO recipe_tag (recipe_id, tag_id)
+    SELECT 58, id FROM tag WHERE name = '宴客' AND category = 'scenario';
+INSERT INTO recipe_tag (recipe_id, tag_id)
+    SELECT 58, id FROM tag WHERE name = '海鲜' AND category = 'flavor';
+INSERT INTO recipe_tag (recipe_id, tag_id)
+    SELECT 58, id FROM tag WHERE name = '咸鲜' AND category = 'flavor';
+
+-- ----------------------------------------------------------------------------
+-- 59. 油爆双脆(鲁菜 · 宴客/快手/咸鲜 · 17 分钟 · 鲁菜火候菜代表 · 脆嫩爽滑 18 秒断生)
+-- ----------------------------------------------------------------------------
+INSERT INTO recipe (name, cuisine, difficulty, prep_time_min, cook_time_min, servings,
+                    description, source, source_ref, is_ai_generated)
+VALUES ('油爆双脆', '鲁菜', 4, 15, 2, 2,
+        '猪肚尖+鸡胗(双脆)+蒜末+绍酒+高汤勾芡 18 秒断生 · 鲁菜火候菜代表 · 脆嫩爽滑',
+        '知识库', '../../_GourmetLib/06_烹饪方法与营养保留/烹饪方法与营养保留.md#油爆', 0);
+
+INSERT INTO ingredient (recipe_id, name, qty, unit, note, is_optional, order_no) VALUES
+    (59, '猪肚尖', 150, 'g', '去油膜切十字花刀', 0, 1),
+    (59, '鸡胗', 150, 'g', '去内膜切十字花刀', 0, 2),
+    (59, '蒜末', 15, 'g', '爆锅用', 0, 3),
+    (59, '姜末', 10, 'g', '提香', 0, 4),
+    (59, '葱末', 10, 'g', '提香', 0, 5),
+    (59, '绍酒', 20, 'ml', '鲁菜本酒,去腥', 0, 6),
+    (59, '生抽', 15, 'ml', '底味', 0, 7),
+    (59, '醋', 10, 'ml', '点睛,提脆', 0, 8),
+    (59, '高汤', 50, 'ml', '鸡汤或骨汤', 0, 9),
+    (59, '盐', 3, 'g', '底味', 0, 10),
+    (59, '糖', 5, 'g', '提鲜', 0, 11),
+    (59, '湿淀粉', 15, 'g', '勾芡', 0, 12),
+    (59, '油', 30, 'ml', '鲁菜爆油', 0, 13);
+
+INSERT INTO step (recipe_id, step_no, content, duration_sec, tip) VALUES
+    (59, 1, '肚尖+鸡胗切十字花刀(深度 2/3,断生后卷曲成菊花状),用绍酒+盐抓匀腌 5 分钟', 300, '十字花刀深度 2/3,断生后卷曲成菊花'),
+    (59, 2, '调碗汁:高汤+生抽+醋+糖+湿淀粉+姜末+葱末', 120, '碗汁提前调,爆炒时一气呵成'),
+    (59, 3, '油烧九成热(约 210℃,油面冒青烟),下肚尖+鸡胗爆 18 秒(双脆关键,超时即老)', 18, '九成热油,210℃,18 秒是双脆黄金时长'),
+    (59, 4, '立刻下蒜末+碗汁,大火翻拌 10 秒(包汁)', 10, '下碗汁大火翻匀,汁包脆'),
+    (59, 5, '起锅装盘(全程不超过 30 秒,鲁菜火候)', 5, '30 秒内出锅,鲁菜火候精髓');
+
+INSERT INTO nutrition (recipe_id, calories_kcal, protein_g, carb_g, fat_g, fiber_g, sodium_mg, source, note) VALUES
+    (59, 220, 28, 6, 9, 0, 480, '估算', '2 人份;鲁菜油爆双脆,18 秒断生,脆嫩爽滑');
+
+INSERT INTO recipe_tag (recipe_id, tag_id)
+    SELECT 59, id FROM tag WHERE name = '鲁菜' AND category = 'cuisine';
+INSERT INTO recipe_tag (recipe_id, tag_id)
+    SELECT 59, id FROM tag WHERE name = '宴客' AND category = 'scenario';
+INSERT INTO recipe_tag (recipe_id, tag_id)
+    SELECT 59, id FROM tag WHERE name = '快手' AND category = 'scenario';
+INSERT INTO recipe_tag (recipe_id, tag_id)
+    SELECT 59, id FROM tag WHERE name = '咸鲜' AND category = 'flavor';
+INSERT INTO recipe_tag (recipe_id, tag_id)
+    SELECT 59, id FROM tag WHERE name = '高蛋白' AND category = 'diet';
+INSERT INTO recipe_tag (recipe_id, tag_id)
+    SELECT 59, id FROM tag WHERE name = '低脂' AND category = 'diet';
+
+-- ----------------------------------------------------------------------------
+-- 60. 葱油拌面(中式 · 快手/早餐/咸鲜 · 40 分钟 · 江南早餐代表 · 葱香扑鼻)
+-- ----------------------------------------------------------------------------
+INSERT INTO recipe (name, cuisine, difficulty, prep_time_min, cook_time_min, servings,
+                    description, source, source_ref, is_ai_generated)
+VALUES ('葱油拌面', '中式', 1, 5, 35, 1,
+        '小葱慢火熬葱油 30 分钟 + 鲜酱油 + 细面 · 江南早餐代表 · 葱香扑鼻',
+        '知识库', '../../_GourmetLib/09_健康快手食谱/健康快手食谱.md#葱油拌面', 0);
+
+INSERT INTO ingredient (recipe_id, name, qty, unit, note, is_optional, order_no) VALUES
+    (60, '细面条', 100, 'g', '鸡蛋面或碱水面', 0, 1),
+    (60, '小葱', 100, 'g', '切 5cm 段,葱白葱绿分用', 0, 2),
+    (60, '油', 80, 'ml', '色拉油或菜籽油', 0, 3),
+    (60, '鲜酱油', 30, 'ml', '生抽+老抽 4:1 调', 0, 4),
+    (60, '糖', 5, 'g', '提鲜', 0, 5),
+    (60, '盐', 2, 'g', '底味', 0, 6);
+
+INSERT INTO step (recipe_id, step_no, content, duration_sec, tip) VALUES
+    (60, 1, '冷油+葱白(中火慢熬,关键)', 60, '冷油下葱白,中火慢熬'),
+    (60, 2, '待葱白微黄,下葱绿,转小火熬 30 分钟(全程不急,见葱焦立刻关火)', 1800, '小火 30 分钟是葱油灵魂,见焦立刻关'),
+    (60, 3, '捞出葱酥(留葱油),葱油中加入鲜酱油+糖+盐调成葱油汁', 60, '葱酥留用撒面,葱油调汁'),
+    (60, 4, '另锅烧水开,下细面煮 2 分钟(过心),捞出沥干', 120, '2 分钟过心,保留嚼劲'),
+    (60, 5, '面条入碗,淋葱油汁+撒葱酥,拌匀即食', 30, '趁热拌匀,葱香扑鼻');
+
+INSERT INTO nutrition (recipe_id, calories_kcal, protein_g, carb_g, fat_g, fiber_g, sodium_mg, source, note) VALUES
+    (60, 420, 10, 52, 18, 2, 620, '估算', '1 人份;江南葱油拌面,葱油慢熬 30 分钟');
+
+INSERT INTO recipe_tag (recipe_id, tag_id)
+    SELECT 60, id FROM tag WHERE name = '中式' AND category = 'cuisine';
+INSERT INTO recipe_tag (recipe_id, tag_id)
+    SELECT 60, id FROM tag WHERE name = '快手' AND category = 'scenario';
+INSERT INTO recipe_tag (recipe_id, tag_id)
+    SELECT 60, id FROM tag WHERE name = '早餐' AND category = 'scenario';
+INSERT INTO recipe_tag (recipe_id, tag_id)
+    SELECT 60, id FROM tag WHERE name = '咸鲜' AND category = 'flavor';
+INSERT INTO recipe_tag (recipe_id, tag_id)
+    SELECT 60, id FROM tag WHERE name = '素食' AND category = 'diet';
+
 -- ============================================================================
--- v0.11 seed 结束 · 55 道菜谱已就位(2026-09-09 · 5 道新菜齐位 · 深耕东北/淮扬 + 新开「微波」场景)
--- 累计:早餐 8 / 凉菜 7 / 汤品 9 / 主菜 14 / 主食 5 / 蒸菜 1 / 宵夜 4 / 微波 2 / 甜品 3 / 宴客 17 / 煲汤 5 = 55 道
---       (东北菜猪肉炖粉条 +1 · 东北菜地三鲜 +1 · 淮扬菜文思豆腐 +1 · 徽菜徽式双冬 +1 · 粤菜微波葱姜鸡 +1)
--- 菜系分布:粤菜 9 / 西餐 6 / 中式 6 / 川菜 6 / 浙菜 6 / 鲁菜 5
---           徽菜 4 / 东北菜 4 / 湘菜 3 / 闽菜 3 / 淮扬菜 3 = **11 类**
--- 标签字典:37 个(本次未新增,全部复用 v0.10 字典;新增「微波」场景桥接 +1)
--- 累计:55 道 / 食材行+54 / 步骤+31 / 标签桥接+27 = 累计 529 食材行 / 287 步骤 / 249 标签桥接
---        营养:55 条全齐(55 道菜全部含 kcal / P / C / F / 纤维 / 钠)
--- 累计 5 道新菜的"净增量"= 54 食材行 + 31 步骤 + 27 标签桥接 + 5 营养记录
--- 200+ 闭环进度:55/200 = 27.5%(v0.10 25.0% → v0.11 27.5%,+2.5pp)
--- 关键技法新增:文思豆腐切丝(刀工 1mm 精度)· 地三鲜双蒜下锅(熟蒜香+生蒜辛)
+-- v0.12 seed 结束 · 60 道菜谱已就位(2026-09-10 · 5 道新菜齐位 · 4 菜系齐升 + 江南早餐补位)
+-- 累计:早餐 10 / 凉菜 7 / 汤品 9 / 主菜 15 / 主食 6 / 蒸菜 1 / 宵夜 4 / 微波 2 / 甜品 3 / 宴客 19 / 煲汤 6 = 60 道
+--       (湘菜永州血鸭 +1 · 闽菜佛跳墙 +1 · 淮扬菜蟹粉小笼包 +1 · 鲁菜油爆双脆 +1 · 中式葱油拌面 +1)
+-- 菜系分布:粤菜 9 / 西餐 6 / 中式 7 / 川菜 6 / 浙菜 6 / 鲁菜 6
+--           徽菜 4 / 东北菜 4 / 湘菜 4 / 闽菜 4 / 淮扬菜 4 = **11 类全 ≥ 4 道**
+-- 标签字典:37 个(本次未新增,全部复用 v0.11 字典)
+-- 累计:60 道 / 食材行+57 / 步骤+28 / 标签桥接+25 = 累计 586 食材行 / 315 步骤 / 274 标签桥接
+--        营养:60 条全齐(60 道菜全部含 kcal / P / C / F / 纤维 / 钠)
+-- 累计 5 道新菜的"净增量"= 57 食材行 + 28 步骤 + 25 标签桥接 + 5 营养记录
+-- 200+ 闭环进度:60/200 = 30.0%(v0.11 27.5% → v0.12 30.0%,+2.5pp)
+-- 关键技法新增:
+--   · 永州血鸭鸭血凝固回锅(30 秒凝固,嫩滑不碎)
+--   · 佛跳墙高汤 4 小时吊制(撇沫彻底,汤色清亮)
+--   · 蟹粉小笼包皮冻化汤(蒸 8 分钟,汤汁饱满)
+--   · 油爆双脆 18 秒断生(210℃ 九成热,双脆黄金时长)
+--   · 葱油拌面小火慢熬 30 分钟(冷油下葱,见焦即停)
+-- v0.11 关键技法保留:文思豆腐切丝 · 地三鲜双蒜下锅 · 微波葱姜鸡高火 5 分焖 2 分
 -- 验证方法:
 --   sqlite3 gourmet.db < db/schema.sql
 --   sqlite3 gourmet.db < db/seed_recipes.sql
@@ -2498,4 +2726,26 @@ INSERT INTO recipe_tag (recipe_id, tag_id)
 -- 预期(累计 v0.11):
 --   55 道菜 / 529 食材行 / 287 步骤 / 249 标签桥接 / 55 营养记录 / 37 tag
 --   11 类菜系全 ≥ 3 道(粤 9 / 西 6 / 中 6 / 川 6 / 浙 6 / 鲁 5 / 徽 4 / 东北 4 / 湘 3 / 闽 3 / 淮扬 3)
+-- ============================================================================
+-- v0.12 验证方法(2026-09-10 新增):
+--   sqlite3 gourmet.db < db/schema.sql
+--   sqlite3 gourmet.db < db/seed_recipes.sql
+--   sqlite3 gourmet.db "SELECT r.name, r.cuisine, COUNT(i.id) AS ingredients
+--                       FROM recipe r LEFT JOIN ingredient i ON i.recipe_id = r.id
+--                       WHERE r.id BETWEEN 56 AND 60
+--                       GROUP BY r.id ORDER BY r.id;"
+--   sqlite3 gourmet.db "SELECT cuisine, COUNT(*) FROM recipe GROUP BY cuisine ORDER BY 2 DESC, 1;"
+-- 预期(v0.12 新增段):
+--   永州血鸭|湘菜|11
+--   佛跳墙|闽菜|15
+--   蟹粉小笼包|淮扬菜|12
+--   油爆双脆|鲁菜|13
+--   葱油拌面|中式|6
+-- 预期(菜系分布 v0.12):
+--   粤菜|9  中式|7  鲁菜|6  西餐|6  川菜|6  浙菜|6
+--   湘菜|4  徽菜|4  闽菜|4  东北菜|4  淮扬菜|4
+-- 预期(累计 v0.12):
+--   60 道菜 / 586 食材行 / 315 步骤 / 274 标签桥接 / 60 营养记录 / 37 tag
+--   11 类菜系全 ≥ 4 道(粤 9 / 中 7 / 西 6 / 川 6 / 浙 6 / 鲁 6 / 湘 4 / 徽 4 / 闽 4 / 东北 4 / 淮扬 4)
+--   200+ 闭环进度:60/200 = 30.0%
 -- ============================================================================
