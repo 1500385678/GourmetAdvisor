@@ -2566,6 +2566,137 @@ INSERT INTO recipe_tag (recipe_id, tag_id)
     SELECT 60, id FROM tag WHERE name = '素食' AND category = 'diet';
 
 -- ============================================================================
+-- v0.13a seed 段 · 2026-09-11(每日 cron 推进 · 3 道新菜:湘/闽/淮扬 三系 4→5)
+-- (今日 plan 文件空缺,按历史节奏 +1 推进:聚焦 3 道 4 道菜系齐升,留 2 道 4 道菜系给 v0.13b)
+-- ----------------------------------------------------------------------------
+-- 61. 腊味合蒸(湘菜 · 宴客/咸鲜/煲汤 · 50 分钟 · 湘菜腊味代表 · 一锅三味)
+-- ----------------------------------------------------------------------------
+INSERT INTO recipe (name, cuisine, difficulty, prep_time_min, cook_time_min, servings,
+                    description, source, source_ref, is_ai_generated)
+VALUES ('腊味合蒸', '湘菜', 3, 20, 30, 2,
+        '腊肉+腊鱼+腊鸡三腊合蒸 · 配干辣椒+豆豉+姜蒜 · 湘菜腊味代表 · 一锅三味',
+        '知识库', '../../_GourmetLib/04_湘菜谱与特色/湘菜谱与特色.md#腊味合蒸', 0);
+
+INSERT INTO ingredient (recipe_id, name, qty, unit, note, is_optional, order_no) VALUES
+    (61, '腊肉', 100, 'g', '湖南腊肉,切 0.5cm 厚片', 0, 1),
+    (61, '腊鱼', 100, 'g', '湖南腊鱼,切 1cm 厚块', 0, 2),
+    (61, '腊鸡', 100, 'g', '湖南腊鸡,切 1.5cm 块', 0, 3),
+    (61, '干辣椒', 5, 'g', '切段,提腊味', 0, 4),
+    (61, '豆豉', 15, 'g', '湖南浏阳豆豉,剁碎', 0, 5),
+    (61, '姜片', 10, 'g', '去腥提鲜', 0, 6),
+    (61, '蒜片', 10, 'g', '提香', 0, 7),
+    (61, '料酒', 15, 'ml', '去腊味咸涩', 0, 8),
+    (61, '白糖', 3, 'g', '中和咸味', 0, 9),
+    (61, '葱花', 5, 'g', '点缀', 0, 10);
+
+INSERT INTO step (recipe_id, step_no, content, duration_sec, tip) VALUES
+    (61, 1, '腊肉+腊鱼+腊鸡温水浸泡 30 分钟(去多余盐分,表面刷净)', 1800, '温水泡 30 分钟去盐,刷净表面灰'),
+    (61, 2, '三腊切好(肉 0.5cm 厚片 / 鱼 1cm 厚块 / 鸡 1.5cm 块),干辣椒切段,豆豉剁碎,姜蒜切片', 600, '切配分门别类,便于一锅合蒸'),
+    (61, 3, '碗底铺姜片+蒜片,腊鸡垫底(鸡块最厚,垫底受热慢),腊鱼居中,腊肉盖顶(油脂渗下层)', 120, '腊鸡垫底,腊鱼居中,腊肉盖顶'),
+    (61, 4, '撒干辣椒+豆豉+料酒+白糖(豆豉是湘菜腊味灵魂),大火蒸 30 分钟', 1800, '大火 30 分钟,豆豉提腊味'),
+    (61, 5, '出锅撒葱花,连碗上桌(腊味油润,一锅三味)', 30, '连碗上桌,腊味油润扑鼻');
+
+INSERT INTO nutrition (recipe_id, calories_kcal, protein_g, carb_g, fat_g, fiber_g, sodium_mg, source, note) VALUES
+    (61, 520, 32, 8, 38, 1, 1480, '估算', '2 人份;湘菜腊味合蒸,一锅三味,腊肉咸香');
+
+INSERT INTO recipe_tag (recipe_id, tag_id)
+    SELECT 61, id FROM tag WHERE name = '湘菜' AND category = 'cuisine';
+INSERT INTO recipe_tag (recipe_id, tag_id)
+    SELECT 61, id FROM tag WHERE name = '宴客' AND category = 'scenario';
+INSERT INTO recipe_tag (recipe_id, tag_id)
+    SELECT 61, id FROM tag WHERE name = '煲汤' AND category = 'scenario';
+INSERT INTO recipe_tag (recipe_id, tag_id)
+    SELECT 61, id FROM tag WHERE name = '咸鲜' AND category = 'flavor';
+INSERT INTO recipe_tag (recipe_id, tag_id)
+    SELECT 61, id FROM tag WHERE name = '高蛋白' AND category = 'diet';
+
+-- ----------------------------------------------------------------------------
+-- 62. 荔枝肉(闽菜 · 酸甜/宴客 · 25 分钟 · 闽菜糖醋代表 · 形似荔枝)
+-- ----------------------------------------------------------------------------
+INSERT INTO recipe (name, cuisine, difficulty, prep_time_min, cook_time_min, servings,
+                    description, source, source_ref, is_ai_generated)
+VALUES ('荔枝肉', '闽菜', 3, 15, 10, 2,
+        '猪里脊切花刀裹糖醋汁 + 土豆垫底 · 形似荔枝壳 · 闽菜糖醋代表(与浙菜糖醋里脊同源异流)',
+        '知识库', '../../_GourmetLib/05_闽菜谱与特色/闽菜谱与特色.md#荔枝肉', 0);
+
+INSERT INTO ingredient (recipe_id, name, qty, unit, note, is_optional, order_no) VALUES
+    (62, '猪里脊', 250, 'g', '切 1.5cm 厚片,十字花刀', 0, 1),
+    (62, '土豆', 100, 'g', '切 1.5cm 滚刀块,炸定型', 0, 2),
+    (62, '红葱头', 30, 'g', '切碎,闽菜糖醋必加', 0, 3),
+    (62, '蒜末', 10, 'g', '爆锅', 0, 4),
+    (62, '番茄酱', 30, 'g', '糖醋底色', 0, 5),
+    (62, '白醋', 40, 'ml', '闽菜糖醋本醋', 0, 6),
+    (62, '白糖', 50, 'g', '闽菜糖醋偏甜', 0, 7),
+    (62, '生抽', 10, 'ml', '底味', 0, 8),
+    (62, '湿淀粉', 30, 'g', '裹肉+勾芡', 0, 9),
+    (62, '料酒', 15, 'ml', '去腥', 0, 10),
+    (62, '盐', 2, 'g', '腌肉底味', 0, 11),
+    (62, '油', 200, 'ml', '炸制用', 0, 12);
+
+INSERT INTO step (recipe_id, step_no, content, duration_sec, tip) VALUES
+    (62, 1, '里脊切 1.5cm 厚片,十字花刀(深 2/3,断生后翻卷似荔枝壳),用盐+料酒+湿淀粉抓匀腌 10 分钟', 600, '十字花刀深 2/3,形似荔枝壳'),
+    (62, 2, '土豆滚刀块 1.5cm,六成热油炸定型至金黄,捞出备用(垫底吸糖醋汁)', 240, '土豆炸定型,垫底吸糖醋汁'),
+    (62, 3, '肉片拍干淀粉,七成热油炸 2 分钟至定型,捞出;九成热油复炸 30 秒(外酥里嫩)', 150, '复炸 30 秒,外酥里嫩'),
+    (62, 4, '锅留底油,爆香红葱头+蒜末,下番茄酱+白醋+白糖+生抽+少量水调成糖醋汁,湿淀粉勾芡', 120, '红葱头是闽菜糖醋灵魂'),
+    (62, 5, '糖醋汁中下肉片+土豆块,大火翻裹 20 秒(汁包肉),立刻起锅(久炒脱壳)', 20, '20 秒翻裹,久炒脱壳');
+
+INSERT INTO nutrition (recipe_id, calories_kcal, protein_g, carb_g, fat_g, fiber_g, sodium_mg, source, note) VALUES
+    (62, 480, 26, 38, 24, 2, 580, '估算', '2 人份;闽菜荔枝肉,糖醋偏甜,形似荔枝');
+
+INSERT INTO recipe_tag (recipe_id, tag_id)
+    SELECT 62, id FROM tag WHERE name = '闽菜' AND category = 'cuisine';
+INSERT INTO recipe_tag (recipe_id, tag_id)
+    SELECT 62, id FROM tag WHERE name = '宴客' AND category = 'scenario';
+INSERT INTO recipe_tag (recipe_id, tag_id)
+    SELECT 62, id FROM tag WHERE name = '酸甜' AND category = 'flavor';
+INSERT INTO recipe_tag (recipe_id, tag_id)
+    SELECT 62, id FROM tag WHERE name = '高蛋白' AND category = 'diet';
+
+-- ----------------------------------------------------------------------------
+-- 63. 烫干丝(淮扬菜 · 凉菜/快手/咸鲜/素食 · 15 分钟 · 淮扬早餐开胃小菜 · 刀工见长)
+-- ----------------------------------------------------------------------------
+INSERT INTO recipe (name, cuisine, difficulty, prep_time_min, cook_time_min, servings,
+                    description, source, source_ref, is_ai_generated)
+VALUES ('烫干丝', '淮扬菜', 2, 12, 3, 2,
+        '大白干切 18 层细丝 + 姜丝+开洋+鸡汤滚烫 · 淮扬刀工代表 · 扬州早茶开胃小菜',
+        '知识库', '../../_GourmetLib/07_淮扬菜谱与特色/淮扬菜谱与特色.md#烫干丝', 0);
+
+INSERT INTO ingredient (recipe_id, name, qty, unit, note, is_optional, order_no) VALUES
+    (63, '大白干', 300, 'g', '扬州老式大白干(厚 1.5cm)', 0, 1),
+    (63, '开洋', 10, 'g', '金华小虾米,温水泡 5 分钟', 0, 2),
+    (63, '姜丝', 15, 'g', '老姜切细丝', 0, 3),
+    (63, '小葱段', 10, 'g', '点缀', 0, 4),
+    (63, '鸡汤', 200, 'ml', '老母鸡汤,烫干丝灵魂', 0, 5),
+    (63, '生抽', 15, 'ml', '底味', 0, 6),
+    (63, '盐', 3, 'g', '底味', 0, 7),
+    (63, '白糖', 2, 'g', '提鲜', 0, 8),
+    (63, '香油', 5, 'ml', '淋面', 0, 9),
+    (63, '油', 10, 'ml', '姜丝爆香', 0, 10);
+
+INSERT INTO step (recipe_id, step_no, content, duration_sec, tip) VALUES
+    (63, 1, '大白干先片成 0.3cm 薄片(越薄越好,淮扬刀工见长),再切细丝(0.3cm 宽 × 5cm 长)', 480, '先片后切,每片 18 层细丝'),
+    (63, 2, '干丝入沸水汆 2 次(每次 30 秒,去豆腥+定型),捞出沥干(关键步骤)', 60, '汆 2 次去豆腥,定型'),
+    (63, 3, '开洋温水泡 5 分钟,姜切细丝,小葱切段', 300, '开洋泡软,姜丝细如发'),
+    (63, 4, '起锅少油,下姜丝+开洋爆香,加鸡汤烧开,下干丝煮 1 分钟(吸鸡汤鲜)', 60, '鸡汤烫干丝是灵魂'),
+    (63, 5, '加生抽+盐+糖调味,装盘淋香油+撒葱段(趁热上桌)', 30, '趁热上桌,鸡汤鲜香扑鼻');
+
+INSERT INTO nutrition (recipe_id, calories_kcal, protein_g, carb_g, fat_g, fiber_g, sodium_mg, source, note) VALUES
+    (63, 240, 22, 8, 12, 1, 680, '估算', '2 人份;淮扬烫干丝,鸡汤烫制,刀工细如发');
+
+INSERT INTO recipe_tag (recipe_id, tag_id)
+    SELECT 63, id FROM tag WHERE name = '淮扬菜' AND category = 'cuisine';
+INSERT INTO recipe_tag (recipe_id, tag_id)
+    SELECT 63, id FROM tag WHERE name = '凉菜' AND category = 'scenario';
+INSERT INTO recipe_tag (recipe_id, tag_id)
+    SELECT 63, id FROM tag WHERE name = '快手' AND category = 'scenario';
+INSERT INTO recipe_tag (recipe_id, tag_id)
+    SELECT 63, id FROM tag WHERE name = '咸鲜' AND category = 'flavor';
+INSERT INTO recipe_tag (recipe_id, tag_id)
+    SELECT 63, id FROM tag WHERE name = '素食' AND category = 'diet';
+INSERT INTO recipe_tag (recipe_id, tag_id)
+    SELECT 63, id FROM tag WHERE name = '低脂' AND category = 'diet';
+
+-- ============================================================================
 -- v0.12 seed 结束 · 60 道菜谱已就位(2026-09-10 · 5 道新菜齐位 · 4 菜系齐升 + 江南早餐补位)
 -- 累计:早餐 10 / 凉菜 7 / 汤品 9 / 主菜 15 / 主食 6 / 蒸菜 1 / 宵夜 4 / 微波 2 / 甜品 3 / 宴客 19 / 煲汤 6 = 60 道
 --       (湘菜永州血鸭 +1 · 闽菜佛跳墙 +1 · 淮扬菜蟹粉小笼包 +1 · 鲁菜油爆双脆 +1 · 中式葱油拌面 +1)
@@ -2748,4 +2879,38 @@ INSERT INTO recipe_tag (recipe_id, tag_id)
 --   60 道菜 / 586 食材行 / 315 步骤 / 274 标签桥接 / 60 营养记录 / 37 tag
 --   11 类菜系全 ≥ 4 道(粤 9 / 中 7 / 西 6 / 川 6 / 浙 6 / 鲁 6 / 湘 4 / 徽 4 / 闽 4 / 东北 4 / 淮扬 4)
 --   200+ 闭环进度:60/200 = 30.0%
+-- ============================================================================
+-- v0.13a seed 段 · 2026-09-11(每日 cron 推进 · 3 道新菜:湘/闽/淮扬 三系 4→5,留 2 道给 v0.13b)
+-- 累计:60 → 63 道 / 净增 32 食材行 + 15 步骤 + 16 标签桥接 + 3 营养记录
+--       湘菜 4→5(腊味合蒸+1) · 闽菜 4→5(荔枝肉+1) · 淮扬菜 4→5(烫干丝+1)
+--       徽菜 4 / 东北菜 4 仍留 v0.13b 收口
+-- 菜系分布 v0.13a:粤菜 9 / 中式 7 / 鲁菜 6 / 西餐 6 / 川菜 6 / 浙菜 6
+--                  湘菜 5 / 闽菜 5 / 淮扬菜 5 / 徽菜 4 / 东北菜 4 = **11 类中 8 类 ≥ 5 道**
+-- 标签字典:37 个(本次未新增,全部复用 v0.12 字典)
+-- 关键技法新增:
+--   · 腊味合蒸"三腊合蒸"分层法(腊鸡垫底 / 腊鱼居中 / 腊肉盖顶,油脂渗下层)
+--   · 荔枝肉"十字花刀+复炸 30 秒"锁汁法(形似荔枝壳,外酥里嫩不脱壳)
+--   · 烫干丝"片 18 层细丝+鸡汤滚烫"刀工(淮扬早茶开胃,鸡汤是灵魂)
+-- v0.12 关键技法保留:永州血鸭鸭血凝固 · 佛跳墙高汤 4h · 蟹粉小笼包皮冻 · 油爆双脆 18 秒 · 葱油拌面 30 分钟
+-- v0.11 关键技法保留:文思豆腐切丝 · 地三鲜双蒜下锅 · 微波葱姜鸡高火 5 分焖 2 分
+-- 200+ 闭环进度:60/200 = 30.0% → 63/200 = 31.5%(+1.5pp)
+-- 验证方法:
+--   sqlite3 gourmet.db < db/schema.sql
+--   sqlite3 gourmet.db < db/seed_recipes.sql
+--   sqlite3 gourmet.db "SELECT r.name, r.cuisine, COUNT(i.id) AS ingredients
+--                       FROM recipe r LEFT JOIN ingredient i ON i.recipe_id = r.id
+--                       WHERE r.id BETWEEN 61 AND 63
+--                       GROUP BY r.id ORDER BY r.id;"
+--   sqlite3 gourmet.db "SELECT cuisine, COUNT(*) FROM recipe GROUP BY cuisine ORDER BY 2 DESC, 1;"
+-- 预期(v0.13a 新增段):
+--   腊味合蒸|湘菜|10
+--   荔枝肉|闽菜|12
+--   烫干丝|淮扬菜|10
+-- 预期(菜系分布 v0.13a):
+--   粤菜|9  中式|7  鲁菜|6  西餐|6  川菜|6  浙菜|6
+--   湘菜|5  闽菜|5  淮扬菜|5  徽菜|4  东北菜|4
+-- 预期(累计 v0.13a):
+--   63 道菜 / 618 食材行 / 330 步骤 / 290 标签桥接 / 63 营养记录 / 37 tag
+--   11 类菜系中 8 类 ≥ 5 道(粤 9 / 中 7 / 西 6 / 川 6 / 浙 6 / 鲁 6 / 湘 5 / 闽 5 / 淮扬 5)
+--   200+ 闭环进度:63/200 = 31.5%
 -- ============================================================================
